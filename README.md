@@ -17,7 +17,7 @@ A non-profit organization needs to keep a record of the participants in relates 
 - An administrator can create and maintain (modify and/or delete) the accounts for everybody  in  the  system  including  other  administrators.  All  administrators  will have equal privileges.
 - The administer will be able to do some simple data analysis and reports. (Example: the total amount of a donor’s contribution to the organization in year 2020)
 - The donor will be able to make restricted donation to a certain event/program or unrestricted donation. The donor can also simple attend an event without make any contribution.
-- The volunteer can register to help an event at certain time slot or help program activities.•An event can be associated with zero, one or more programs.
+- The volunteer can register to help an event at certain time slot or help program activities.
 - An event can be associated with zero, one or more programs.
 
 ## Minimal Functionalites
