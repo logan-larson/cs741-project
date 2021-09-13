@@ -3,8 +3,8 @@ Semester long project for CS 741: Software Engineering Principles
 
 ## Stack
 - Front end: Angular
-- Back end/API: Node/Express
-- Database: Cloud Firestore
+- Back end/API: NestJS
+- Database: MongoDB Atlas
 
 ## Objective
 To develop a software system for a non-profit organization that is used to do the book keeping for their participants.
