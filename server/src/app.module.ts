@@ -4,7 +4,7 @@ import { AppService } from './app.service';
 import { MongooseModule } from '@nestjs/mongoose';
 
 @Module({
-  imports: [MongooseModule.forRoot('mongodb://localhost/nest')], // Switch url with Atlas url
+  imports: [MongooseModule.forRoot('mongodb+srv://admin:adminpassword@cluster0.bfohk.mongodb.net/Cluster0?retryWrites=true&w=majority')],
   controllers: [AppController],
   providers: [AppService],
 })
