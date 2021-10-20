@@ -1,0 +1,21 @@
+<div class="container bg-ltgrey">
+  <form>
+    <h2 class="txt-center">Login</h2>
+    <input type="text"
+      name="username"
+      id="username"
+      placeholder="Username"
+      class="center-self input-margin"
+      [(ngModel)]="username">
+    <input type="password"
+      name="password"
+      id="password"
+      placeholder="Password"
+      class="center-self input-margin"
+      [(ngModel)]="password">
+    <div class="flow-vert center-items">
+      <button (click)="login()" class="txt-white bg-blue" >Login</button>
+      <button class="txt-white bg-green">Register</button>
+    </div>
+  </form>
+</div>
