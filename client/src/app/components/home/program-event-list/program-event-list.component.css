@@ -1,6 +1,6 @@
 .container {
   margin-left: 50px;
-  width: 50%;
+  width: 65%;
 }
 
 h3 {
@@ -13,8 +13,4 @@ nav {
   overflow: hidden;
   overflow-y: scroll;
   padding: 20px;
-}
-
-button {
-  width: 90%;
 }

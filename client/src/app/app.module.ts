@@ -13,6 +13,7 @@ import { HeaderComponent } from './components/home/header/header.component';
 import { ProgramEventListComponent } from './components/home/program-event-list/program-event-list.component';
 import { EventComponent } from './components/home/program-event-list/event/event.component';
 import { AddEventComponent } from './components/home/add-event/add-event.component';
+import { EventViewerComponent } from './components/home/event-viewer/event-viewer.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { AddEventComponent } from './components/home/add-event/add-event.compone
     HeaderComponent,
     ProgramEventListComponent,
     EventComponent,
-    AddEventComponent
+    AddEventComponent,
+    EventViewerComponent
   ],
   imports: [
     BrowserModule,

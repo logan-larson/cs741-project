@@ -13,9 +13,10 @@
       placeholder="Password"
       class="center-self input-margin"
       [(ngModel)]="password">
-    <div class="flow-vert center-items">
+    <div class="flow-vert center-items button-group">
       <button (click)="login()" class="txt-white bg-blue" >Login</button>
       <h5 (click)="gotoRegister()" class="link">Need to make an account? Click here</h5>
+      <h5 (click)="gotoHome()" class="link">Continue without logging in</h5>
     </div>
   </form>
 </div>

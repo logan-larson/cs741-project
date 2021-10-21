@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
 
   currentUser: User = {};
   showAddEventComponent: boolean = false;
+  showEventViewerComponent: boolean = false;
 
   constructor(private usersService: UsersService, private authService: AuthService, private router: Router) { }
 
@@ -21,10 +22,4 @@ export class HomeComponent implements OnInit {
       this.currentUser = user;
     });
   }
-
-  showAddEvent() {
-    this.showAddEventComponent = true;
-    console.log("caught it");
-  }
-
 }

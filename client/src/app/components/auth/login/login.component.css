@@ -15,6 +15,10 @@ h2 {
   transform: translateX(-50%);
 }
 
+h5 {
+  margin: 10px;
+}
+
 .link {
   text-decoration: underline;
 }

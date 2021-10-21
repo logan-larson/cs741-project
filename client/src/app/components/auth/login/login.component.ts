@@ -36,4 +36,8 @@ export class LoginComponent implements OnInit {
     this.gotoRegisterEmitter.emit("goto register");
   }
 
+  gotoHome() {
+    this.router.navigateByUrl('home');
+  }
+
 }

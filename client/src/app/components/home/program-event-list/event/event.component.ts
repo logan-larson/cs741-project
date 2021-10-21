@@ -24,7 +24,7 @@ export class EventComponent implements OnInit {
         this.startTime = new Date(this.event.timeStart).toLocaleTimeString();
       }
       if (this.event.timeEnd) {
-        this.startTime = new Date(this.event.timeEnd).toLocaleTimeString();
+        this.endTime = new Date(this.event.timeEnd).toLocaleTimeString();
       }
     }
   }
