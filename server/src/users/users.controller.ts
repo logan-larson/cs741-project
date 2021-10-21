@@ -12,7 +12,6 @@ export class UsersController {
 
   @Get('user')
   async getCurrentUser(@Session() session: Record<string, any>): Promise<User> {
-    console.log(session.userId);
     if (!session.userId) {
       return null;
     }
@@ -21,7 +20,6 @@ export class UsersController {
 
   @Get('user/:userId')
   async getUser(@Param('userId') userId: string): Promise<User> {
-    console.log("home load: " + userId);
     return this.usersService.getUserById(userId);
   }
   
@@ -32,7 +30,6 @@ export class UsersController {
     @Body() createUserDto: CreateUserDto
   ): Promise<User> {
     let user: User = await this.usersService.createUser(createUserDto.username, createUserDto.password, createUserDto.type);
-    console.log("create account " + user.userId);
     session.userId = user.userId;
     return user;
   }
@@ -45,7 +42,6 @@ export class UsersController {
   ): Promise<User> {
     let user: User = await this.usersService.validateUser(validateUserDto.username, validateUserDto.password);
     if (user) {
-      console.log("login: " + user.userId);
       session.userId = user.userId;
     }
     return user;
@@ -57,8 +53,6 @@ export class UsersController {
     @Session() session: Record<string, any>,
     @Param('userId') userId: string
   ): Promise<boolean> {
-    console.log("logout " + userId);
-    console.log("logout session " + session.userId);
     session.userId = null;
     return true;
   }

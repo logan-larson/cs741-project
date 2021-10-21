@@ -12,6 +12,7 @@ import { LoginComponent } from './components/auth/login/login.component';
 import { HeaderComponent } from './components/home/header/header.component';
 import { ProgramEventListComponent } from './components/home/program-event-list/program-event-list.component';
 import { EventComponent } from './components/home/program-event-list/event/event.component';
+import { AddEventComponent } from './components/home/add-event/add-event.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { EventComponent } from './components/home/program-event-list/event/event
     LoginComponent,
     HeaderComponent,
     ProgramEventListComponent,
-    EventComponent
+    EventComponent,
+    AddEventComponent
   ],
   imports: [
     BrowserModule,

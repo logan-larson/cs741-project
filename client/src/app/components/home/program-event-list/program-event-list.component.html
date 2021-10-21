@@ -1,8 +1,9 @@
 <div class="container">
-  <button (click)="addEvent()">Add Event</button>
-  <nav>
+    <h3>Program/Event List</h3>
+  <nav class="bg-ltgrey">
     <div *ngFor="let event of events">
       <app-event [event]="event"></app-event>
     </div>
   </nav>
+  <div *ngIf="currentUser && currentUser.type == 'admin'"><button (click)="addEvent()">Add Event</button></div>
 </div>

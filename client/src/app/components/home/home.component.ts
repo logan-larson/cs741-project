@@ -12,6 +12,7 @@ import { UsersService } from 'src/app/services/users.service';
 export class HomeComponent implements OnInit {
 
   currentUser: User = {};
+  showAddEventComponent: boolean = false;
 
   constructor(private usersService: UsersService, private authService: AuthService, private router: Router) { }
 
@@ -19,6 +20,11 @@ export class HomeComponent implements OnInit {
     this.usersService.getCurrentUser((user: User) => {
       this.currentUser = user;
     });
+  }
+
+  showAddEvent() {
+    this.showAddEventComponent = true;
+    console.log("caught it");
   }
 
 }

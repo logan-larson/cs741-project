@@ -53,7 +53,6 @@ export class RegisterComponent implements OnInit {
     };
 
     this.usersService.create(user, (user: User) => {
-      console.log(`Hello ${user.username}`);
       this.router.navigateByUrl('home');
     })
   }

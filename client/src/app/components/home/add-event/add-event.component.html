@@ -1,0 +1,31 @@
+<div class="container">
+  <h3 style="text-align: center;">Add Event</h3>
+  <form class="flow-vert center-items">
+    <div>
+      <label for="name">Name:</label>
+      <input type="text" name="name" id="name" placeholder="Event Name" [(ngModel)]="name">
+    </div>
+    <div>
+      <label for="description">Description:</label>
+      <input type="text" name="description" id="description" placeholder="Event Description" [(ngModel)]="description">
+    </div>
+    <div>
+      <label for="date">Date:</label>
+      <input type="date" name="date" id="date" [attr.min]="currentDate" [value]="currentDate" [(ngModel)]="date">
+    </div>
+    <div>
+      <label for="date">Start Time:</label>
+      <input type="time" name="timeStart" id="timeStart" [(ngModel)]="timeStartString">
+    </div>
+    <div>
+      <label for="date">End Time:</label>
+      <input type="time" name="timeEnd" id="timeEnd" [(ngModel)]="timeEndString">
+    </div>
+    <div>
+      <label for="date">Volunteers Needed:</label>
+      <input type="number" name="volunteersNeeded" id="volunteersNeeded" [(ngModel)]="volunteersNeeded">
+    </div>
+    <button type="submit" (click)="addEvent()" class="bg-green txt-white">Add Event</button>
+    <button (click)="cancel()" class="bg-red txt-white">Cancel</button>
+  </form>
+</div>
