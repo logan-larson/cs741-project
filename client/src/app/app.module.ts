@@ -14,6 +14,7 @@ import { ProgramEventListComponent } from './components/home/program-event-list/
 import { EventComponent } from './components/home/program-event-list/event/event.component';
 import { AddEventComponent } from './components/home/add-event/add-event.component';
 import { EventViewerComponent } from './components/home/event-viewer/event-viewer.component';
+import { VolunteerSectionComponent } from './components/home/event-viewer/volunteer-section/volunteer-section.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { EventViewerComponent } from './components/home/event-viewer/event-viewe
     ProgramEventListComponent,
     EventComponent,
     AddEventComponent,
-    EventViewerComponent
+    EventViewerComponent,
+    VolunteerSectionComponent
   ],
   imports: [
     BrowserModule,

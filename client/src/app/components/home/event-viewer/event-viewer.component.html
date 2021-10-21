@@ -1,4 +1,7 @@
 <div class="container">
   <h3>Event Viewer</h3>
+  <div *ngIf="currentUser.type == 'volunteer' || currentUser.type == 'both'">
+    <app-volunteer-section></app-volunteer-section>
+  </div>
   <button (click)="close()" class="bg-red txt-white">Close</button>
 </div>
