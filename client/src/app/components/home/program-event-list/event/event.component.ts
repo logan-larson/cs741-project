@@ -9,11 +9,24 @@ import { Event } from 'src/app/models/Event';
 export class EventComponent implements OnInit {
 
   @Input() event: Event = {};
+  date: string = "";
+  startTime: string = "";
+  endTime: string = "";
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
-    
+    if (this.event) {
+      if (this.event.date) {
+        this.date = new Date(this.event.date).toLocaleDateString();
+      }
+      if (this.event.timeStart) {
+        this.startTime = new Date(this.event.timeStart).toLocaleTimeString();
+      }
+      if (this.event.timeEnd) {
+        this.startTime = new Date(this.event.timeEnd).toLocaleTimeString();
+      }
+    }
   }
 
 }
