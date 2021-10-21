@@ -1,5 +1,6 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { CreateUserDto } from './dtos/create-user.dto';
+import { ValidateUserDto } from './dtos/validate-user.dto';
 import { User } from './schemas/user.schema';
 
 import { UsersService } from './users.service';
@@ -19,6 +20,14 @@ export class UsersController {
   @Post()
   async createUser(
     @Body() createUserDto: CreateUserDto): Promise<User> {
-      return this.usersService.createUser(createUserDto.username, createUserDto.password);
+      console.log(createUserDto);
+      return this.usersService.createUser(createUserDto.username, createUserDto.password, createUserDto.type);
   }
+
+  // User login
+  @Post('user')
+  async validateUser(
+    @Body() validateUserDto: ValidateUserDto): Promise<User> {
+      return this.usersService.validateUser(validateUserDto.username, validateUserDto.password);
+    }
 }

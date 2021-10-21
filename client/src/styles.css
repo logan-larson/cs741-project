@@ -29,6 +29,11 @@ button:hover {
   filter: brightness(80%);
 }
 
+input.checkbox {
+  width: 25px;
+  height: 25px;
+}
+
 /* Colors */
 .bg-green {
   background-color: green;

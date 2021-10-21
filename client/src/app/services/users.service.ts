@@ -9,10 +9,21 @@ export class UsersService {
 
   constructor(private http: HttpClient) { }
 
-  create(username: string, password: string, cb: any): void {
-    this.http.post<User>('/api/users', { username: username, password: password })
+  create(user: User, cb: any): void {
+    this.http.post<User>('/api/users', user)
       .subscribe(user => {
         cb(user);
-      })
+      }, err => {
+        console.log(err);
+      });
+  }
+
+  validate(username: string, password: string, cb: any): void {
+    this.http.post<User>('/api/users/user', { username: username, password: password })
+      .subscribe(user => {
+        cb(user);
+      }, err => {
+        console.log(err);
+      });
   }
 }

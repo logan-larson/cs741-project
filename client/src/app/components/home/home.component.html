@@ -3,8 +3,9 @@
     <div *ngIf="name; else elseBlock"><h4>Hello {{ name }}</h4></div>
     <ng-template #elseBlock>Guest User</ng-template>
     <h1>Non-profit Oranization Bookeeping</h1>
-    <button class="bg-blue">Login</button>
-    <button class="bg-green">Register</button>
+    <!-- Do an ngIf logged in, for whether to show (login and register) or logout button -->
+    <button (click)="gotoLogin()" class="bg-blue">Login</button>
+    <button (click)="gotoRegister()" class="bg-green">Register</button>
   </div>
   <div></div>
 </div>

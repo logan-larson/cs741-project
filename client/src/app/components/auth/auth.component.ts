@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from 'src/app/models/User';
+import { AuthService } from 'src/app/services/auth.service';
 import { UsersService } from 'src/app/services/users.service';
 
 @Component({
@@ -10,21 +10,12 @@ import { UsersService } from 'src/app/services/users.service';
 })
 export class AuthComponent implements OnInit {
 
-  @Input() username: string = "";
-  @Input() password: string = "";
+  page: string = "register";
 
-  constructor(private usersService: UsersService, private router: Router) { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.page = this.authService.getPage();
   }
 
-  login() {
-  }
-
-  register() {
-    this.usersService.create(this.username, this.password, (user: User) => {
-      console.log(`Hello ${user.username}`);
-      this.router.navigateByUrl('home');
-    })
-  }
 }

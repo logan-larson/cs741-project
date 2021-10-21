@@ -1,0 +1,44 @@
+<div class="container bg-ltgrey">
+  <form>
+    <h2 class="txt-center">Register</h2>
+    <input type="text"
+      name="username"
+      id="username"
+      placeholder="Username"
+      class="center-self input-margin"
+      [(ngModel)]="username">
+    <input type="password"
+      name="password"
+      id="password"
+      placeholder="Password"
+      class="center-self input-margin"
+      [(ngModel)]="password">
+    <input type="password"
+      name="confirmPassword"
+      id="confirmPassword"
+      placeholder="Confirm password"
+      class="center-self input-margin"
+      [(ngModel)]="confirmPassword">
+    <div class="flow-hori">
+      <label for="donor" style="margin-left: auto;">Donor: </label>
+      <input type="checkbox"
+        name="donor"
+        id="donor"
+        class="checkbox"
+        style="margin-right: auto;"
+        [(ngModel)]="donor"> 
+    </div>
+    <div class="flow-hori">
+      <label for="volunteer" style="margin-left: auto;">Volunteer: </label>
+      <input type="checkbox"
+        name="volunteer"
+        id="volunteer"
+        class="checkbox"
+        style="margin-right: auto;"
+        [(ngModel)]="volunteer"> 
+    </div>
+    <div class="flow-vert center-items">
+      <button (click)="register()" class="txt-white bg-blue" >Register</button>
+    </div>
+  </form>
+</div>
