@@ -1,6 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/User';
+import { AuthService } from 'src/app/services/auth.service';
 import { UsersService } from 'src/app/services/users.service';
 
 @Component({
@@ -16,7 +17,9 @@ export class RegisterComponent implements OnInit {
   @Input() donor: boolean = false;
   @Input() volunteer: boolean = false;
 
-  constructor(private usersService: UsersService, private router: Router) { }
+  @Output() gotoLoginEmitter: EventEmitter<string> = new EventEmitter<string>();
+
+  constructor(private usersService: UsersService, private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -53,5 +56,10 @@ export class RegisterComponent implements OnInit {
       console.log(`Hello ${user.username}`);
       this.router.navigateByUrl('home');
     })
+  }
+
+  gotoLogin() {
+    this.authService.setPage('login');
+    this.gotoLoginEmitter.emit("goto login");
   }
 }

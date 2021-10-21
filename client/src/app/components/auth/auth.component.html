@@ -1,3 +1,3 @@
 <div *ngIf="page == 'login'; then thenBlock; else elseBlock"></div>
-<ng-template #thenBlock><app-login></app-login></ng-template>
-<ng-template #elseBlock><app-register></app-register></ng-template>
+<ng-template #thenBlock><app-login (gotoRegisterEmitter)="ngOnInit()"></app-login></ng-template>
+<ng-template #elseBlock><app-register (gotoLoginEmitter)="ngOnInit()"></app-register></ng-template>

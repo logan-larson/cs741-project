@@ -14,3 +14,12 @@ h2 {
   margin: 15px 50%;
   transform: translateX(-50%);
 }
+
+.link {
+  text-decoration: underline;
+}
+
+.link:hover {
+  cursor: pointer;
+  color: blue;
+}
