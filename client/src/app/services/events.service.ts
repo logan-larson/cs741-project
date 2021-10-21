@@ -16,4 +16,22 @@ export class EventsService {
         cb(events);
       })
   }
+
+  createEvent(cb: any): void {
+    let event: Event = {
+      name: "Event Name",
+      description: "Event description",
+      date: new Date(),
+      timeStart: new Date(),
+      timeEnd: new Date(),
+      volunteersNeeded: 3
+    };
+
+    this.http.post<Event>('/api/events', event)
+      .subscribe(event => {
+        cb(event);
+      }, err => {
+        console.log(err);
+      })
+  }
 }

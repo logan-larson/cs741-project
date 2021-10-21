@@ -1,7 +1,8 @@
 <div class="container">
+  <button (click)="addEvent()">Add Event</button>
   <nav>
     <div *ngFor="let event of events">
-      <h4>This worked</h4>
+      <app-event [event]="event"></app-event>
     </div>
   </nav>
 </div>

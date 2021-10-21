@@ -1,0 +1,6 @@
+nav {
+  height: 400px;
+  width: 25%;
+  overflow: hidden;
+  overflow-y: scroll;
+}

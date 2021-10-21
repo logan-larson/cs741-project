@@ -11,6 +11,7 @@ import { RegisterComponent } from './components/auth/register/register.component
 import { LoginComponent } from './components/auth/login/login.component';
 import { HeaderComponent } from './components/home/header/header.component';
 import { ProgramEventListComponent } from './components/home/program-event-list/program-event-list.component';
+import { EventComponent } from './components/home/program-event-list/event/event.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ProgramEventListComponent } from './components/home/program-event-list/
     RegisterComponent,
     LoginComponent,
     HeaderComponent,
-    ProgramEventListComponent
+    ProgramEventListComponent,
+    EventComponent
   ],
   imports: [
     BrowserModule,

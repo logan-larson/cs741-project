@@ -1,10 +1,9 @@
-import { Time } from "@angular/common";
-
 export interface Event {
+  eventId?: string,
   name?: string,
   description?: string,
   date?: Date,
-  time?: Time,
-  location?: string,
+  timeStart?: Date,
+  timeEnd?: Date,
   volunteersNeeded?: number,
 }

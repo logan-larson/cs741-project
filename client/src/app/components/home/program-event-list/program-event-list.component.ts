@@ -20,4 +20,10 @@ export class ProgramEventListComponent implements OnInit {
     });
   }
 
+  addEvent(): void {
+    this.eventsService.createEvent((event: Event) => {
+      this.ngOnInit();
+    });
+  }
+
 }
