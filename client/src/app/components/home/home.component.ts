@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Event } from 'src/app/models/Event';
 import { User } from 'src/app/models/User';
 import { AuthService } from 'src/app/services/auth.service';
 import { UsersService } from 'src/app/services/users.service';
@@ -12,6 +13,7 @@ import { UsersService } from 'src/app/services/users.service';
 export class HomeComponent implements OnInit {
 
   currentUser: User = {};
+  selectedEvent: Event = {};
   showAddEventComponent: boolean = false;
   showEventViewerComponent: boolean = false;
 
@@ -21,5 +23,10 @@ export class HomeComponent implements OnInit {
     this.usersService.getCurrentUser((user: User) => {
       this.currentUser = user;
     });
+  }
+
+  selectEvent(event: Event): void {
+    this.selectedEvent = event;
+    this.showEventViewerComponent = true;
   }
 }

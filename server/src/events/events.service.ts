@@ -32,8 +32,40 @@ export class EventsService {
       date: date,
       timeStart: timeStart,
       timeEnd: timeEnd,
-      volunteersNeeded: volunteersNeeded
+      volunteersNeeded: volunteersNeeded,
+      volunteerUserIds: []
     })
+  }
+
+  async getVolunteerRegistrationStatus(eventId: string, userId: string): Promise<boolean> {
+    // Get specifed event
+    const event: Event = await this.eventRepository.findOne({ eventId });
+
+    // Check if user is a volunteer for event
+    if (!event.volunteerUserIds.includes(userId)) {
+      return false;
+    }
+
+    return true;
+  }
+
+  async changeEventVolunteerStatus(eventId: string, userId: string): Promise<Event> {
+    const isRegistered: boolean = await this.getVolunteerRegistrationStatus(eventId, userId);
+    const event: Event = await this.eventRepository.findOne({ eventId });
+    let eventVolunteerUserIds: string[] = event.volunteerUserIds;
+    let eventVolunteersNeeded: number = event.volunteersNeeded;
+
+    if (isRegistered) {
+      // If user was registered, remove them from the list of volunteers
+      eventVolunteerUserIds = eventVolunteerUserIds.filter(uid => uid != userId);
+      eventVolunteersNeeded += 1;
+    } else {
+      // If user wasn't registered, add them to the list of volunteers
+      eventVolunteerUserIds.push(userId);
+      eventVolunteersNeeded -= 1;
+    }
+  
+    return this.eventRepository.findOneAndUpdate({ eventId }, { volunteersNeeded: eventVolunteersNeeded, volunteerUserIds: eventVolunteerUserIds });
   }
 
 }

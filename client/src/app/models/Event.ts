@@ -6,4 +6,5 @@ export interface Event {
   timeStart?: Date,
   timeEnd?: Date,
   volunteersNeeded?: number,
+  volunteerUserIds?: string[],
 }

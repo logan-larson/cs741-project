@@ -1,4 +1,5 @@
-import { Body, Controller, Get, Post, Session } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put, Session } from '@nestjs/common';
+import { UserIdDto } from 'src/users/dtos/user-id.dto';
 import { CreateEventDto } from './dtos/create-event.dto';
 import { EventsService } from './events.service';
 import { Event } from './schemas/event.schema';
@@ -11,6 +12,14 @@ export class EventsController {
   @Get()
   async getAllEvents() {
     return this.eventsService.getAllEvents();
+  }
+
+  @Get(':eventId/volunteers/:userId')
+  async getVolunteerRegistrationStatus(
+    @Param('eventId') eventId: string,
+    @Param('userId') userId: string
+  ): Promise<boolean> {
+    return this.eventsService.getVolunteerRegistrationStatus(eventId, userId);
   }
 
   @Post()
@@ -28,4 +37,13 @@ export class EventsController {
       createEventDto.volunteersNeeded
       );
   }
+
+  @Put(':eventId/volunteers')
+  async addVolunteerToEvent(
+    @Param('eventId') eventId: string,
+    @Body() userIdDto: UserIdDto
+  ): Promise<Event> {
+    return this.eventsService.changeEventVolunteerStatus(eventId, userIdDto.userId);
+  }
+
 }

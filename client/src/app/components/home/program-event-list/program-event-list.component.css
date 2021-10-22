@@ -3,14 +3,39 @@
   width: 65%;
 }
 
-h3 {
+.headings {
+  display: grid;
+  grid-template-columns: 2fr 3fr 2fr 2fr 2fr 1fr;
+  padding: 10px 30px;
+  background-color: grey;
+  width: 98%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.headings h3 {
+  margin: 5px 0px;
+  justify-self: center;
+  text-align: center;
+  align-self: center;
+}
+
+#list-title {
   text-align: center;
 }
 
 nav {
-  height: 500px;
+  height: 450px;
   width: 100%;
   overflow: hidden;
   overflow-y: scroll;
   padding: 20px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+#btn-add-event {
+  left: 50%;
+  position: relative;
+  transform: translate(-50%, 0px);
 }

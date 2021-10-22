@@ -1,4 +1,5 @@
 <div class="container">
-  <label>Current Volunteer Status: {{ registrationStatus }}</label>
-  <button>{{ buttonText }}</button>
+  <h3>Volunteer Section</h3>
+  <label>Current Volunteer Status: <b>{{ registrationStatus }}</b></label>
+  <button class="bg-blue txt-white" (click)="setRegistrationStatus()">{{ buttonText }}</button>
 </div>

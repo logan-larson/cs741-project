@@ -25,6 +25,9 @@ export class Event {
   
   @Prop()
   volunteersNeeded: number;
+
+  @Prop([String])
+  volunteerUserIds: string[];
 }
 
 export const EventSchema = SchemaFactory.createForClass(Event);

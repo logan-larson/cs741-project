@@ -16,7 +16,7 @@ export class ProgramEventListComponent implements OnInit {
   currentUser: User = {};
 
   @Output() showAddEventEmitter: EventEmitter<any> = new EventEmitter<any>();
-  @Output() showEventViewerEmitter: EventEmitter<any> = new EventEmitter<any>();
+  @Output() selectEventEmitter: EventEmitter<Event> = new EventEmitter();
 
   constructor(private eventsService: EventsService, private usersSerivce: UsersService) {
     this.eventsService.getEventsEmitter.subscribe(() => {
@@ -37,8 +37,8 @@ export class ProgramEventListComponent implements OnInit {
     this.showAddEventEmitter.emit("show add event component");
   }
 
-  showEventViewer() {
-    this.showEventViewerEmitter.emit("show event viewer");
+  selectEvent(event: Event) {
+    this.selectEventEmitter.emit(event);
   }
 
 }
