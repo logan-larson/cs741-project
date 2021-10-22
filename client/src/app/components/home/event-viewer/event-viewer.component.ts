@@ -24,7 +24,9 @@ export class EventViewerComponent implements OnInit {
   constructor(private eventsService: EventsService) { }
 
   ngOnInit(): void {
-    this.getIsRegistered(this.currentUser);
+    if (this.currentUser) {
+      this.getIsRegistered(this.currentUser);
+    }
   }
 
   getIsRegistered(user: User) {
