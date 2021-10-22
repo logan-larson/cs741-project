@@ -1,0 +1,14 @@
+.container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 30px;
+  border-radius: 15px;
+  background-color: lightgrey;
+  border: 3px solid darkgrey;
+}
+
+label {
+  margin-right: 20px;
+}

@@ -1,0 +1,29 @@
+.container {
+  width: 30%;
+  margin: auto;
+  margin-top: 10%;
+  padding: 30px;
+  border-radius: 15px;
+}
+
+h2 {
+  text-align: center;
+}
+
+.input-margin {
+  margin: 15px 50%;
+  transform: translateX(-50%);
+}
+
+h5 {
+  margin: 10px;
+}
+
+.link {
+  text-decoration: underline;
+}
+
+.link:hover {
+  cursor: pointer;
+  color: blue;
+}
