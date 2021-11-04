@@ -1,16 +1,16 @@
 import { Injectable } from '@nestjs/common';
 import { v4 as uuidv4 } from 'uuid';
 
-import { EventsRepository } from './events.repository';
+import { EventRepository } from './events.repository';
 import { Event } from './schemas/event.schema';
 
 @Injectable()
 export class EventsService {
 
-  constructor(private readonly eventsRepository: EventsRepository) {}
+  constructor(private readonly eventRepository: EventRepository) {}
 
   async getAllEvents(): Promise<Event[]> {
-    return this.eventsRepository.findAll();
+    return this.eventRepository.findAll();
   }
 
   async createEvent(
@@ -25,7 +25,7 @@ export class EventsService {
     // Validate user is admin with userId
     console.log(userId);
 
-    return this.eventsRepository.create({
+    return this.eventRepository.create({
       eventId: uuidv4(),
       name: name,
       description: description,
@@ -33,14 +33,13 @@ export class EventsService {
       timeStart: timeStart,
       timeEnd: timeEnd,
       volunteersNeeded: volunteersNeeded,
-      volunteerUserIds: [],
-      donationIds: [],
+      volunteerUserIds: []
     })
   }
 
   async getVolunteerRegistrationStatus(eventId: string, userId: string): Promise<boolean> {
     // Get specifed event
-    const event: Event = await this.eventsRepository.findOne({ eventId });
+    const event: Event = await this.eventRepository.findOne({ eventId });
 
     // Check if user is a volunteer for event
     if (!event.volunteerUserIds.includes(userId)) {
@@ -52,7 +51,7 @@ export class EventsService {
 
   async changeEventVolunteerStatus(eventId: string, userId: string): Promise<Event> {
     const isRegistered: boolean = await this.getVolunteerRegistrationStatus(eventId, userId);
-    const event: Event = await this.eventsRepository.findOne({ eventId });
+    const event: Event = await this.eventRepository.findOne({ eventId });
     let eventVolunteerUserIds: string[] = event.volunteerUserIds;
     let eventVolunteersNeeded: number = event.volunteersNeeded;
 
@@ -66,7 +65,7 @@ export class EventsService {
       eventVolunteersNeeded -= 1;
     }
   
-    return this.eventsRepository.findOneAndUpdate({ eventId }, { volunteersNeeded: eventVolunteersNeeded, volunteerUserIds: eventVolunteerUserIds });
+    return this.eventRepository.findOneAndUpdate({ eventId }, { volunteersNeeded: eventVolunteersNeeded, volunteerUserIds: eventVolunteerUserIds });
   }
 
 }
