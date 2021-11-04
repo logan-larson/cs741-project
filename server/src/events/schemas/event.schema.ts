@@ -27,7 +27,14 @@ export class Event {
   volunteersNeeded: number;
 
   @Prop([String])
+  donationIds: string[];
+
+  // TODO - This needs to get phased out
+  // and replaced by registrationIds
+  @Prop([String])
   volunteerUserIds: string[];
+  //registrationIds: string[];
+
 }
 
 export const EventSchema = SchemaFactory.createForClass(Event);
