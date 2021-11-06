@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit {
   currentUser: User = {};
   selectedEvent: Event = {};
   showAddEventComponent: boolean = false;
+  showAddProgramComponent: boolean = false;
   showEventViewerComponent: boolean = false;
 
   constructor(private usersService: UsersService, private authService: AuthService, private router: Router) { }

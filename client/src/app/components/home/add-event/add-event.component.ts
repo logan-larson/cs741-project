@@ -10,14 +10,14 @@ import { EventsService } from 'src/app/services/events.service';
 export class AddEventComponent implements OnInit {
 
   // Placeholder values
-  currentDate: string = new Date().toISOString().substr(0, 10);
+  currentDate: Date = new Date();
   timeStartDate: Date = new Date();
   timeEndDate: Date = new Date(this.timeStartDate.getTime() + (2*60*60*1000));
 
   // Values gathered from inputs
   @Input() name: string = "";
   @Input() description: string = "";
-  @Input() date: string = new Date().toISOString().substr(0, 10);
+  @Input() date: string = "";
   @Input() timeStartString: string = this.timeStartDate.toTimeString().substr(0,5);
   @Input() timeEndString: string = this.timeEndDate.toTimeString().substr(0, 5);
   @Input() volunteersNeeded: number = 0;
@@ -27,7 +27,23 @@ export class AddEventComponent implements OnInit {
   constructor(private eventsService: EventsService) { }
 
   ngOnInit(): void {
-    console.log(new Date().toISOString().substr(11,5));
+    this.date = this.parseDate(this.currentDate);
+  }
+  
+  parseDate(date: Date): string {
+    let day: number = date.getDate();
+    let month: number = date.getMonth()+1;
+    let year: number = date.getFullYear();
+
+    return `${this.addZeroes(year.toString())}-${this.addZeroes(month.toString())}-${this.addZeroes(day.toString())}`;
+  }
+
+  addZeroes(str: string): string {
+    let ret: string = str;
+    if (ret.length == 1) {
+        ret = "0" + ret;
+    }
+    return ret;
   }
 
   addEvent() {

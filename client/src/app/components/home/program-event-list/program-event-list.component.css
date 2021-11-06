@@ -34,8 +34,11 @@ nav {
   border-bottom-right-radius: 10px;
 }
 
-#btn-add-event {
-  left: 50%;
-  position: relative;
-  transform: translate(-50%, 0px);
+.button-container {
+  display: flex;
+  justify-content: center;
+}
+
+#btn-add-program {
+  width: 175px;
 }

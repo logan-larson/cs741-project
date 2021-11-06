@@ -1,8 +1,11 @@
 <div class="container">
   <app-header [currentUser]="currentUser"></app-header>
-  <app-program-event-list (selectEventEmitter)="selectEvent($event)" (showAddEventEmitter)="showAddEventComponent = true"></app-program-event-list>
+    <app-program-event-list (selectEventEmitter)="selectEvent($event)" (showAddEventEmitter)="showAddEventComponent = true" (showAddProgramEmitter)="showAddProgramComponent = true"></app-program-event-list>
   <div *ngIf="showAddEventComponent">
     <app-add-event (close)="showAddEventComponent = false"></app-add-event>
+  </div>
+  <div *ngIf="showAddProgramComponent">
+    <app-add-program (close)="showAddProgramComponent = false"></app-add-program>
   </div>
   <div *ngIf="showEventViewerComponent">
     <app-event-viewer [currentUser]="currentUser" [event]="selectedEvent" (closeEmitter)="showEventViewerComponent = false"></app-event-viewer>

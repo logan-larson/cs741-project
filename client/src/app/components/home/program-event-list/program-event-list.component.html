@@ -12,6 +12,12 @@
     <div *ngFor="let event of events" style="margin-bottom: 15px">
       <app-event (click)="selectEvent(event)" [event]="event"></app-event>
     </div>
-    <div *ngIf="currentUser && currentUser.type == 'admin'"><button (click)="addEvent()" id="btn-add-event">Add Event</button></div>
+    <div *ngFor="let program of programs" style="margin-bottom: 15px">
+      <app-program (click)="selectProgram(program)" [program]="program"></app-program>
+    </div>
+    <div class="button-container">
+      <div *ngIf="currentUser && currentUser.type == 'admin'"><button (click)="addEvent()" id="btn-add-event">Add Event</button></div>
+      <div *ngIf="currentUser && currentUser.type == 'admin'"><button (click)="addProgram()" id="btn-add-program">Add Program</button></div>
+    </div>
   </nav>
 </div>
