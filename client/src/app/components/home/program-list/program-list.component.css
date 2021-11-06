@@ -1,11 +1,11 @@
 .container {
-  margin-left: 50px;
-  width: 65%;
+  width: 90%;
+  margin-left: 10px;
 }
 
 .headings {
   display: grid;
-  grid-template-columns: 2fr 3fr 2fr 2fr 2fr 1fr;
+  grid-template-columns: 2fr 3fr 2fr 2fr;
   padding: 10px 30px;
   background-color: grey;
   width: 98%;

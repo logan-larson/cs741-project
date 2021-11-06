@@ -28,6 +28,9 @@ export class Event {
 
   @Prop([String])
   volunteerUserIds: string[];
+
+  @Prop()
+  isIndependent: boolean;
 }
 
 export const EventSchema = SchemaFactory.createForClass(Event);

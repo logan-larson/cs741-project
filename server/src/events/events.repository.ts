@@ -14,6 +14,10 @@ export class EventRepository {
     return this.eventModel.findOne(eventFilterQuery);
   }
 
+  async findMany(eventFilterQuery: FilterQuery<EventDocument>): Promise<Event[]> {
+    return this.eventModel.find(eventFilterQuery);
+  }
+
   async findAll(): Promise<Event[]> {
     return this.eventModel.find();
   }

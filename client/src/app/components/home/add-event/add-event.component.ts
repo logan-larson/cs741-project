@@ -9,6 +9,9 @@ import { EventsService } from 'src/app/services/events.service';
 })
 export class AddEventComponent implements OnInit {
 
+  // Is Event independent?
+  @Input() isIndependent: boolean = true;
+
   // Placeholder values
   currentDate: Date = new Date();
   timeStartDate: Date = new Date();
@@ -75,7 +78,8 @@ export class AddEventComponent implements OnInit {
       date: inputtedDate,
       timeStart: inputtedStartTime,
       timeEnd: inputtedEndTime,
-      volunteersNeeded: this.volunteersNeeded
+      volunteersNeeded: this.volunteersNeeded,
+      isIndependent: this.isIndependent
     }
 
     this.eventsService.createEvent(event, (event: Event) => {

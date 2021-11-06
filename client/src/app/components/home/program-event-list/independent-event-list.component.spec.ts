@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ProgramEventListComponent } from './program-event-list.component';
+import { ProgramEventListComponent } from './independent-event-list.component';
 
 describe('ProgramEventListComponent', () => {
   let component: ProgramEventListComponent;

@@ -21,6 +21,10 @@ export class ProgramsService {
       })
   }
 
+  getPrograms(): Program[] {
+    return this.programs;
+  }
+
   createProgram(program: Program, cb: any): void {
     this.http.post<Program>('/api/programs', program)
       .subscribe(program => {

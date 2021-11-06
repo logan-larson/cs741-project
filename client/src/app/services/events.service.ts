@@ -15,8 +15,8 @@ export class EventsService {
 
   constructor(private http: HttpClient) { }
 
-  getAllEvents(cb: any): void {
-    this.http.get<Event[]>('/api/events')
+  getAllIndependentEvents(cb: any): void {
+    this.http.get<Event[]>('/api/events/independent')
       .subscribe(events => {
         this.events = events;
         cb(events);
@@ -30,7 +30,9 @@ export class EventsService {
   createEvent(event: Event, cb: any): void {
     this.http.post<Event>('/api/events', event)
       .subscribe(event => {
-        this.events.push(event);
+        if (event.isIndependent) {
+          this.events.push(event);
+        }
         this.getEventsEmitter.emit("get events");
         cb(event);
       }, err => {

@@ -14,6 +14,11 @@ export class EventsController {
     return this.eventsService.getAllEvents();
   }
 
+  @Get('independent')
+  async getAllIndependentEvents() {
+    return this.eventsService.getAllIndependentEvents();
+  }
+
   @Get(':eventId/volunteers/:userId')
   async getVolunteerRegistrationStatus(
     @Param('eventId') eventId: string,
@@ -34,7 +39,8 @@ export class EventsController {
       createEventDto.date,
       createEventDto.timeStart,
       createEventDto.timeEnd,
-      createEventDto.volunteersNeeded
+      createEventDto.volunteersNeeded,
+      createEventDto.isIndependent
       );
   }
 

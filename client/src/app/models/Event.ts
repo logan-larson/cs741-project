@@ -7,4 +7,5 @@ export interface Event {
   timeEnd?: Date,
   volunteersNeeded?: number,
   volunteerUserIds?: string[],
+  isIndependent?: boolean,
 }

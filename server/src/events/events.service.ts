@@ -13,6 +13,10 @@ export class EventsService {
     return this.eventRepository.findAll();
   }
 
+  async getAllIndependentEvents(): Promise<Event[]> {
+    return this.eventRepository.findMany({ isIndependent: true });
+  }
+
   async createEvent(
     userId: string,
     name: string,
@@ -20,7 +24,8 @@ export class EventsService {
     date: Date,
     timeStart: Date,
     timeEnd: Date,
-    volunteersNeeded: number
+    volunteersNeeded: number,
+    isIndependent: boolean
   ): Promise<Event> {
     // Validate user is admin with userId
     console.log(userId);
@@ -33,7 +38,8 @@ export class EventsService {
       timeStart: timeStart,
       timeEnd: timeEnd,
       volunteersNeeded: volunteersNeeded,
-      volunteerUserIds: []
+      volunteerUserIds: [],
+      isIndependent: isIndependent
     })
   }
 
