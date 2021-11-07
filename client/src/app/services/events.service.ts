@@ -27,8 +27,8 @@ export class EventsService {
     return this.events;
   }
 
-  createEvent(event: Event, cb: any): void {
-    this.http.post<Event>('/api/events', event)
+  createEvent(programId: string, event: Event, cb: any): void {
+    this.http.post<Event>(`/api/events/${programId}`, event)
       .subscribe(event => {
         if (event.isIndependent) {
           this.events.push(event);

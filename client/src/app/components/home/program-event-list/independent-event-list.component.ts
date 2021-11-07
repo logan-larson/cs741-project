@@ -19,7 +19,7 @@ export class IndependentEventListComponent implements OnInit {
   @Output() showAddEventEmitter: EventEmitter<any> = new EventEmitter<any>();
   @Output() selectEventEmitter: EventEmitter<Event> = new EventEmitter();
 
-  constructor(private eventsService: EventsService, private usersSerivce: UsersService) {
+  constructor(private eventsService: EventsService, private usersService: UsersService) {
     this.eventsService.getEventsEmitter.subscribe(() => {
       this.events = this.eventsService.getEvents();
     })
@@ -29,7 +29,7 @@ export class IndependentEventListComponent implements OnInit {
     this.eventsService.getAllIndependentEvents((events: Event[]) => {
       this.events = events;
     });
-    this.usersSerivce.getCurrentUser((user: User) => {
+    this.usersService.getCurrentUser((user: User) => {
       this.currentUser = user;
     })
   }

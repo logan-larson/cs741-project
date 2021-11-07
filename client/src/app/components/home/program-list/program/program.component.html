@@ -1,6 +1,12 @@
 <div class="container">
-  <h4>{{ program.name }}</h4>
-  <p>{{ program.description }}</p>
-  <h4>{{ dateStart }}</h4>
-  <h4>{{ dateEnd }}</h4>
+  <div class="program-container">
+    <h4 id="name">{{ program.name }}</h4>
+    <p id="description">{{ program.description }}</p>
+    <h4 id="date-range">{{ dateStart }} - {{ dateEnd }}</h4>
+    <button id="btn-view-details">View Program Details</button>
+  </div>
+  <div *ngFor="let event of events" style="margin-bottom: 15px">
+    <app-event (click)="selectEvent(event)" [event]="event"></app-event>
+  </div>
+  <button *ngIf="currentUser && currentUser.type == 'admin'" id="btn-add-event" (click)="addEventToProgram()">Add Event to Program</button>
 </div>

@@ -1,4 +1,5 @@
 import { Body, Controller, Get, Param, Post, Put, Session } from '@nestjs/common';
+import { ProgramsService } from 'src/programs/programs.service';
 import { UserIdDto } from 'src/users/dtos/user-id.dto';
 import { CreateEventDto } from './dtos/create-event.dto';
 import { EventsService } from './events.service';
@@ -7,7 +8,10 @@ import { Event } from './schemas/event.schema';
 @Controller('api/events')
 export class EventsController {
 
-  constructor(private readonly eventsService: EventsService) {}
+  constructor(
+    private readonly eventsService: EventsService,
+    private readonly programsService: ProgramsService
+  ) {}
 
   @Get()
   async getAllEvents() {
@@ -27,12 +31,13 @@ export class EventsController {
     return this.eventsService.getVolunteerRegistrationStatus(eventId, userId);
   }
 
-  @Post()
+  @Post(':programId')
   async createEvent(
     @Session() session: Record<string, any>,
+    @Param('programId') programId: string,
     @Body() createEventDto: CreateEventDto
   ): Promise<Event> {
-    return this.eventsService.createEvent(
+    let event: Event = await this.eventsService.createEvent(
       session.userId,
       createEventDto.name,
       createEventDto.description,
@@ -41,7 +46,13 @@ export class EventsController {
       createEventDto.timeEnd,
       createEventDto.volunteersNeeded,
       createEventDto.isIndependent
-      );
+    );
+
+    if (programId != 'undefined') {
+      this.programsService.updateEventIds(programId, event.eventId);
+    }
+    
+    return event;
   }
 
   @Put(':eventId/volunteers')

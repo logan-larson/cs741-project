@@ -1,17 +1,9 @@
 <div class="container">
   <h2 id="list-title">Program List</h2>
-  <div class="headings">
-    <h3>Name</h3>
-    <h3>Description</h3>
-    <h3>Start Date</h3>
-    <h3>End Date</h3>
-  </div>
+  <div *ngIf="currentUser && currentUser.type == 'admin'" id="btn-add-program"><button (click)="addProgram()">Add Program</button></div>
   <nav class="bg-ltgrey">
     <div *ngFor="let program of programs" style="margin-bottom: 15px">
-      <app-program (click)="selectProgram(program)" [program]="program"></app-program>
-    </div>
-    <div class="button-container">
-      <div *ngIf="currentUser && currentUser.type == 'admin'"><button (click)="addProgram()" id="btn-add-program">Add Program</button></div>
+      <app-program (click)="selectProgram(program)" (showAddEventToProgramEmitter)="addEventToProgram($event)" [program]="program"></app-program>
     </div>
   </nav>
 </div>

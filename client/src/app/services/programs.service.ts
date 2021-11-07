@@ -25,6 +25,23 @@ export class ProgramsService {
     return this.programs;
   }
 
+  getAssociatedEvents(programId: string | undefined, cb: any): void {
+    this.http.get<Event[]>(`/api/programs/${programId}/events`)
+      .subscribe((events: Event[]) => {
+        console.log(events);
+        cb(events);
+      })
+  }
+
+  updateEventIds(programId: string | undefined, eventId: string | undefined) {
+    this.http.put<Program>(`/api/programs/${programId}/event/${eventId}`, null)
+      .subscribe((program: Program) => {
+        console.log(program);
+      }, (error: any) => {
+        console.log(error);
+      })
+  }
+
   createProgram(program: Program, cb: any): void {
     this.http.post<Program>('/api/programs', program)
       .subscribe(program => {

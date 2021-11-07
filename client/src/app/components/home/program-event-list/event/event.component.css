@@ -2,13 +2,14 @@
   display: grid;
   grid-template-columns: 2fr 3fr 2fr 2fr 2fr 1fr;
   border-radius: 15px;
-  border: 2px solid grey;
-  background-color: darkgrey;
+  background-color: lightgrey;
+  margin-top: 15px;
   padding-left: 15px;
   padding-right: 15px;
+  transition: background-color 0.5s;
 }
 
 .container:hover {
-  background-color: grey;
+  background-color: darkgrey;
   cursor: pointer;
 }

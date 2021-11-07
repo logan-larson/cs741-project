@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Event } from 'src/app/models/Event';
 import { EventsService } from 'src/app/services/events.service';
+import { ProgramsService } from 'src/app/services/programs.service';
 
 @Component({
   selector: 'app-add-event',
@@ -9,8 +10,8 @@ import { EventsService } from 'src/app/services/events.service';
 })
 export class AddEventComponent implements OnInit {
 
-  // Is Event independent?
-  @Input() isIndependent: boolean = true;
+  // Program ID is "" if it is independent
+  @Input() programId: string = "";
 
   // Placeholder values
   currentDate: Date = new Date();
@@ -27,7 +28,7 @@ export class AddEventComponent implements OnInit {
 
   @Output() close: EventEmitter<any> = new EventEmitter();
 
-  constructor(private eventsService: EventsService) { }
+  constructor(private eventsService: EventsService, private programsService: ProgramsService) { }
 
   ngOnInit(): void {
     this.date = this.parseDate(this.currentDate);
@@ -72,6 +73,8 @@ export class AddEventComponent implements OnInit {
       return;
     }
 
+    let isIndependent: boolean = this.programId.length == 0 ? true : false;
+
     let event: Event = {
       name: this.name,
       description: this.description,
@@ -79,10 +82,12 @@ export class AddEventComponent implements OnInit {
       timeStart: inputtedStartTime,
       timeEnd: inputtedEndTime,
       volunteersNeeded: this.volunteersNeeded,
-      isIndependent: this.isIndependent
+      isIndependent: isIndependent
     }
 
-    this.eventsService.createEvent(event, (event: Event) => {
+    let id: string = this.programId.length == 0 ? 'undefined' : this.programId;
+
+    this.eventsService.createEvent(id, event, (event: Event) => {
       if (event) {
         this.close.emit("close me");
       }

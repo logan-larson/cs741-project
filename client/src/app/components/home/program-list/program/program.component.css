@@ -1,14 +1,69 @@
 .container {
-  display: grid;
-  grid-template-columns: 2fr 3fr 2fr 2fr 2fr 1fr;
+  display: flex;
+  flex-direction: column;
   border-radius: 15px;
   border: 2px solid grey;
-  background-color: darkgrey;
-  padding-left: 15px;
-  padding-right: 15px;
+  background-color: grey;
+  padding: 10px;
 }
 
+.program-container {
+  display: grid;
+  grid-template-rows: 75px 75px;
+  grid-template-columns: 50% 50%;
+  padding-left: 15px;
+  padding-right: 15px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+}
+
+/*
 .container:hover {
   background-color: grey;
   cursor: pointer;
+}
+*/
+
+#name {
+  grid-row-start: 1;
+  grid-row-end: 2;
+  grid-column-start: 1;
+  grid-column-end: 2;
+  margin: 0px;
+  font-size: 36px;
+  align-self: center;
+  text-align: center;
+}
+
+#description {
+  grid-row-start: 2;
+  grid-row-end: 3;
+  grid-column-start: 1;
+  grid-column-end: 2;
+  margin: 5px;
+}
+
+#date-range {
+  grid-row-start: 1;
+  grid-row-end: 2;
+  grid-column-start: 2;
+  grid-column-end: 3;
+  text-align: center;
+  font-weight: normal;
+}
+
+#btn-view-details {
+  grid-row-start: 2;
+  grid-row-end: 3;
+  grid-column-start: 2;
+  grid-column-end: 3;
+  width: 90%;
+  align-self: center;
+  justify-self: center;
+}
+
+#btn-add-event {
+  align-self: center;
+  justify-self: center;
+  width: 300px;
 }

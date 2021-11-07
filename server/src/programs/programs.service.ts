@@ -13,6 +13,16 @@ export class ProgramsService {
     return this.programsRepository.findAll();
   }
 
+  async getProgramById(programId: string): Promise<Program> {
+    return this.programsRepository.findOne({ programId: programId });
+  }
+
+  async updateEventIds(programId: string, eventId: string): Promise<Program> {
+    let eventIds: string[] = await (await this.programsRepository.findOne({ programId: programId })).eventIds;
+    eventIds.push(eventId);
+    return this.programsRepository.findOneAndUpdate({ programId }, { eventIds: eventIds });
+  }
+
   async createProgram(
     userId: string,
     name: string,

@@ -21,6 +21,8 @@ export class HomeComponent implements OnInit {
   showEventViewerComponent: boolean = false;
   showProgramViewerComponent: boolean = false;
 
+  programId: any = "";
+
   constructor(private usersService: UsersService, private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
@@ -37,5 +39,10 @@ export class HomeComponent implements OnInit {
   selectProgram(program: Program): void {
     this.selectedProgram = program;
     this.showProgramViewerComponent = true;
+  }
+
+  showAddEvent(programId: any) {
+    this.programId = programId;
+    this.showAddEventComponent = true;
   }
 }

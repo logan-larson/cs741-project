@@ -6,7 +6,7 @@ import { Event, EventDocument } from "./schemas/event.schema";
 
 
 @Injectable()
-export class EventRepository {
+export class EventsRepository {
 
   constructor(@InjectModel(Event.name) private eventModel: Model<EventDocument>) {}
 

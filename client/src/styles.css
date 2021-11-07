@@ -24,10 +24,7 @@ button {
   border-radius: 10px;
   margin: 10px;
   padding: 10px;
-}
-
-button:hover {
-  filter: brightness(80%);
+  transition: background-color 1s;
 }
 
 input.checkbox {
@@ -67,7 +64,7 @@ input.checkbox {
   color: white;
 }
 
-/*  */
+/* Properties */
 .flow-vert {
   display: flex;
   flex-flow: column;
@@ -88,4 +85,12 @@ input.checkbox {
 /* Margins and Padding */
 .mg-10 {
   margin: 10;
+}
+
+.shadow {
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.shadow-down {
+  box-shadow: 0px 3px 4px 1px rgba(0, 0, 0, 0.2);
 }

@@ -1,17 +1,17 @@
-<div class="header flow-hori bg-ltgrey">
+<div class="header flow-hori bg-ltgrey shadow-down">
   <h2 style="margin: auto; width: 50%">Non-profit Oranization Bookeeping</h2>
   <!-- Do an ngIf logged in, for whether to show (login and register) or logout button -->
   <div *ngIf="currentUser; then thenBlock; else elseBlock"></div>
   <ng-template #thenBlock>
-    <div style="margin-right: 25px; display: flex">
+    <div style="display: flex; align-items: center;">
       <h4>Hello {{ currentUser.username }}</h4>
-      <button (click)="logout()" class="bg-red txt-white">Logout</button>
+      <button (click)="logout()" class="btn-logout">Logout</button>
     </div>
   </ng-template>
   <ng-template #elseBlock>
     <div class="btn-group">
-      <button (click)="gotoLogin()" class="bg-blue txt-white">Login</button>
-      <button (click)="gotoRegister()" class="bg-green txt-white">Register</button>
+      <button (click)="gotoLogin()" class="bg-blue txt-white btn-login">Login</button>
+      <button (click)="gotoRegister()" class="bg-green txt-white btn-register">Register</button>
     </div>
   </ng-template>
 </div>
