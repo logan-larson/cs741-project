@@ -2,7 +2,7 @@
   <h2 id="list-title">Program List</h2>
   <nav class="bg-ltgrey">
     <div *ngFor="let program of programs" style="margin-bottom: 15px">
-      <app-program (click)="selectProgram(program)" (showAddEventToProgramEmitter)="addEventToProgram($event)" [program]="program"></app-program>
+      <app-program (click)="selectProgram(program)" (selectEventEmitter)="selectEvent($event)" (showAddEventToProgramEmitter)="addEventToProgram($event)" [program]="program"></app-program>
     </div>
   </nav>
   <div *ngIf="currentUser && currentUser.type == 'admin'; then thenBlock; else elseBlock"></div>

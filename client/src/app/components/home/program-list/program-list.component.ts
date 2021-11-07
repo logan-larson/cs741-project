@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Event } from 'src/app/models/Event';
 import { Program } from 'src/app/models/Program';
 import { User } from 'src/app/models/User';
 import { ProgramsService } from 'src/app/services/programs.service';
@@ -17,6 +18,7 @@ export class ProgramListComponent implements OnInit {
   @Output() showAddProgramEmitter: EventEmitter<any> = new EventEmitter<any>();
   @Output() showAddEventToProgramEmitter: EventEmitter<any> = new EventEmitter<any>();
   @Output() selectProgramEmitter: EventEmitter<Program> = new EventEmitter();
+  @Output() selectEventEmitter: EventEmitter<Event> = new EventEmitter();
 
   constructor(private programsService: ProgramsService, private usersService: UsersService) {
     this.programsService.getProgramsEmitter.subscribe(() => {
@@ -45,6 +47,10 @@ export class ProgramListComponent implements OnInit {
 
   selectProgram(program: Program) {
     this.selectProgramEmitter.emit(program);
+  }
+
+  selectEvent(event: Event) {
+    this.selectEventEmitter.emit(event);
   }
 
 }

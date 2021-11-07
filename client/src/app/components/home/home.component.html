@@ -4,10 +4,15 @@
     <app-program-list
       id="program-list"
       (selectProgramEmitter)="selectProgram($event)"
+      (selectEventEmitter)="selectEvent($event)"
       (showAddProgramEmitter)="showAddProgramComponent = true"
       (showAddEventToProgramEmitter)="showAddEvent($event)">
     </app-program-list>
-    <app-independent-event-list id="event-list" (selectEventEmitter)="selectEvent($event)" (showAddEventEmitter)="showAddEvent('')"></app-independent-event-list>
+    <app-independent-event-list
+      id="event-list"
+      (selectEventEmitter)="selectEvent($event)"
+      (showAddEventEmitter)="showAddEvent('')">
+    </app-independent-event-list>
   </div>
   <div *ngIf="showAddEventComponent">
     <app-add-event (close)="showAddEventComponent = false" [programId]="programId"></app-add-event>
