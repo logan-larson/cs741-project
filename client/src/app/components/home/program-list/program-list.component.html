@@ -1,10 +1,16 @@
 <div class="container">
   <h2 id="list-title">Program List</h2>
-  <div *ngIf="currentUser && currentUser.type == 'admin'" id="btn-add-program"><button (click)="addProgram()">Add Program</button></div>
-  <nav class="bg-ltgrey">
+  <nav class="bg-ltgrey" style="padding-top: 10px">
     <div *ngFor="let program of programs" style="margin-bottom: 15px">
       <app-program (click)="selectProgram(program)" (showAddEventToProgramEmitter)="addEventToProgram($event)" [program]="program"></app-program>
     </div>
   </nav>
+  <div *ngIf="currentUser && currentUser.type == 'admin'; then thenBlock; else elseBlock"></div>
+  <ng-template #thenBlock>
+    <button id="btn-add-program" (click)="addProgram()">Add Program</button>
+  </ng-template>  
+  <ng-template #elseBlock>
+    <div style="height: 20px;"></div>
+  </ng-template>
 </div>
     

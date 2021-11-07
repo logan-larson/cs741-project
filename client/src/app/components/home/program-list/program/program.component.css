@@ -5,6 +5,7 @@
   border: 2px solid grey;
   background-color: grey;
   padding: 10px;
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
 }
 
 .program-container {
@@ -60,10 +61,40 @@
   width: 90%;
   align-self: center;
   justify-self: center;
+  border: none;
+  background-color: var(--blue);
+  color: white;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.5s;
+}
+
+#btn-view-details:hover {
+  background-color: var(--dark-blue);
+  cursor: pointer;
 }
 
 #btn-add-event {
   align-self: center;
   justify-self: center;
   width: 300px;
+  border: none;
+  background-color: var(--green);
+  color: white;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.5s;
+}
+
+#btn-add-event:hover {
+  background-color: var(--dark-green);
+  cursor: pointer;
+}
+
+#associated-events {
+  margin: 0px 10px;
+  text-align: center;
+}
+
+hr {
+  border-top: 2px solid rgb(67, 67, 67);
+  width: 100%;
 }

@@ -17,6 +17,7 @@ export class ProgramComponent implements OnInit {
   dateEnd: string = "";
 
   events: Event[] = [];
+  hasEvents: boolean = false;
   currentUser: User = {};
 
   @Output() showAddEventToProgramEmitter: EventEmitter<string> = new EventEmitter<string>();
@@ -33,9 +34,8 @@ export class ProgramComponent implements OnInit {
         this.dateEnd = new Date(this.program.dateEnd).toLocaleDateString();
       }
       this.programsService.getAssociatedEvents(this.program.programId, (events: Event[]) => {
-        console.log(events);
-        
         this.events = events;
+        this.hasEvents = events.length != 0 ? true : false;
       })
 
       this.usersService.getCurrentUser((user: User) => {

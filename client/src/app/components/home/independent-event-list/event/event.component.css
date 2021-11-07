@@ -13,3 +13,11 @@
   background-color: darkgrey;
   cursor: pointer;
 }
+
+.independent {
+  background-color: var(--tertiary);
+}
+
+.independent:hover {
+  background-color: rgb(94, 94, 94);
+}

@@ -30,6 +30,8 @@ export class ProgramListComponent implements OnInit {
     })
     this.usersService.getCurrentUser((user: User) => {
       this.currentUser = user;
+      console.log(user);
+      
     })
   }
 

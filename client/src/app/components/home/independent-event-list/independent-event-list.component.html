@@ -1,19 +1,15 @@
 <div class="container">
   <h2 id="list-title">Independent Event List</h2>
-  <div class="headings">
-    <h3>Name</h3>
-    <h3>Description</h3>
-    <h3>Date</h3>
-    <h3>Start Time</h3>
-    <h3>End Time</h3>
-    <h3>Volunteers Needed</h3>
-  </div>
   <nav class="bg-ltgrey">
     <div *ngFor="let event of events" style="margin-bottom: 15px">
       <app-event (click)="selectEvent(event)" [event]="event"></app-event>
     </div>
-    <div class="button-container">
-      <div *ngIf="currentUser && currentUser.type == 'admin'"><button (click)="addEvent()" id="btn-add-event">Add Event</button></div>
-    </div>
   </nav>
+  <div *ngIf="currentUser && currentUser.type == 'admin'; then thenBlock; else elseBlock"></div>
+  <ng-template #thenBlock>
+    <button (click)="addEvent()" id="btn-add-event">Add Event</button>
+  </ng-template>  
+  <ng-template #elseBlock>
+    <div style="height: 20px;"></div>
+  </ng-template>
 </div>

@@ -5,6 +5,22 @@ body {
   margin: 0px;
 }
 
+/* Global variables */
+:root {
+  --primary: lightgrey;
+  --secondary: darkgrey;
+  --tertiary: grey;
+
+  --green: green;
+  --dark-green: darkgreen;
+
+  --blue: blue;
+  --dark-blue: darkblue;
+
+  --red: red;
+  --dark-red: darkred;
+}
+
 /* Components */
 input {
   border-radius: 5px;
@@ -24,7 +40,6 @@ button {
   border-radius: 10px;
   margin: 10px;
   padding: 10px;
-  transition: background-color 1s;
 }
 
 input.checkbox {

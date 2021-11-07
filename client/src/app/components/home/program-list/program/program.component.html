@@ -5,6 +5,8 @@
     <h4 id="date-range">{{ dateStart }} - {{ dateEnd }}</h4>
     <button id="btn-view-details">View Program Details</button>
   </div>
+  <hr *ngIf="hasEvents" noshade>
+  <!-- <h4 *ngIf="hasEvents" id="associated-events">Associated Events</h4> -->
   <div *ngFor="let event of events" style="margin-bottom: 15px">
     <app-event (click)="selectEvent(event)" [event]="event"></app-event>
   </div>
