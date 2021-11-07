@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Event } from 'src/app/models/Event';
 import { Program } from 'src/app/models/Program';
 import { User } from 'src/app/models/User';
+import { EventsService } from 'src/app/services/events.service';
 import { ProgramsService } from 'src/app/services/programs.service';
 import { UsersService } from 'src/app/services/users.service';
 
@@ -23,7 +24,15 @@ export class ProgramComponent implements OnInit {
   @Output() showAddEventToProgramEmitter: EventEmitter<string> = new EventEmitter<string>();
   @Output() selectEventEmitter: EventEmitter<Event> = new EventEmitter();
 
-  constructor(private programsService: ProgramsService, private usersService: UsersService) { }
+  constructor(private programsService: ProgramsService, private usersService: UsersService, private eventsService: EventsService) {
+    this.eventsService.getEventsEmitter.subscribe((programId: string) => {
+      if (this.program && programId == this.program.programId) {
+        this.programsService.getAssociatedEvents(programId, (events: Event[]) => {
+          this.events = events;
+        })
+      }
+    })
+  }
 
   ngOnInit(): void {
     if (this.program) {

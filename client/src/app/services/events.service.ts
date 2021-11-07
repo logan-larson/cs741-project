@@ -33,7 +33,9 @@ export class EventsService {
         if (event.isIndependent) {
           this.events.push(event);
         }
-        this.getEventsEmitter.emit("get events");
+        console.log(programId);
+        
+        this.getEventsEmitter.emit(programId);
         cb(event);
       }, err => {
         console.log(err);
