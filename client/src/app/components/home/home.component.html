@@ -21,6 +21,6 @@
     <app-add-program (close)="showAddProgramComponent = false"></app-add-program>
   </div>
   <div *ngIf="showEventViewerComponent">
-    <app-event-viewer [currentUser]="currentUser" [event]="selectedEvent" (closeEmitter)="showEventViewerComponent = false"></app-event-viewer>
+    <app-event-viewer [user]="currentUser" [event]="selectedEvent" (closeEmitter)="showEventViewerComponent = false"></app-event-viewer>
   </div>
 </div>

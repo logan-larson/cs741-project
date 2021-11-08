@@ -19,6 +19,10 @@ export class EventsService {
     return this.eventsRepository.findMany({ isIndependent: true });
   }
 
+  async getEventById(eventId: string): Promise<Event> {
+    return this.eventsRepository.findOne({ eventId });
+  }
+
   async getEventsByIds(eventIds: string[]): Promise<Event[]> {
     if (!eventIds || eventIds.length == 0) {
       return [];

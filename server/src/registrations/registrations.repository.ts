@@ -21,4 +21,8 @@ export class RegistrationsRepository {
   async findOneAndUpdate(registrationFilterQuery: FilterQuery<RegistrationDocument>, registration: Partial<Registration>): Promise<Registration> {
     return this.registrationModel.findOneAndUpdate(registrationFilterQuery, registration);
   }
+
+  async findOneAndDelete(registrationFilterQuery: FilterQuery<RegistrationDocument>) {
+    return this.registrationModel.findOneAndDelete(registrationFilterQuery);
+  }
 }

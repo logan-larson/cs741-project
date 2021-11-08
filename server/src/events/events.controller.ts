@@ -23,6 +23,15 @@ export class EventsController {
     return this.eventsService.getAllIndependentEvents();
   }
 
+  @Get(':eventId')
+  async getEventById(
+    @Param('eventId') eventId: string
+  ): Promise<Event> {
+    return this.eventsService.getEventById(eventId);
+  }
+
+
+  // -- Deprecated -- 
   @Get(':eventId/volunteers/:userId')
   async getVolunteerRegistrationStatus(
     @Param('eventId') eventId: string,

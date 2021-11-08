@@ -1,12 +1,12 @@
 <div class="pop-up-container container">
   <h2>Event Viewer</h2>
   <app-event-details [event]="event"></app-event-details>
-  <div *ngIf="isRegistered != undefined && (currentUser.type == 'volunteer' || currentUser.type == 'both')">
-    <app-volunteer-section [isRegistered]="isRegistered" (registrationStatusEmitter)="setIsRegistered($event)"></app-volunteer-section>
+  <div *ngIf="isRegistered != undefined && (user.type == 'volunteer' || user.type == 'both')">
+    <app-volunteer-section [isRegistered]="isRegistered" [event]="event" [user]="user" (eventChangeEmitter)="refreshEvent()"></app-volunteer-section>
   </div>
   <div style="display: flex;">
     <button (click)="close()" class="bg-red txt-white">Close</button>
-    <div *ngIf="currentUser != {}">
+    <div *ngIf="user != {}">
       <button (click)="save()" class="bg-green txt-white">Save</button>
     </div>
   </div>

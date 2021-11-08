@@ -22,15 +22,16 @@ export class EventViewerComponent implements OnInit {
 
   // Inputs passed by home component
   @Input() event: Event = {};
-  @Input() currentUser: User = {};
+  @Input() user: User = {};
 
   // Emit when close
   @Output() closeEmitter: EventEmitter<any> = new EventEmitter();
 
-  constructor(private eventsService: EventsService, private registrationsService: RegistrationsService) { }
+  constructor(private eventsService: EventsService, private registrationsService: RegistrationsService) {}
+  
 
   ngOnInit(): void {
-    if (this.currentUser) {
+    if (this.user) {
       this.getIsRegistered();
     }
   }
@@ -44,8 +45,8 @@ export class EventViewerComponent implements OnInit {
     // if so the user is registered to volunteer for event
     if (this.event && this.event.registrationIds) {
       this.event.registrationIds.forEach(eventRegId => {
-        if (this.currentUser.registrationIds) {
-          this.currentUser.registrationIds.forEach(userRegId => {
+        if (this.user.registrationIds) {
+          this.user.registrationIds.forEach(userRegId => {
             if (eventRegId == userRegId) {
               this.isRegistered = true;
               this.previousIsRegistered = true;
@@ -62,13 +63,14 @@ export class EventViewerComponent implements OnInit {
   }
 
   async save() {
+    /*
     // Add all fields that changed to user
-    if ((this.currentUser.type == 'volunteer' || this.currentUser.type == 'both') && this.previousIsRegistered != this.isRegistered) {
+    if ((this.user.type == 'volunteer' || this.user.type == 'both') && this.previousIsRegistered != this.isRegistered) {
       if (this.registrationId) {
-        await this.registrationsService.unregisterFromEvent(this.registrationId, this.currentUser, this.event);
+        await this.registrationsService.unregisterFromEvent(this.registrationId, this.user, this.event);
         console.log("unregistered");
       } else {
-        let registered: any = await this.registrationsService.registerForEvent(this.currentUser, this.event);
+        let registered: any = await this.registrationsService.registerForEvent(this.user, this.event);
         if (!registered) {
           alert("You cannot register to volunteer for events with overlapping times");
           this.isRegistered = false;
@@ -78,6 +80,7 @@ export class EventViewerComponent implements OnInit {
         }
       }
     }
+    */
 
 
     // Update user
@@ -89,4 +92,13 @@ export class EventViewerComponent implements OnInit {
     this.isRegistered = isRegistered;
   }
 
+  refreshEvent() {
+    console.log("here");
+    
+    if (this.event.eventId) {
+      this.eventsService.getEventById(this.event.eventId, (event: Event) => {
+        this.event = event;
+      });
+    }
+  }
 }

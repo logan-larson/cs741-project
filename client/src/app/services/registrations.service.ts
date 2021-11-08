@@ -11,24 +11,28 @@ export class RegistrationsService {
 
   constructor(private http: HttpClient) { }
 
-  async unregisterFromEvent(registrationId: string, user: User, event: Event) {
+  unregisterFromEvent(registrationId: string, user: User, event: Event, cb: any): void {
     this.http.post<Registration>(`/api/registrations/${registrationId}`, { user: user, event: event })
       .subscribe((registration: Registration) => {
-        return registration;
+        console.log(registration);
+        cb(registration);
       }, (err: any) => {
-        return err;
+        console.log("error in unregistration response");
+        cb(null);
       })
   }
 
-  async registerForEvent(user: User, event: Event) {
+  registerForEvent(user: User, event: Event, cb: any): void {
     this.http.post<Registration>(`/api/registrations`, { user: user, event: event })
       .subscribe((registration: Registration) => {
-        return registration;
+        console.log(registration);
+        cb(registration)
       }, (err: HttpErrorResponse) => {
+        console.log("error in registration response");
         if (err.message == "Overlap") {
-          return err.message;
+          alert("You cannot register to volunteer for events with overlapping times");
         }
-        return err;
+        cb(err);
       });
   }
 

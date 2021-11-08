@@ -61,4 +61,17 @@ export class RegistrationsService {
     return registration;
   }
 
+  async removeRegistration(registrationId: string, user: User, event: Event): Promise<Registration> {
+    // Remove registration from user and events registrationIds
+    let userRegIds: string[] = user.registrationIds.filter(regId => regId != registrationId);
+    this.usersService.updateRegistrationIds(user.userId, userRegIds);
+
+    let eventRegIds: string[] = event.registrationIds.filter(regId => regId != registrationId);
+    this.eventsService.updateRegistrationIds(event.eventId, eventRegIds);
+
+    // Remove registration from repository
+    return await this.registrationsRepository.findOneAndDelete({ registrationId });
+
+  }
+
 }
