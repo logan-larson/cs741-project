@@ -24,10 +24,13 @@ export class Event {
   timeEnd: Date;
   
   @Prop()
-  volunteersNeeded: number;
+  volunteerCountRequirement: number;
 
   @Prop([String])
-  volunteerUserIds: string[];
+  registrationIds: string[];
+
+  @Prop([String])
+  donationIds: string[];
 
   @Prop()
   isIndependent: boolean;

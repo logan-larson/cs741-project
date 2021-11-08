@@ -16,6 +16,12 @@ export class User {
 
   @Prop()
   type: string;
+
+  @Prop([String])
+  registrationIds: string[];
+
+  @Prop([String])
+  donationIds: string[];
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

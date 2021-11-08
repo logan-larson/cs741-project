@@ -1,9 +1,10 @@
 .container {
   border-radius: 10px;
   padding: 15px;
-  background-color: darkgrey;
+  background-color: grey;
   display: flex;
   flex-flow: column;
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
 }
 
 .container > * {
@@ -24,4 +25,13 @@ label {
 
 button {
   width: 50%;
+  border: none;
+  background-color: var(--blue);
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.5s;
+}
+
+button:hover {
+  background-color: var(--dark-blue);
+  cursor: pointer;
 }

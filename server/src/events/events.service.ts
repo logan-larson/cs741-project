@@ -1,4 +1,6 @@
 import { Injectable } from '@nestjs/common';
+import { User } from 'src/users/schemas/user.schema';
+import { UsersRepository } from 'src/users/users.repository';
 import { v4 as uuidv4 } from 'uuid';
 
 import { EventsRepository } from './events.repository';
@@ -7,7 +9,7 @@ import { Event } from './schemas/event.schema';
 @Injectable()
 export class EventsService {
 
-  constructor(private readonly eventsRepository: EventsRepository) {}
+  constructor(private readonly eventsRepository: EventsRepository, private readonly usersRepository: UsersRepository) {}
 
   async getAllEvents(): Promise<Event[]> {
     return this.eventsRepository.findAll();
@@ -47,7 +49,7 @@ export class EventsService {
     date: Date,
     timeStart: Date,
     timeEnd: Date,
-    volunteersNeeded: number,
+    volunteerRequirementCount: number,
     isIndependent: boolean
   ): Promise<Event> {
     // Validate user is admin with userId
@@ -60,24 +62,38 @@ export class EventsService {
       date: date,
       timeStart: timeStart,
       timeEnd: timeEnd,
-      volunteersNeeded: volunteersNeeded,
-      volunteerUserIds: [],
+      volunteerCountRequirement: volunteerRequirementCount,
+      registrationIds: [],
+      donationIds: [],
       isIndependent: isIndependent
-    })
+    });
   }
 
   async getVolunteerRegistrationStatus(eventId: string, userId: string): Promise<boolean> {
     // Get specifed event
     const event: Event = await this.eventsRepository.findOne({ eventId });
+    const user: User = await this.usersRepository.findOne({ userId });
 
-    // Check if user is a volunteer for event
-    if (!event.volunteerUserIds.includes(userId)) {
-      return false;
+    // for each registration id in event, if has registration id associated then is registered
+    for (const eventRegId in event.registrationIds) {
+      if (user.registrationIds.find((userRegId) => userRegId == eventRegId)) {
+        return true
+      }
     }
 
     return true;
   }
 
+  async updateRegistrationIds(eventId: string, registrationIds: string[]): Promise<boolean> {
+    console.log(registrationIds);
+    
+    let event: Event = await this.eventsRepository.findOneAndUpdate({ eventId }, { registrationIds });
+    
+    return event != undefined;
+  }
+
+  /*
+  -- Deprecated -- Old volunteering system
   async changeEventVolunteerStatus(eventId: string, userId: string): Promise<Event> {
     const isRegistered: boolean = await this.getVolunteerRegistrationStatus(eventId, userId);
     const event: Event = await this.eventsRepository.findOne({ eventId });
@@ -96,5 +112,6 @@ export class EventsService {
   
     return this.eventsRepository.findOneAndUpdate({ eventId }, { volunteersNeeded: eventVolunteersNeeded, volunteerUserIds: eventVolunteerUserIds });
   }
+  */
 
 }

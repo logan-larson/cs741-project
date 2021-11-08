@@ -7,5 +7,7 @@ export interface Event {
   timeEnd?: Date,
   volunteersNeeded?: number,
   volunteerUserIds?: string[],
+  registrationIds?: string[],
+  donationIds?: string[],
   isIndependent?: boolean,
 }

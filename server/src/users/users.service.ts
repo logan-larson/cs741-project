@@ -17,7 +17,9 @@ export class UsersService {
       userId: uuidv4(),
       username: username,
       password: password,
-      type: type
+      type: type,
+      registrationIds: [],
+      donationIds: [],
     });
   }
 
@@ -31,5 +33,13 @@ export class UsersService {
     }
 
     return user;
+  }
+
+  async updateRegistrationIds(userId: string, registrationIds: string[]): Promise<boolean> {
+    console.log(registrationIds);
+    
+    let user: User = await this.usersRepository.findOneAndUpdate({ userId }, { registrationIds });
+    
+    return user != undefined;
   }
 }

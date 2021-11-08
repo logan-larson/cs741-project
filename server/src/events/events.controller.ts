@@ -55,6 +55,8 @@ export class EventsController {
     return event;
   }
 
+  /*
+  -- Deprecated -- Old volunteering system
   @Put(':eventId/volunteers')
   async addVolunteerToEvent(
     @Param('eventId') eventId: string,
@@ -62,5 +64,6 @@ export class EventsController {
   ): Promise<Event> {
     return this.eventsService.changeEventVolunteerStatus(eventId, userIdDto.userId);
   }
+  */
 
 }
