@@ -30,18 +30,11 @@ export class EventsService {
 
     let events: Event[] = [];
 
-
     for (const eventIndex in eventIds) {
       const event: Event = await this.eventsRepository.findOne({ eventId: eventIds[eventIndex] });
-
-
-      console.log(event);
       
       events.push(event);
     }
-
-    console.log(events);
-    
 
     return events; 
   }
@@ -57,7 +50,10 @@ export class EventsService {
     isIndependent: boolean
   ): Promise<Event> {
     // Validate user is admin with userId
-    console.log(userId);
+    let user: User = await this.usersRepository.findOne({ userId });
+    if (user.type != "admin") {
+      return null;
+    }
 
     return this.eventsRepository.create({
       eventId: uuidv4(),
@@ -89,8 +85,6 @@ export class EventsService {
   }
 
   async updateRegistrationIds(eventId: string, registrationIds: string[]): Promise<boolean> {
-    console.log(registrationIds);
-    
     let event: Event = await this.eventsRepository.findOneAndUpdate({ eventId }, { registrationIds });
     
     return event != undefined;

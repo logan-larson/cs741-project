@@ -36,8 +36,6 @@ export class UsersService {
   }
 
   async updateRegistrationIds(userId: string, registrationIds: string[]): Promise<boolean> {
-    console.log(registrationIds);
-    
     let user: User = await this.usersRepository.findOneAndUpdate({ userId }, { registrationIds });
     
     return user != undefined;

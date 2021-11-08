@@ -40,12 +40,10 @@ export class EventsService {
         if (event.isIndependent) {
           this.events.push(event);
         }
-        console.log(programId);
-        
         this.getEventsEmitter.emit(programId);
         cb(event);
       }, err => {
-        console.log(err);
+        console.log("Error in EventsService -> createEvent");
       })
   }
 }

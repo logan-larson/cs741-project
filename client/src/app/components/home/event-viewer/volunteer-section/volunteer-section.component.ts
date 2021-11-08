@@ -46,35 +46,43 @@ export class VolunteerSectionComponent implements OnInit {
 
   async setRegistrationStatus() {
     // Use registration service to update registration status
+
     if (this.isRegistered) {
+      console.log("Unregistering...");
+      
       this.registrationsService.unregisterFromEvent(
         this.registrationId, 
         this.user, 
         this.event, 
         (registration: Registration) => {
-          console.log(registration);
-          
           if (registration) {
             // On successful registration or unregistration, update view
             this.isRegistered = false;
             this.registrationStatus = "Not registered";
             this.buttonText = "Register";
             this.eventChangeEmitter.emit(true);
+
+            console.log("Successfully unregistered");
           }
         });
     } else {
+      console.log("Registering...");
+      
       this.registrationsService.registerForEvent(
         this.user,
         this.event,
         (registration: Registration) => {
-          console.log(registration);
-
           if (registration) {
             // On successful registration or unregistration, update view
             this.isRegistered = true;
             this.registrationStatus = "Registered";
             this.buttonText = "Unregister";
+            if (registration.registrationId) {
+              this.registrationId = registration.registrationId;
+            }
             this.eventChangeEmitter.emit(true);
+            
+            console.log("Successfully registered");
           }
         })
       }

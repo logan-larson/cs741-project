@@ -28,7 +28,6 @@ export class ProgramsService {
   getAssociatedEvents(programId: string | undefined, cb: any): void {
     this.http.get<Event[]>(`/api/programs/${programId}/events`)
       .subscribe((events: Event[]) => {
-        console.log(events);
         cb(events);
       })
   }
@@ -36,9 +35,8 @@ export class ProgramsService {
   updateEventIds(programId: string | undefined, eventId: string | undefined) {
     this.http.put<Program>(`/api/programs/${programId}/event/${eventId}`, null)
       .subscribe((program: Program) => {
-        console.log(program);
       }, (error: any) => {
-        console.log(error);
+        console.log("Error in ProgramsService -> updateEventIds");
       })
   }
 
@@ -49,7 +47,7 @@ export class ProgramsService {
         this.getProgramsEmitter.emit("get programs");
         cb(program);
       }, err => {
-        console.log(err);
+        console.log("Error in ProgramsService -> createProgram");
       })
   }
 }

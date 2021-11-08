@@ -15,7 +15,7 @@ export class UsersService {
       .subscribe(user => {
         cb(user);
       }, err => {
-        console.log(err);
+        console.log("Error in UsersService -> create");
       });
   }
 
@@ -24,7 +24,7 @@ export class UsersService {
       .subscribe(user => {
         cb(user);
       }, err => {
-        console.log(err);
+        console.log("Error in UsersService -> validate");
       });
   }
 
@@ -33,7 +33,7 @@ export class UsersService {
       .subscribe(success => {
         cb(success);
       }, err => {
-        console.log(err);
+        console.log("Error in UsersService -> logout");
       })
   }
 

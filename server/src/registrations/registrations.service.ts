@@ -47,7 +47,6 @@ export class RegistrationsService {
     // Update user registrationIds
     let registrationIds: string[] = user.registrationIds;
     registrationIds.push(registration.registrationId);
-    console.log(registrationIds);
     
     this.usersService.updateRegistrationIds(user.userId, registrationIds);
   

@@ -1,4 +1,6 @@
 import { Injectable } from "@nestjs/common";
+import { User } from "src/users/schemas/user.schema";
+import { UsersRepository } from "src/users/users.repository";
 import { v4 as uuidv4 } from 'uuid';
 
 import { ProgramsRepository } from "./programs.repository";
@@ -7,7 +9,10 @@ import { Program } from "./schemas/program.schema";
 @Injectable()
 export class ProgramsService {
 
-  constructor(private readonly programsRepository: ProgramsRepository) {}
+  constructor(
+    private readonly programsRepository: ProgramsRepository,
+    private readonly usersRepository: UsersRepository
+  ) {}
 
   async getAllPrograms(): Promise<Program[]> {
     return this.programsRepository.findAll();
@@ -31,7 +36,10 @@ export class ProgramsService {
     dateEnd: Date,
   ): Promise<Program> {
     // Validate user creating the program is admin
-    console.log(userId);
+    let user: User = await this.usersRepository.findOne({ userId });
+    if (user.type != "admin") {
+      return null;
+    }
 
     return this.programsRepository.create({
       programId: uuidv4(),

@@ -63,28 +63,6 @@ export class EventViewerComponent implements OnInit {
   }
 
   async save() {
-    /*
-    // Add all fields that changed to user
-    if ((this.user.type == 'volunteer' || this.user.type == 'both') && this.previousIsRegistered != this.isRegistered) {
-      if (this.registrationId) {
-        await this.registrationsService.unregisterFromEvent(this.registrationId, this.user, this.event);
-        console.log("unregistered");
-      } else {
-        let registered: any = await this.registrationsService.registerForEvent(this.user, this.event);
-        if (!registered) {
-          alert("You cannot register to volunteer for events with overlapping times");
-          this.isRegistered = false;
-          this.previousIsRegistered = false;
-          this.volunteerSectionComponent.setRegistrationStatus();
-          return;
-        }
-      }
-    }
-    */
-
-
-    // Update user
-
     this.close();
   }
 
@@ -93,11 +71,12 @@ export class EventViewerComponent implements OnInit {
   }
 
   refreshEvent() {
-    console.log("here");
+    console.log("Refreshing event...");
     
     if (this.event.eventId) {
       this.eventsService.getEventById(this.event.eventId, (event: Event) => {
         this.event = event;
+        console.log("Successfully refreshed event");
       });
     }
   }
