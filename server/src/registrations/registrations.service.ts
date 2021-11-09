@@ -15,11 +15,11 @@ export class RegistrationsService {
     private readonly usersService: UsersService,
     private readonly eventsService: EventsService) {}
 
-  async checkOverlap(user: User, event: Event): Promise<boolean> {
+  async checkOverlap(user: User, clientEvent: Event): Promise<boolean> {
+
+    let event: Event = await this.eventsService.getEventById(clientEvent.eventId);
     
-    return false;
-    //console.log(`Event -- Start: ${event.timeStart}, End: ${event.timeEnd}`);
-    console.log("user regIds: " + user.registrationIds);
+    console.log(`Event -- Start: ${event.timeStart}, End: ${event.timeEnd}`);
 
     if (user.registrationIds.length == 0) {
       return false;
@@ -32,11 +32,25 @@ export class RegistrationsService {
 
       // Check if times overlap with event times
       console.log(`Registration -- Start: ${registration.timeStart}, End: ${registration.timeEnd}`);
+      let test: number = registration.timeEnd[Symbol.toPrimitive]('number');
+
+      console.log("\ntest: " + test + "\n");
+      
+
+      let regTimeStart: number = registration.timeStart.valueOf();
+      let regTimeEnd: number = registration.timeEnd.valueOf();
+      let eventTimeStart: number = event.timeStart.valueOf();
+      let eventTimeEnd: number = event.timeEnd.valueOf();
       
       // -- check if event start time or end time is within the registration time
+      if (regTimeStart >= eventTimeStart && regTimeStart <= eventTimeEnd) {
+        return true;
+      } else if (regTimeEnd >= eventTimeStart && regTimeEnd <= eventTimeEnd) {
+        return true;
+      }
     }
 
-    return true;
+    return false;
   }
 
   async createRegistration(user: User, event: Event): Promise<Registration> {

@@ -71,9 +71,9 @@ export class VolunteerSectionComponent implements OnInit {
             
             this.eventsService.getAllIndependentEvents(() => {
               this.eventsService.getEventsEmitter.emit(true);
+              this.usersService.getCurrentUserEmitter.emit(true);
             });
 
-            this.usersService.getCurrentUserEmitter.emit(true);
 
             console.log("Successfully unregistered");
           }
@@ -96,12 +96,10 @@ export class VolunteerSectionComponent implements OnInit {
             this.eventChangeEmitter.emit(true);
 
             this.eventsService.getAllIndependentEvents(() => {
+              this.usersService.getCurrentUserEmitter.emit(true);
               this.eventsService.getEventsEmitter.emit(true);
             });
 
-            this.usersService.getCurrentUserEmitter.emit(true);
-
-            
             console.log("Successfully registered");
           }
         })

@@ -9,6 +9,7 @@ import { Event } from '../models/Event';
 export class UsersService {
 
   @Output() getCurrentUserEmitter: EventEmitter<any> = new EventEmitter();
+  currentUser: User = {};
 
   constructor(private http: HttpClient) { }
 
@@ -41,8 +42,13 @@ export class UsersService {
 
   getCurrentUser(cb: any): void {
     this.http.get<User>(`/api/users/user`)
-      .subscribe(user => {
+      .subscribe((user: User) => {
+        this.currentUser = user;
         cb(user);
       })
+  }
+
+  getUser(): User {
+    return this.currentUser;
   }
 }

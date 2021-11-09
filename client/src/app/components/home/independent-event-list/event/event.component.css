@@ -21,3 +21,11 @@
 .independent:hover {
   background-color: rgb(94, 94, 94);
 }
+
+.registered {
+  background-color: var(--blue);
+}
+
+.registered:hover {
+  background-color: var(--dark-blue);
+}
