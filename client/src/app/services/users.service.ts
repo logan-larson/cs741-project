@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable, Output } from '@angular/core';
 import { User } from '../models/User';
 import { Event } from '../models/Event';
 
@@ -7,6 +7,8 @@ import { Event } from '../models/Event';
   providedIn: 'root'
 })
 export class UsersService {
+
+  @Output() getCurrentUserEmitter: EventEmitter<any> = new EventEmitter();
 
   constructor(private http: HttpClient) { }
 

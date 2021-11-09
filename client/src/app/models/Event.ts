@@ -5,7 +5,7 @@ export interface Event {
   date?: Date,
   timeStart?: Date,
   timeEnd?: Date,
-  volunteersNeeded?: number,
+  volunteerCountRequirement?: number,
   volunteerUserIds?: string[],
   registrationIds?: string[],
   donationIds?: string[],

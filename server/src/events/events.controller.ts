@@ -53,7 +53,7 @@ export class EventsController {
       createEventDto.date,
       createEventDto.timeStart,
       createEventDto.timeEnd,
-      createEventDto.volunteersNeeded,
+      createEventDto.volunteerCountRequirement,
       createEventDto.isIndependent
     );
 

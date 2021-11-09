@@ -4,6 +4,6 @@ export class CreateEventDto {
   date: Date;
   timeStart: Date;
   timeEnd: Date;
-  volunteersNeeded: number;
+  volunteerCountRequirement: number;
   isIndependent: boolean;
 }

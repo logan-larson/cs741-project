@@ -24,7 +24,7 @@ export class AddEventComponent implements OnInit {
   @Input() date: string = "";
   @Input() timeStartString: string = this.timeStartDate.toTimeString().substr(0,5);
   @Input() timeEndString: string = this.timeEndDate.toTimeString().substr(0, 5);
-  @Input() volunteersNeeded: number = 0;
+  @Input() volunteerCountRequirement: number = 0;
 
   @Output() close: EventEmitter<any> = new EventEmitter();
 
@@ -68,7 +68,7 @@ export class AddEventComponent implements OnInit {
       return;
     }
 
-    if (this.volunteersNeeded <= 0) {
+    if (this.volunteerCountRequirement <= 0) {
       alert("Volunteers needed must be at least 1");
       return;
     }
@@ -81,7 +81,7 @@ export class AddEventComponent implements OnInit {
       date: inputtedDate,
       timeStart: inputtedStartTime,
       timeEnd: inputtedEndTime,
-      volunteersNeeded: this.volunteersNeeded,
+      volunteerCountRequirement: this.volunteerCountRequirement,
       isIndependent: isIndependent
     }
 

@@ -2,7 +2,9 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Event } from 'src/app/models/Event';
 import { Registration } from 'src/app/models/Registration';
 import { User } from 'src/app/models/User';
+import { EventsService } from 'src/app/services/events.service';
 import { RegistrationsService } from 'src/app/services/registrations.service';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-volunteer-section',
@@ -11,6 +13,7 @@ import { RegistrationsService } from 'src/app/services/registrations.service';
 })
 export class VolunteerSectionComponent implements OnInit {
 
+  // Input passed by event viewer component
   @Input() event: Event = {};
   @Input() user: User = {};
 
@@ -20,7 +23,11 @@ export class VolunteerSectionComponent implements OnInit {
   @Input() isRegistered: boolean = false;
   @Output() eventChangeEmitter: EventEmitter<boolean> = new EventEmitter();
 
-  constructor(private registrationsService: RegistrationsService) { }
+  constructor(
+    private registrationsService: RegistrationsService,
+    private eventsService: EventsService,
+    private usersService: UsersService
+  ) { }
 
   ngOnInit(): void {
     // Calculate registration status
@@ -61,6 +68,12 @@ export class VolunteerSectionComponent implements OnInit {
             this.registrationStatus = "Not registered";
             this.buttonText = "Register";
             this.eventChangeEmitter.emit(true);
+            
+            this.eventsService.getAllIndependentEvents(() => {
+              this.eventsService.getEventsEmitter.emit(true);
+            });
+
+            this.usersService.getCurrentUserEmitter.emit(true);
 
             console.log("Successfully unregistered");
           }
@@ -73,7 +86,7 @@ export class VolunteerSectionComponent implements OnInit {
         this.event,
         (registration: Registration) => {
           if (registration) {
-            // On successful registration or unregistration, update view
+            // On successful registration, update view
             this.isRegistered = true;
             this.registrationStatus = "Registered";
             this.buttonText = "Unregister";
@@ -81,6 +94,13 @@ export class VolunteerSectionComponent implements OnInit {
               this.registrationId = registration.registrationId;
             }
             this.eventChangeEmitter.emit(true);
+
+            this.eventsService.getAllIndependentEvents(() => {
+              this.eventsService.getEventsEmitter.emit(true);
+            });
+
+            this.usersService.getCurrentUserEmitter.emit(true);
+
             
             console.log("Successfully registered");
           }

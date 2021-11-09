@@ -46,7 +46,7 @@ export class EventsService {
     date: Date,
     timeStart: Date,
     timeEnd: Date,
-    volunteerRequirementCount: number,
+    volunteerCountRequirement: number,
     isIndependent: boolean
   ): Promise<Event> {
     // Validate user is admin with userId
@@ -62,7 +62,7 @@ export class EventsService {
       date: date,
       timeStart: timeStart,
       timeEnd: timeEnd,
-      volunteerCountRequirement: volunteerRequirementCount,
+      volunteerCountRequirement: volunteerCountRequirement,
       registrationIds: [],
       donationIds: [],
       isIndependent: isIndependent

@@ -12,6 +12,7 @@ export class EventComponent implements OnInit {
   date: string = "";
   startTime: string = "";
   endTime: string = "";
+  volunteersNeeded: number = 0;
 
   constructor() {}
 
@@ -25,6 +26,9 @@ export class EventComponent implements OnInit {
       }
       if (this.event.timeEnd) {
         this.endTime = new Date(this.event.timeEnd).toLocaleTimeString();
+      }
+      if (this.event.volunteerCountRequirement && this.event.registrationIds) {
+        this.volunteersNeeded = this.event.volunteerCountRequirement - this.event.registrationIds.length;
       }
     }
   }

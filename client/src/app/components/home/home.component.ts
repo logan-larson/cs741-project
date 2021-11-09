@@ -23,7 +23,13 @@ export class HomeComponent implements OnInit {
 
   programId: any = "";
 
-  constructor(private usersService: UsersService, private authService: AuthService, private router: Router) { }
+  constructor(private usersService: UsersService, private authService: AuthService, private router: Router) {
+    this.usersService.getCurrentUserEmitter.subscribe(() => {
+      this.usersService.getCurrentUser((user: User) => {
+        this.currentUser = user;
+      })
+    })
+  }
 
   ngOnInit(): void {
     this.usersService.getCurrentUser((user: User) => {
