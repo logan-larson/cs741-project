@@ -19,7 +19,7 @@ export class MakeDonationComponent implements OnInit {
   @Input() program?: Program;
 
   // Input from user
-  @Input() amount: number = 0;
+  @Input() amount?: number;
 
   // Type of donation
   type?: string;
@@ -34,13 +34,25 @@ export class MakeDonationComponent implements OnInit {
 
   donate() {
 
-    if (this.amount <= 0) {
-      alert("Donation amount must be greater than 0");
+    if (!this.user) {
+      alert("Internal error");
+      this.cancel();
+      return;
     }
 
-    this.donationsService.makeDonation(this.amount, (donation: Donation) => {
+    if (!this.amount || (this.amount && this.amount <= 0)) {
+      alert("Donation amount must be greater than 0");
+      this.amount = undefined;
+      return;
+    }
+
+    this.donationsService.makeDonation(this.amount, this.user, (donation: Donation) => {
+
+      // Let components know they need to get an updated version
+      // of user and event/program associated with the donation
+
       this.donationViewsService.showDonationComponent.emit(false);
-    }, this.user, this.event, this.program)
+    }, this.event, this.program)
   }
 
   cancel() {

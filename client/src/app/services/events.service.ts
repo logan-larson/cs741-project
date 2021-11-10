@@ -10,8 +10,10 @@ import { User } from '../models/User';
 export class EventsService {
 
   events: Event[] = [];
+  selectedEvent: Event = {};
 
   @Output() getEventsEmitter: EventEmitter<any> = new EventEmitter();
+  @Output() getSelectedEventEmitter: EventEmitter<any> = new EventEmitter();
 
   constructor(private http: HttpClient) { }
 
@@ -25,6 +27,10 @@ export class EventsService {
 
   getEvents(): Event[]  {
     return this.events;
+  }
+
+  getSelectedEvent(): Event {
+    return this.selectedEvent;
   }
 
   getEventById(eventId: string, cb: any): void {

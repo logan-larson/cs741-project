@@ -12,7 +12,7 @@ export class DonationsService {
 
   constructor(private http: HttpClient) { }
 
-  makeDonation(amount: number, cb: any, user?: User, event?: Event, program?: Program) {
+  makeDonation(amount: number, user: User, cb: any, event?: Event, program?: Program) {
     this.http.post('/api/donations',
     {
       amount: amount,
