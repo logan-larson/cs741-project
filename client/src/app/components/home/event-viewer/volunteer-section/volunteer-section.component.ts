@@ -34,10 +34,8 @@ export class VolunteerSectionComponent implements OnInit {
   ngOnInit(): void {
     // Calculate registration status
     this.user = this.usersService.getUser();
-    console.log(this.user);
     
     this.event = this.eventsService.getSelectedEvent();
-    console.log(this.event);
     
 
     // Check if event registration ids contains a registration id in current user's registration ids

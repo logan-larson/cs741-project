@@ -1,10 +1,10 @@
 .container {
   border-radius: 10px;
   padding: 15px;
-  background-color: darkgrey;
+  background-color: var(--tertiary);
   display: flex;
   flex-flow: column;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .container > * {

@@ -1,16 +1,18 @@
 <div class="pop-up-container container">
-  <h2>Event Viewer</h2>
-  <app-event-details [event]="event"></app-event-details>
-  <div *ngIf="isRegistered != undefined && (user.type == 'volunteer' || user.type == 'both')">
-    <app-volunteer-section [isRegistered]="isRegistered" (eventChangeEmitter)="refreshEvent()"></app-volunteer-section>
-  </div>
-  <div *ngIf="user.type == 'donor' || user.type == 'both'">
-    <app-donor-section></app-donor-section>
-  </div>
-  <div style="display: flex;">
-    <button (click)="close()" class="bg-red txt-white">Close</button>
-    <div *ngIf="user != {}">
-      <button (click)="save()" class="bg-green txt-white">Save</button>
+  <h2 id="title">Event Viewer</h2>
+  <nav>
+    <app-event-details class="subcontainer" [event]="event"></app-event-details>
+    <div class="subcontainer" *ngIf="isRegistered != undefined && (user.type == 'volunteer' || user.type == 'both')">
+      <app-volunteer-section [isRegistered]="isRegistered" (eventChangeEmitter)="refreshEvent()"></app-volunteer-section>
+    </div>
+    <div class="subcontainer" *ngIf="user.type == 'donor' || user.type == 'both'">
+      <app-donor-section></app-donor-section>
+    </div>
+  </nav>
+  <div class="button-container">
+    <button id="close" (click)="close()">Close</button>
+    <div *ngIf="user != {} && user.type == 'admin'">
+      <button id="save" (click)="save()">Save</button>
     </div>
   </div>
 </div>

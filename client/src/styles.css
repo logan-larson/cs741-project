@@ -54,7 +54,7 @@ input.checkbox {
   transform: translate(-50%, -50%);
   padding: 30px;
   border-radius: 15px;
-  background-color: lightgrey;
+  background-color: var(--secondary);
   border: none;
   box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
 }

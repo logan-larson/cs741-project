@@ -4,7 +4,6 @@
   background-color: grey;
   display: flex;
   flex-flow: column;
-  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
 }
 
 .container > * {

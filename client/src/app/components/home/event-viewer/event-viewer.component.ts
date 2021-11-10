@@ -45,7 +45,6 @@ export class EventViewerComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.usersService.getUser();
-    console.log(this.user);
     this.event = this.eventsService.getSelectedEvent();
 
     if (this.user) {

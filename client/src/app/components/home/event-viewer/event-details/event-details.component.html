@@ -1,9 +1,9 @@
 <div class="container">
   <h3>Event Details</h3>
   <p>Name: {{ event.name }}</p>
-  <p>Description: {{ event.description }}</p>
-  <p>Date: {{ event.date }}</p>
-  <p>Start time: {{ event.timeStart }}</p>
-  <p>End time: {{ event.timeEnd }}</p>
+  <p *ngIf="event.description">Description: {{ event.description }}</p>
+  <p>Date: {{ date }}</p>
+  <p>Start time: {{ startTime }}</p>
+  <p>End time: {{ endTime }}</p>
   <p>Number of volunteers needed: {{ volunteersNeeded }}</p>
 </div>

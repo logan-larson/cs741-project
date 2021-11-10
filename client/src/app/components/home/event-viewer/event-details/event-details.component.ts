@@ -1,5 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Event } from 'src/app/models/Event';
+import { User } from 'src/app/models/User';
+import { EventsService } from 'src/app/services/events.service';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-event-details',
@@ -9,29 +12,45 @@ import { Event } from 'src/app/models/Event';
 export class EventDetailsComponent implements OnInit {
 
   @Input() event: Event = {};
+  user: User = {};
   date: string | undefined;
   startTime: string | undefined;
   endTime: string | undefined;
   volunteersNeeded: number = 0;
 
-  constructor() {}
+  constructor(
+    private eventsService: EventsService,
+  ) {
+    this.eventsService.getEventsEmitter.subscribe(() => {
+      let e = this.eventsService.getEvents().find(element => element.eventId == this.event.eventId);
+      if (e) {
+        this.event = e;
+        this.setVolunteersNeeded();
+      }
+    });
+  }
 
   ngOnInit(): void {
     // TODO format date and time properly
-    /*
-    if (this.event.date != undefined
-      && this.event.timeStart != undefined
-      && this.event.timeEnd != undefined) {
-      this.date = this.event.date?.toDateString();
-      this.startTime = this.event.timeStart?.toTimeString();
-      this.endTime = this.event.timeEnd?.toTimeString();
+
+    if (this.event && this.event.date && this.event.timeStart && this.event.timeEnd) {
+      this.date = new Date(this.event.date).toLocaleDateString();
+      this.startTime = new Date(this.event.timeStart).toLocaleTimeString();
+      this.endTime = new Date(this.event.timeEnd).toLocaleTimeString();
+      
+      console.log(`Date: ${this.date}, Start: ${this.startTime}, End: ${this.endTime}`);
+      
     }
-    */
+
+
+    this.setVolunteersNeeded();
+
+  }
+
+  setVolunteersNeeded() {
     if (this.event && this.event.volunteerCountRequirement && this.event.registrationIds) {
       this.volunteersNeeded = this.event.volunteerCountRequirement - this.event.registrationIds?.length;
     }
-
-
   }
 
 }
