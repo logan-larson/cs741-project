@@ -19,6 +19,8 @@ import { EventDetailsComponent } from './components/home/event-viewer/event-deta
 import { ProgramComponent } from './components/home/program-list/program/program.component';
 import { AddProgramComponent } from './components/home/add-program/add-program.component';
 import { ProgramListComponent } from './components/home/program-list/program-list.component';
+import { DonorSectionComponent } from './components/home/event-viewer/donor-section/donor-section.component';
+import { MakeDonationComponent } from './components/home/make-donation/make-donation.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { ProgramListComponent } from './components/home/program-list/program-lis
     EventDetailsComponent,
     ProgramComponent,
     AddProgramComponent,
-    ProgramListComponent
+    ProgramListComponent,
+    DonorSectionComponent,
+    MakeDonationComponent
   ],
   imports: [
     BrowserModule,

@@ -5,6 +5,7 @@ import { Program } from 'src/app/models/Program';
 import { User } from 'src/app/models/User';
 import { AuthService } from 'src/app/services/auth.service';
 import { UsersService } from 'src/app/services/users.service';
+import { DonationViewsService } from 'src/app/services/views/donation-views.service';
 
 @Component({
   selector: 'app-home',
@@ -20,14 +21,24 @@ export class HomeComponent implements OnInit {
   showAddProgramComponent: boolean = false;
   showEventViewerComponent: boolean = false;
   showProgramViewerComponent: boolean = false;
+  showMakeDonationComponent: boolean = false;
 
   programId: any = "";
 
-  constructor(private usersService: UsersService, private authService: AuthService, private router: Router) {
+  constructor(
+    private usersService: UsersService,
+    private authService: AuthService,
+    private router: Router,
+    private donationViewsService: DonationViewsService
+  ) {
     this.usersService.getCurrentUserEmitter.subscribe(() => {
       this.usersService.getCurrentUser((user: User) => {
         this.currentUser = user;
       })
+    });
+
+    this.donationViewsService.showDonationComponent.subscribe(show => {
+      this.showMakeDonationComponent = show;
     })
   }
 

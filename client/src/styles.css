@@ -55,7 +55,8 @@ input.checkbox {
   padding: 30px;
   border-radius: 15px;
   background-color: lightgrey;
-  border: 3px solid darkgrey;
+  border: none;
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
 }
 
 /* Colors */

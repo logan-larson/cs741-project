@@ -4,6 +4,9 @@
   <div *ngIf="isRegistered != undefined && (user.type == 'volunteer' || user.type == 'both')">
     <app-volunteer-section [isRegistered]="isRegistered" [event]="event" [user]="user" (eventChangeEmitter)="refreshEvent()"></app-volunteer-section>
   </div>
+  <div *ngIf="user.type == 'donor' || user.type == 'both'">
+    <app-donor-section [event]="event" [user]="user"></app-donor-section>
+  </div>
   <div style="display: flex;">
     <button (click)="close()" class="bg-red txt-white">Close</button>
     <div *ngIf="user != {}">

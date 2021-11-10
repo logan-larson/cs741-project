@@ -1,0 +1,53 @@
+.container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 15px;
+  padding: 30px;
+  background-color: lightgrey;
+  display: flex;
+  flex-flow: column;
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
+}
+
+h3 {
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+label {
+  margin-right: 20px;
+}
+
+button {
+  border: none;
+  color: white;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.5s;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+#donate {
+  background-color: var(--blue);
+}
+
+#donate:hover {
+  background-color: var(--dark-blue);
+}
+
+#cancel {
+  background-color: var(--red);
+}
+
+#cancel:hover {
+  background-color: var(--dark-red);
+}

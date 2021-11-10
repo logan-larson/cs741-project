@@ -23,4 +23,7 @@
   <div *ngIf="showEventViewerComponent">
     <app-event-viewer [user]="currentUser" [event]="selectedEvent" (closeEmitter)="showEventViewerComponent = false"></app-event-viewer>
   </div>
+  <div *ngIf="showMakeDonationComponent">
+    <app-make-donation [user]="currentUser" [event]="selectedEvent"></app-make-donation>
+  </div>
 </div>

@@ -1,0 +1,11 @@
+<div class="container">
+  <h3>Make Donation</h3>
+  <form>
+    <label for="amount">Amount:</label>
+    <input type="number" name="amount" [(ngModel)]="amount">
+    <div style="display: flex;">
+      <button id="cancel" (click)="cancel()">Cancel</button>
+      <button id="donate" type="submit" (click)="donate()">Donate</button>
+    </div>
+  </form>
+</div>
