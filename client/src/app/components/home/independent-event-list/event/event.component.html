@@ -1,9 +1,12 @@
-<div class="container shadow" [class.independent]="event.isIndependent" [class.registered]="isRegistered">
-  <h4>{{ event.name }}</h4>
-  <p>{{ event.description }}</p>
-  <h4>{{ date }}</h4>
-  <h4>{{ startTime }}</h4>
-  <h4>{{ endTime }}</h4>
-  <h4>{{ volunteersNeeded }}</h4>
+<div class="container" [class.independent]="event.isIndependent" [class.registered]="isRegistered">
+  <div class="details-container">
+    <h2>{{ event.name }}</h2>
+    <div class="date-time-container">
+      <h4>{{ date }}</h4>
+      <h4>{{ startTime }}  {{ endTime }}</h4>
+    </div>
+  </div>
+  <h4 id="vol-need">Volunteers Needed: {{ volunteersNeeded }}</h4>
+  <p *ngIf="event.description">{{ event.description }}</p>
   <button (click)="viewEventDetails()">View Event Details</button>
 </div>

@@ -1,11 +1,36 @@
 .container {
-  display: grid;
-  grid-template-columns: 2fr 3fr 2fr 2fr 2fr 1fr;
+  display: flex;
+  flex-direction: column;
   border-radius: 15px;
   background-color: lightgrey;
   margin-top: 15px;
   padding-left: 15px;
   padding-right: 15px;
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
+  justify-content: center;
+  align-items: center;
+}
+
+.details-container {
+  display: flex;
+  width: 100%;
+  margin: 20px 0px;
+}
+
+.date-time-container {
+  width: 50%;
+  text-align: center;
+}
+
+.date-time-container h4 {
+  margin: 0px;
+}
+
+h2 {
+  margin: 0px;
+  align-self: center;
+  text-align: center;
+  flex-grow: 2;
 }
 
 .independent {
@@ -16,12 +41,18 @@
   background-color: var(--green);
 }
 
+#vol-need {
+  margin: 10px;
+}
+
 button {
   border: none;
   background-color: var(--blue);
   color: white;
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
   transition: background-color 0.5s;
+  width: 250px;
+  margin-bottom: 20px;
 }
 
 button:hover {
