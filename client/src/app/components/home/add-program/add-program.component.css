@@ -1,3 +1,50 @@
-label {
-  margin-right: 20px;
+.pop-up-container {
+  width: 600px;
+}
+
+#title {
+  text-align: center;
+  margin-top: 0px;
+}
+
+form div {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+
+#button-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+button {
+  border: none;
+  color: white;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.5s;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+#add-program {
+  width: 200px;
+  background-color: var(--green);
+}
+
+#add-program:hover {
+  background-color: var(--dark-green);
+}
+
+#cancel {
+  background-color: var(--red);
+}
+
+#cancel:hover {
+  background-color: var(--dark-red);
 }

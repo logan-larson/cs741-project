@@ -1,5 +1,5 @@
 <div class="pop-up-container">
-  <h3 style="text-align: center;">Add Event</h3>
+  <h3 id="title">Add Event</h3>
   <form class="flow-vert center-items">
     <div>
       <label for="name">Name:</label>
@@ -25,7 +25,9 @@
       <label for="date">Volunteers Needed:</label>
       <input type="number" name="volunteersNeeded" id="volunteersNeeded" [(ngModel)]="volunteerCountRequirement">
     </div>
-    <button type="submit" (click)="addEvent()" class="bg-green txt-white">Add Event</button>
-    <button (click)="cancel()" class="bg-red txt-white">Cancel</button>
+    <div id="button-container">
+      <button id="cancel" (click)="cancel()">Cancel</button>
+      <button id="add-event" type="submit" (click)="addEvent()">Add Event</button>
+    </div>
   </form>
 </div>
