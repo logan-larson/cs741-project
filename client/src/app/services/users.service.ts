@@ -2,16 +2,30 @@ import { HttpClient } from '@angular/common/http';
 import { EventEmitter, Injectable, Output } from '@angular/core';
 import { User } from '../models/User';
 import { Event } from '../models/Event';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
 
+  // When a component invokes a command that will change the user's contents server side
+  // The component should signal this to let the service know it needs to get the updated user
+  @Output() userUpdatedEmitter: EventEmitter<any> = new EventEmitter();
+
   @Output() getCurrentUserEmitter: EventEmitter<any> = new EventEmitter();
   currentUser: User = {};
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    // Listen for emissions from userUpdatedEmitter
+    // On change get the updated user from the server
+    this.userUpdatedEmitter.subscribe(() => {
+      this.getCurrentUser((updatedUser: User) => {
+        this.currentUser = updatedUser;
+      })
+    })
+
+  }
 
   create(user: User, cb: any): void {
     this.http.post<User>('/api/users', user)

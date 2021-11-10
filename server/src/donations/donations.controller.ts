@@ -1,4 +1,4 @@
-import { Body, Controller, HttpException, Post } from "@nestjs/common";
+import { Body, Controller, Get, HttpException, Param, Post } from "@nestjs/common";
 import { DonationsService } from "./donations.service";
 import { MakeDonationDto } from "./dtos/make-donation.dto";
 import { Donation } from "./schemas/donation.schema";
@@ -7,6 +7,14 @@ import { Donation } from "./schemas/donation.schema";
 export class DonationsController {
 
   constructor(private readonly donationsService: DonationsService) {}
+
+  @Get('user/:userId/event/:eventId')
+  async getUsersDonationsForEvent(
+    @Param('userId') userId: string,
+    @Param('eventId') eventId: string
+  ): Promise<Donation[]> {
+    return this.donationsService.getUsersDonationsForEvent(userId, eventId);
+  }
 
   @Post()
   async makeDonation(

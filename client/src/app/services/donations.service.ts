@@ -12,7 +12,8 @@ export class DonationsService {
 
   constructor(private http: HttpClient) { }
 
-  makeDonation(amount: number, user: User, cb: any, event?: Event, program?: Program) {
+  // Refer to comment in make donation - TODO
+  makeDonation(amount: number, user: User, cb: (donation: Donation | null) => void, event?: Event, program?: Program) {
     this.http.post('/api/donations',
     {
       amount: amount,
@@ -24,7 +25,12 @@ export class DonationsService {
       cb(donation)
     }, (err: HttpErrorResponse) => {
       console.log(err);
+      
       cb(null);
     });
+  }
+
+  async getUsersDonationsForEvent(user: User, event: Event): Promise<Donation[]> {
+    return this.http.get<Donation[]>(`/api/donations/user/${user.userId}/event/${event.eventId}`).toPromise();
   }
 }

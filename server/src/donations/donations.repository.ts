@@ -12,6 +12,10 @@ export class DonationsRepository {
     return this.donationModel.findOne(donationFilterQuery);
   }
 
+  async findWithIdList(donationIds: string[]): Promise<Donation[]> {
+    return this.donationModel.find({ donationId: {$in: donationIds} });
+  }
+
   async create(donation: Donation): Promise<Donation> {
     const newDonation = new this.donationModel(donation);
     return newDonation.save();

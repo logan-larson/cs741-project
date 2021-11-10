@@ -18,6 +18,22 @@ export class DonationsService {
     private readonly programsService: ProgramsService
   ) {}
 
+  async getUsersDonationsForEvent(userId: string, eventId: string): Promise<Donation[]> {
+    const user: User = await this.usersService.getUserById(userId);
+    const event: Event = await this.eventsService.getEventById(eventId);
+
+    const donationIds: string[] = [];
+    for (const userDonId of user.donationIds) {
+      for (const eventDonId of event.donationIds) {
+        if (userDonId == eventDonId) {
+          donationIds.push(userDonId);
+        }
+      }
+    }
+
+    return this.donationsRepository.findWithIdList(donationIds);
+  }
+
   async makeDonationToEvent(amount: number, user: User, event: Event): Promise<Donation> {
     let donation: Donation = await this.donationsRepository.create({
       donationId: uuidv4(),

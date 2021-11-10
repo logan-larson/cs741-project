@@ -46,7 +46,9 @@ export class MakeDonationComponent implements OnInit {
       return;
     }
 
-    this.donationsService.makeDonation(this.amount, this.user, (donation: Donation) => {
+    // Look into callback return types - TODO
+    this.donationsService.makeDonation(this.amount, this.user, (donation: Donation | null) => {
+      // Signal to users and events service that the user and event has been updated
 
       // Let components know they need to get an updated version
       // of user and event/program associated with the donation
