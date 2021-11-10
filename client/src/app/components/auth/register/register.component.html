@@ -19,27 +19,28 @@
       placeholder="Confirm password"
       class="center-self input-margin"
       [(ngModel)]="confirmPassword">
-    <div class="flow-hori">
-      <label for="donor" style="margin-left: auto;">Donor: </label>
-      <input type="checkbox"
-        name="donor"
-        id="donor"
-        class="checkbox"
-        style="margin-right: auto;"
-        [(ngModel)]="donor"> 
+    <div id="type-container">
+      <div class="checkbox-container">
+        <label for="donor">Donor: </label>
+        <input type="checkbox"
+          name="donor"
+          id="donor"
+          class="checkbox"
+          [(ngModel)]="donor"> 
+      </div>
+      <div class="checkbox-container">
+        <label for="volunteer">Volunteer: </label>
+        <input type="checkbox"
+          name="volunteer"
+          id="volunteer"
+          class="checkbox"
+          [(ngModel)]="volunteer"> 
+      </div>
     </div>
-    <div class="flow-hori">
-      <label for="volunteer" style="margin-left: auto;">Volunteer: </label>
-      <input type="checkbox"
-        name="volunteer"
-        id="volunteer"
-        class="checkbox"
-        style="margin-right: auto;"
-        [(ngModel)]="volunteer"> 
-    </div>
-    <div class="flow-vert center-items">
-      <button (click)="register()" class="txt-white bg-blue" >Register</button>
+    <div id="button-container">
+      <button id="register" (click)="register()">Register</button>
       <h5 (click)="gotoLogin()" class="link">Already have an account? Click here</h5>
+      <h5 (click)="gotoHome()" class="link">Continue without registering</h5>
     </div>
   </form>
 </div>

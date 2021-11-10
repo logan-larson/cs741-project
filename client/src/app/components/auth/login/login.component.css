@@ -4,6 +4,7 @@
   margin-top: 10%;
   padding: 30px;
   border-radius: 15px;
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
 }
 
 h2 {
@@ -17,6 +18,19 @@ h2 {
 
 h5 {
   margin: 10px;
+}
+
+#login {
+  border: none;
+  color: white;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  background-color: var(--blue);
+  transition: background-color 0.5s;
+}
+
+#login:hover {
+  background-color: var(--dark-blue);
+  cursor: pointer;
 }
 
 .link {

@@ -23,3 +23,47 @@ h2 {
   cursor: pointer;
   color: blue;
 }
+
+#type-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.checkbox-container {
+  display: flex;
+  width: 150px;
+  margin: auto;
+  justify-content: space-between;
+}
+
+.checkbox-container label input {
+  margin: 0px;
+}
+
+#register {
+  border: none;
+  color: white;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  background-color: var(--blue);
+  transition: background-color 0.5s;
+}
+
+#register:hover {
+  background-color: var(--dark-blue);
+  cursor: pointer;
+}
+
+#button-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#register {
+  margin: 10px auto;
+}
+
+h5 {
+  margin: 10px 0px;
+  text-align: center;
+}

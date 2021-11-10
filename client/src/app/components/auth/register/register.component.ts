@@ -61,4 +61,8 @@ export class RegisterComponent implements OnInit {
     this.authService.setPage('login');
     this.gotoLoginEmitter.emit("goto login");
   }
+
+  gotoHome() {
+    this.router.navigateByUrl('home');
+  }
 }
