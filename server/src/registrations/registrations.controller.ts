@@ -27,6 +27,8 @@ export class RegistrationsController {
   async registerForEvent(
     @Body() createRegistrationDto: CreateRegistrationDto
   ): Promise<Registration> {
+    console.log(createRegistrationDto);
+
     let isOverlapping = await this.registrationsService.checkOverlap(createRegistrationDto.user, createRegistrationDto.event);
     if (isOverlapping) {
       throw new HttpException("Overlap", 400);

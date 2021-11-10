@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { User } from 'src/app/models/User';
 import { Event } from 'src/app/models/Event';
 import { DonationsService } from 'src/app/services/donations.service';
-import { DonationViewsService } from 'src/app/services/views/donation-views.service';
+import { ViewsService } from 'src/app/services/views/views.service';
 import { Program } from 'src/app/models/Program';
 import { Donation } from 'src/app/models/Donation';
 import { UsersService } from 'src/app/services/users.service';
@@ -27,13 +27,15 @@ export class MakeDonationComponent implements OnInit {
   type?: string;
 
   constructor(
-    private donationViewsService: DonationViewsService,
+    private viewsService: ViewsService,
     private donationsService: DonationsService,
     private usersService: UsersService,
     private eventsService: EventsService
   ) { }
 
   ngOnInit(): void {
+    this.user = this.usersService.getUser();
+    this.event = this.eventsService.getSelectedEvent();
   }
 
   donate() {
@@ -61,12 +63,12 @@ export class MakeDonationComponent implements OnInit {
 
       this.usersService.userAndEventUpdatedEmitter.emit();
 
-      this.donationViewsService.showDonationComponent.emit(false);
+      this.viewsService.showDonationComponent.emit(false);
     }, this.event, this.program)
   }
 
   cancel() {
-    this.donationViewsService.showDonationComponent.emit(false);
+    this.viewsService.showDonationComponent.emit(false);
   }
 
 }

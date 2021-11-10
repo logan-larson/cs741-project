@@ -5,7 +5,7 @@ import { User } from 'src/app/models/User';
 import { DonationsService } from 'src/app/services/donations.service';
 import { EventsService } from 'src/app/services/events.service';
 import { UsersService } from 'src/app/services/users.service';
-import { DonationViewsService } from 'src/app/services/views/donation-views.service';
+import { ViewsService } from 'src/app/services/views/views.service';
 
 @Component({
   selector: 'app-donor-section',
@@ -22,23 +22,16 @@ export class DonorSectionComponent implements OnInit {
   amountDonated: number = 0;
 
   constructor(
-    private donationViewsService: DonationViewsService,
+    private viewsService: ViewsService,
     private donationsService: DonationsService,
     private usersService: UsersService,
     private eventsService: EventsService
   ) {
     this.eventsService.getSelectedEventEmitter
       .subscribe(() => {
-        console.log("All changed");
         
         this.user = this.usersService.getUser();
         this.event = this.eventsService.getSelectedEvent();
-
-        console.log("Got updated event and user");
-        console.log(this.user);
-        console.log("---------------------------");
-        console.log(this.event);
-        console.log("---------------------------\n");
         
         this.setAmountDonated();
       });
@@ -48,6 +41,8 @@ export class DonorSectionComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.user = this.usersService.getUser();
+    this.event = this.eventsService.getSelectedEvent();
     this.setAmountDonated();
 
     // TODO - expand donor section to accomodate programs
@@ -58,8 +53,6 @@ export class DonorSectionComponent implements OnInit {
     // Given the user donationIds and event donationIds
     // Find the donations the user has made to the event
     // Add the amounts of those donations to this.amount
-    console.log(this.user);
-    
 
     if (this.user && this.user.donationIds && this.event && this.event.donationIds) {
       const donationIds: string[] = [];
@@ -83,7 +76,7 @@ export class DonorSectionComponent implements OnInit {
   }
 
   donate() {
-    this.donationViewsService.showDonationComponent.emit(true);
+    this.viewsService.showDonationComponent.emit(true);
   }
 
 }

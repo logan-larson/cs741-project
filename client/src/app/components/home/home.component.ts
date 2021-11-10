@@ -5,7 +5,7 @@ import { Program } from 'src/app/models/Program';
 import { User } from 'src/app/models/User';
 import { AuthService } from 'src/app/services/auth.service';
 import { UsersService } from 'src/app/services/users.service';
-import { DonationViewsService } from 'src/app/services/views/donation-views.service';
+import { ViewsService } from 'src/app/services/views/views.service';
 
 @Component({
   selector: 'app-home',
@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit {
     private usersService: UsersService,
     private authService: AuthService,
     private router: Router,
-    private donationViewsService: DonationViewsService
+    private viewsService: ViewsService
   ) {
     this.usersService.getCurrentUserEmitter.subscribe(() => {
       this.usersService.getCurrentUser((user: User) => {
@@ -37,8 +37,12 @@ export class HomeComponent implements OnInit {
       })
     });
 
-    this.donationViewsService.showDonationComponent.subscribe(show => {
+    this.viewsService.showDonationComponent.subscribe(show => {
       this.showMakeDonationComponent = show;
+    });
+
+    this.viewsService.showEventViewerComponent.subscribe(show => {
+      this.showEventViewerComponent = show;
     })
   }
 

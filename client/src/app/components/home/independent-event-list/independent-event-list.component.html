@@ -2,7 +2,7 @@
   <h2 id="list-title">Independent Event List</h2>
   <nav class="bg-ltgrey">
     <div *ngFor="let event of events" style="margin-bottom: 15px">
-      <app-event (click)="selectEvent(event)" [event]="event" [user]="currentUser"></app-event>
+      <app-event [event]="event" [user]="currentUser"></app-event>
     </div>
   </nav>
   <div *ngIf="currentUser && currentUser.type == 'admin'; then thenBlock; else elseBlock"></div>

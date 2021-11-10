@@ -3,6 +3,7 @@ import { Event } from 'src/app/models/Event';
 import { User } from 'src/app/models/User';
 import { EventsService } from 'src/app/services/events.service';
 import { UsersService } from 'src/app/services/users.service';
+import { ViewsService } from 'src/app/services/views/views.service';
 
 @Component({
   selector: 'app-event',
@@ -19,7 +20,11 @@ export class EventComponent implements OnInit {
   volunteersNeeded: number = 0;
   isRegistered: boolean = false;
 
-  constructor(private usersService: UsersService, private eventsService: EventsService) {
+  constructor(
+    private usersService: UsersService,
+    private eventsService: EventsService,
+    private viewsService: ViewsService
+  ) {
     this.usersService.getCurrentUserEmitter.subscribe(() => {
       this.user = this.usersService.getUser();
       this.eventsService.getEventsEmitter.subscribe(() => {
@@ -55,6 +60,11 @@ export class EventComponent implements OnInit {
       this.setIsRegistered();
 
     }
+  }
+
+  viewEventDetails() {
+    this.eventsService.setSelectedEvent(this.event);
+    this.viewsService.showEventViewerComponent.emit(true);
   }
 
   setIsRegistered() {

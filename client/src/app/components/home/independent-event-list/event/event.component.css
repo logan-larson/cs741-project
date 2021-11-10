@@ -6,26 +6,25 @@
   margin-top: 15px;
   padding-left: 15px;
   padding-right: 15px;
-  transition: background-color 0.5s;
-}
-
-.container:hover {
-  background-color: darkgrey;
-  cursor: pointer;
 }
 
 .independent {
   background-color: var(--tertiary);
 }
 
-.independent:hover {
-  background-color: rgb(94, 94, 94);
-}
-
 .registered {
-  background-color: var(--blue);
+  background-color: var(--green);
 }
 
-.registered:hover {
+button {
+  border: none;
+  background-color: var(--blue);
+  color: white;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.5s;
+}
+
+button:hover {
   background-color: var(--dark-blue);
+  cursor: pointer;
 }

@@ -14,8 +14,10 @@ import { UsersService } from 'src/app/services/users.service';
 export class VolunteerSectionComponent implements OnInit {
 
   // Input passed by event viewer component
-  @Input() event: Event = {};
-  @Input() user: User = {};
+  //@Input() event: Event = {};
+  //@Input() user: User = {};
+  user?: User;
+  event?: Event;
 
   buttonText: string = "";
   registrationStatus: string = "";
@@ -31,6 +33,12 @@ export class VolunteerSectionComponent implements OnInit {
 
   ngOnInit(): void {
     // Calculate registration status
+    this.user = this.usersService.getUser();
+    console.log(this.user);
+    
+    this.event = this.eventsService.getSelectedEvent();
+    console.log(this.event);
+    
 
     // Check if event registration ids contains a registration id in current user's registration ids
     // if so the user is registered to volunteer for event
@@ -54,7 +62,7 @@ export class VolunteerSectionComponent implements OnInit {
   async setRegistrationStatus() {
     // Use registration service to update registration status
 
-    if (this.isRegistered) {
+    if (this.isRegistered && this.user && this.event) {
       this.registrationsService.unregisterFromEvent(
         this.registrationId, 
         this.user, 
@@ -75,8 +83,7 @@ export class VolunteerSectionComponent implements OnInit {
 
           }
         });
-    } else {
-      
+    } else if (!this.isRegistered && this.user && this.event){
       this.registrationsService.registerForEvent(
         this.user,
         this.event,

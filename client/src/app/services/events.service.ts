@@ -21,16 +21,9 @@ export class EventsService {
 
   constructor(private http: HttpClient) {
     this.selectedEventUpdatedEmitter.subscribe(() => {
-      console.log("Now updating event");
-      
-      if (this.selectedEvent && !this.selectedEvent.eventId) {
-        console.log("WTF");
-      }
-
       if (this.selectedEvent && this.selectedEvent.eventId) {
         this.getEventById(this.selectedEvent.eventId, (updatedEvent: Event) => {
           this.selectedEvent = updatedEvent;
-          console.log("Updated event: " + event);
           
           this.getSelectedEventEmitter.emit();
         })

@@ -22,6 +22,13 @@ export class RegistrationsService {
   }
 
   registerForEvent(user: User, event: Event, cb: any): void {
+    const body = {
+      user: user,
+      event: event
+    };
+
+    console.log(body);
+    
     this.http.post<Registration>(`/api/registrations`, { user: user, event: event })
       .subscribe((registration: Registration) => {
         cb(registration)

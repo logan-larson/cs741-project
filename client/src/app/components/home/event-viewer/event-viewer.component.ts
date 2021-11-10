@@ -3,6 +3,7 @@ import { Event } from 'src/app/models/Event';
 import { User } from 'src/app/models/User';
 import { EventsService } from 'src/app/services/events.service';
 import { RegistrationsService } from 'src/app/services/registrations.service';
+import { UsersService } from 'src/app/services/users.service';
 import { VolunteerSectionComponent } from './volunteer-section/volunteer-section.component';
 
 @Component({
@@ -16,9 +17,9 @@ export class EventViewerComponent implements OnInit {
   private volunteerSectionComponent!: VolunteerSectionComponent
 
   // Fields subject to change by user
-  isRegistered: boolean | undefined;
+  isRegistered?: boolean;
   previousIsRegistered: boolean = false;
-  registrationId: string | undefined;
+  registrationId?: string;
 
   // Inputs passed by home component
   @Input() event: Event = {};
@@ -27,10 +28,26 @@ export class EventViewerComponent implements OnInit {
   // Emit when close
   @Output() closeEmitter: EventEmitter<any> = new EventEmitter();
 
-  constructor(private eventsService: EventsService, private registrationsService: RegistrationsService) {}
+  constructor(
+    private eventsService: EventsService,
+    private registrationsService: RegistrationsService,
+    private usersService: UsersService
+  ) {
+    this.eventsService.getSelectedEventEmitter.subscribe(() => {
+      this.event = this.eventsService.getSelectedEvent();
+    });
+
+    this.usersService.getCurrentUserEmitter.subscribe(() => {
+      this.user = this.usersService.getUser();
+    })
+  }
   
 
   ngOnInit(): void {
+    this.user = this.usersService.getUser();
+    console.log(this.user);
+    this.event = this.eventsService.getSelectedEvent();
+
     if (this.user) {
       this.getIsRegistered();
     }

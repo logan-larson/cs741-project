@@ -31,7 +31,6 @@ export class UsersService {
     })
 
     this.userAndEventUpdatedEmitter.subscribe(() => {
-      console.log("Caught it!");
       this.getCurrentUser((updatedUser: User) => {
         this.currentUser = updatedUser;
         this.eventsService.selectedEventUpdatedEmitter.emit();
