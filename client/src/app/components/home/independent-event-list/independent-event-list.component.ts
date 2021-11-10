@@ -41,6 +41,7 @@ export class IndependentEventListComponent implements OnInit {
   }
 
   selectEvent(event: Event) {
+    this.eventsService.setSelectedEvent(event);
     this.selectEventEmitter.emit(event);
   }
 

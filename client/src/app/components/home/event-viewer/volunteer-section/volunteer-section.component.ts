@@ -55,8 +55,6 @@ export class VolunteerSectionComponent implements OnInit {
     // Use registration service to update registration status
 
     if (this.isRegistered) {
-      console.log("Unregistering...");
-      
       this.registrationsService.unregisterFromEvent(
         this.registrationId, 
         this.user, 
@@ -75,11 +73,9 @@ export class VolunteerSectionComponent implements OnInit {
             });
 
 
-            console.log("Successfully unregistered");
           }
         });
     } else {
-      console.log("Registering...");
       
       this.registrationsService.registerForEvent(
         this.user,
@@ -100,7 +96,6 @@ export class VolunteerSectionComponent implements OnInit {
               this.eventsService.getEventsEmitter.emit(true);
             });
 
-            console.log("Successfully registered");
           }
         })
       }

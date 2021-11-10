@@ -59,16 +59,12 @@ export class EventComponent implements OnInit {
 
   setIsRegistered() {
     if (this.event && this.event.registrationIds) {
-      console.log("event && event.registrationIds");
       
       this.isRegistered = false;
       this.event.registrationIds.forEach(eventRegId => {
         if (this.user && this.user.registrationIds) {
-          console.log("user && user.registrationIds");
           this.user.registrationIds.forEach(userRegId => {
             if (eventRegId == userRegId) {
-              console.log("Registered for " + this.event.name);
-              
               this.isRegistered = true;
             }
           });
@@ -76,8 +72,6 @@ export class EventComponent implements OnInit {
       });
 
     }
-
-    console.log("Event: " + this.event.name + "isRegged: " + this.isRegistered)
   }
 
 }

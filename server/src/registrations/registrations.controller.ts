@@ -17,8 +17,6 @@ export class RegistrationsController {
     @Param('registrationId') registrationId: string,
     @Body() removeRegistrationDto: RemoveRegistrationDto
   ): Promise<Registration> {
-    console.log("Unregistering...");
-    
     return this.registrationsService.removeRegistration(
       registrationId,
       removeRegistrationDto.user,
@@ -29,8 +27,6 @@ export class RegistrationsController {
   async registerForEvent(
     @Body() createRegistrationDto: CreateRegistrationDto
   ): Promise<Registration> {
-    console.log("Registering...");
-    
     let isOverlapping = await this.registrationsService.checkOverlap(createRegistrationDto.user, createRegistrationDto.event);
     if (isOverlapping) {
       throw new HttpException("Overlap", 400);

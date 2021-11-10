@@ -27,15 +27,22 @@ export class DonorSectionComponent implements OnInit {
     private usersService: UsersService,
     private eventsService: EventsService
   ) {
-    this.usersService.getCurrentUserEmitter
-      .subscribe(() => {
-        this.user = this.usersService.getUser();
-      });
-
     this.eventsService.getSelectedEventEmitter
       .subscribe(() => {
+        console.log("All changed");
+        
+        this.user = this.usersService.getUser();
         this.event = this.eventsService.getSelectedEvent();
+
+        console.log("Got updated event and user");
+        console.log(this.user);
+        console.log("---------------------------");
+        console.log(this.event);
+        console.log("---------------------------\n");
+        
+        this.setAmountDonated();
       });
+
 
     // Listen for change from make donation?
   }
@@ -51,6 +58,8 @@ export class DonorSectionComponent implements OnInit {
     // Given the user donationIds and event donationIds
     // Find the donations the user has made to the event
     // Add the amounts of those donations to this.amount
+    console.log(this.user);
+    
 
     if (this.user && this.user.donationIds && this.event && this.event.donationIds) {
       const donationIds: string[] = [];

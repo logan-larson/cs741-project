@@ -71,12 +71,9 @@ export class EventViewerComponent implements OnInit {
   }
 
   refreshEvent() {
-    console.log("Refreshing event...");
-    
     if (this.event.eventId) {
       this.eventsService.getEventById(this.event.eventId, (event: Event) => {
         this.event = event;
-        console.log("Successfully refreshed event");
       });
     }
   }

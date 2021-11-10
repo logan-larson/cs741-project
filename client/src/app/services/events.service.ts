@@ -10,12 +10,33 @@ import { User } from '../models/User';
 export class EventsService {
 
   events: Event[] = [];
+
+  @Output() selectedEventUpdatedEmitter: EventEmitter<any> = new EventEmitter();
+  @Output() getSelectedEventEmitter: EventEmitter<any> = new EventEmitter();
   selectedEvent: Event = {};
 
   @Output() getEventsEmitter: EventEmitter<any> = new EventEmitter();
-  @Output() getSelectedEventEmitter: EventEmitter<any> = new EventEmitter();
 
-  constructor(private http: HttpClient) { }
+
+
+  constructor(private http: HttpClient) {
+    this.selectedEventUpdatedEmitter.subscribe(() => {
+      console.log("Now updating event");
+      
+      if (this.selectedEvent && !this.selectedEvent.eventId) {
+        console.log("WTF");
+      }
+
+      if (this.selectedEvent && this.selectedEvent.eventId) {
+        this.getEventById(this.selectedEvent.eventId, (updatedEvent: Event) => {
+          this.selectedEvent = updatedEvent;
+          console.log("Updated event: " + event);
+          
+          this.getSelectedEventEmitter.emit();
+        })
+      }
+    })
+  }
 
   getAllIndependentEvents(cb: any): void {
     this.http.get<Event[]>('/api/events/independent')
@@ -51,5 +72,9 @@ export class EventsService {
       }, err => {
         console.log("Error in EventsService -> createEvent");
       })
+  }
+
+  setSelectedEvent(event: Event) {
+    this.selectedEvent = event;
   }
 }

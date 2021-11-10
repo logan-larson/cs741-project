@@ -19,8 +19,6 @@ export class RegistrationsService {
 
     let event: Event = await this.eventsService.getEventById(clientEvent.eventId);
     
-    console.log(`Event -- Start: ${event.timeStart}, End: ${event.timeEnd}`);
-
     if (user.registrationIds.length == 0) {
       return false;
     }
@@ -31,12 +29,6 @@ export class RegistrationsService {
       let registration: Registration = await this.registrationsRepository.findOne({ registrationId: user.registrationIds[index] })
 
       // Check if times overlap with event times
-      console.log(`Registration -- Start: ${registration.timeStart}, End: ${registration.timeEnd}`);
-      let test: number = registration.timeEnd[Symbol.toPrimitive]('number');
-
-      console.log("\ntest: " + test + "\n");
-      
-
       let regTimeStart: number = registration.timeStart.valueOf();
       let regTimeEnd: number = registration.timeEnd.valueOf();
       let eventTimeStart: number = event.timeStart.valueOf();
@@ -77,21 +69,17 @@ export class RegistrationsService {
 
   async removeRegistration(registrationId: string, user: User, event: Event): Promise<Registration> {
     // Remove registration from user and events registrationIds
-    console.log("user reg ids before: " + user.registrationIds);
     
     let userRegIds: string[] = user.registrationIds.filter(regId => regId != registrationId);
 
-    console.log("user reg ids after: " + userRegIds);
     let updatedUserRegs: boolean = await this.usersService.updateRegistrationIds(user.userId, userRegIds);
     if (!updatedUserRegs) {
-      console.log("Failed to update user registration ids");
       return null;
     }
 
     let eventRegIds: string[] = event.registrationIds.filter(regId => regId != registrationId);
     let updatedEventRegs: boolean = await this.eventsService.updateRegistrationIds(event.eventId, eventRegIds);
     if (!updatedEventRegs) {
-      console.log("Failed to update event registration ids");
       return null;
     }
 
