@@ -90,6 +90,12 @@ export class EventsService {
     return event != undefined;
   }
 
+  async updateDonationIds(eventId: string, donationIds: string[]): Promise<boolean> {
+    let event: Event = await this.eventsRepository.findOneAndUpdate({ eventId }, { donationIds });
+    
+    return event != undefined;
+  }
+
   /*
   -- Deprecated -- Old volunteering system
   async changeEventVolunteerStatus(eventId: string, userId: string): Promise<Event> {

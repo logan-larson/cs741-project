@@ -40,4 +40,10 @@ export class UsersService {
     
     return user != undefined;
   }
+
+  async updateDonationIds(userId: string, donationIds: string[]): Promise<boolean> {
+    let user: User = await this.usersRepository.findOneAndUpdate({ userId }, { donationIds });
+    
+    return user != undefined;
+  }
 }

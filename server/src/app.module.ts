@@ -4,6 +4,7 @@ import { UsersModule } from './users/users.module';
 import { EventsModule } from './events/events.module';
 import { ProgramsModule } from './programs/programs.module';
 import { RegistrationsModule } from './registrations/registrations.module';
+import { DonationsModule } from './donations/donations.module';
 
 @Module({
   imports: [
@@ -11,9 +12,9 @@ import { RegistrationsModule } from './registrations/registrations.module';
     UsersModule,
     EventsModule,
     ProgramsModule,
-    RegistrationsModule
+    RegistrationsModule,
+    DonationsModule
   ],
-  controllers: [],
   providers: [],
 })
 export class AppModule {}
