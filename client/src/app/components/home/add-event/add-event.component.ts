@@ -75,10 +75,13 @@ export class AddEventComponent implements OnInit {
 
     let isIndependent: boolean = this.programId.length == 0 ? true : false;
 
+    const localDate: Date = new Date(inputtedDate);
+    localDate.setHours(localDate.getHours() + 6);
+
     let event: Event = {
       name: this.name,
       description: this.description,
-      date: inputtedDate,
+      date: localDate,
       timeStart: inputtedStartTime,
       timeEnd: inputtedEndTime,
       volunteerCountRequirement: this.volunteerCountRequirement,

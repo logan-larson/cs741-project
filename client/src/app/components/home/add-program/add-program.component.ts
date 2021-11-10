@@ -65,12 +65,16 @@ export class AddProgramComponent implements OnInit {
     }
 
     // Assemble Program
+    const localStartDate: Date = new Date(inputtedStartDate);
+    const localEndDate: Date = new Date(inputtedEndDate);
+    localStartDate.setHours(localStartDate.getHours() + 6);
+    localEndDate.setHours(localEndDate.getHours() + 6);
 
     let program: Program = {
       name: this.name,
       description: this.description,
-      dateStart: inputtedStartDate,
-      dateEnd: inputtedEndDate,
+      dateStart: localStartDate,
+      dateEnd: localEndDate,
     }
 
     this.programsService.createProgram(program, (program: Program) => {
