@@ -77,6 +77,7 @@ export class DonorSectionComponent implements OnInit {
 
   donate() {
     this.viewsService.showDonationComponent.emit(true);
+    this.donationsService.setType("restricted:event");
   }
 
 }

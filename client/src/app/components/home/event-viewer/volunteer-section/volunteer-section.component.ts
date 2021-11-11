@@ -60,28 +60,41 @@ export class VolunteerSectionComponent implements OnInit {
   async setRegistrationStatus() {
     // Use registration service to update registration status
 
-    if (this.isRegistered && this.user && this.event) {
+    if (this.isRegistered) {
+      this.unregister();
+    } else {
+      this.register();
+    }
+  }
+
+  unregister() {
+    if (this.user && this.event) {
       this.registrationsService.unregisterFromEvent(
         this.registrationId, 
         this.user, 
         this.event, 
         (registration: Registration) => {
           if (registration) {
-            // On successful registration or unregistration, update view
+            // On successful unregistration, update view
             this.isRegistered = false;
             this.registrationStatus = "Not registered";
             this.buttonText = "Register";
             this.eventChangeEmitter.emit(true);
             
             this.eventsService.getAllIndependentEvents(() => {
+              this.usersService.userUpdatedEmitter.emit(true);
+              this.eventsService.selectedEventUpdatedEmitter.emit(true);
+
               this.eventsService.getEventsEmitter.emit(true);
               this.usersService.getCurrentUserEmitter.emit(true);
-            });
-
-
+            })
           }
         });
-    } else if (!this.isRegistered && this.user && this.event){
+    }
+  }
+
+  register() {
+    if (this.user && this.event) {
       this.registrationsService.registerForEvent(
         this.user,
         this.event,
@@ -97,13 +110,15 @@ export class VolunteerSectionComponent implements OnInit {
             this.eventChangeEmitter.emit(true);
 
             this.eventsService.getAllIndependentEvents(() => {
+              this.usersService.userUpdatedEmitter.emit(true);
+              this.eventsService.selectedEventUpdatedEmitter.emit(true);
+
               this.usersService.getCurrentUserEmitter.emit(true);
               this.eventsService.getEventsEmitter.emit(true);
-            });
-
+            })
           }
-        })
-      }
+      })
+    }
   }
 
 }

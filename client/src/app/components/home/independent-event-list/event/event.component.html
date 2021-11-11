@@ -1,12 +1,12 @@
-<div class="container" [class.independent]="event.isIndependent" [class.registered]="isRegistered">
+<div class="container" [class.independent]="isIndependent" [class.registered]="isRegistered">
   <div class="details-container">
-    <h2>{{ event.name }}</h2>
+    <h2>{{ name }}</h2>
     <div class="date-time-container">
       <h4>{{ date }}</h4>
-      <h4>{{ startTime }} - {{ endTime }}</h4>
+      <h4 id="time-range">{{ startTime }} - {{ endTime }}</h4>
     </div>
   </div>
   <h4 id="vol-need">Volunteers Needed: {{ volunteersNeeded }}</h4>
-  <p *ngIf="event.description">{{ event.description }}</p>
+  <p *ngIf="event && event.description">{{ event.description }}</p>
   <button (click)="viewEventDetails()">View Event Details</button>
 </div>

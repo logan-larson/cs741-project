@@ -37,13 +37,13 @@ export class HomeComponent implements OnInit {
       })
     });
 
-    this.viewsService.showDonationComponent.subscribe(show => {
+    this.viewsService.showDonationComponent.subscribe((show: boolean) => {
       this.showMakeDonationComponent = show;
     });
 
-    this.viewsService.showEventViewerComponent.subscribe(show => {
+    this.viewsService.showEventViewerComponent.subscribe((show: boolean) => {
       this.showEventViewerComponent = show;
-    })
+    });
   }
 
   ngOnInit(): void {

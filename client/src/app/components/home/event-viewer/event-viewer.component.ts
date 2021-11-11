@@ -39,7 +39,7 @@ export class EventViewerComponent implements OnInit {
 
     this.usersService.getCurrentUserEmitter.subscribe(() => {
       this.user = this.usersService.getUser();
-    })
+    });
   }
   
 

@@ -7,6 +7,7 @@ import { Program } from 'src/app/models/Program';
 import { Donation } from 'src/app/models/Donation';
 import { UsersService } from 'src/app/services/users.service';
 import { EventsService } from 'src/app/services/events.service';
+import { ProgramsService } from 'src/app/services/programs.service';
 
 @Component({
   selector: 'app-make-donation',
@@ -15,30 +16,33 @@ import { EventsService } from 'src/app/services/events.service';
 })
 export class MakeDonationComponent implements OnInit {
 
-  // Input from home component
-  @Input() user?: User;
-  @Input() event?: Event;
-  @Input() program?: Program;
+  // OnInit get these from their respective services
+  user?: User;
+  event?: Event;
+  program?: Program;
 
   // Input from user
   @Input() amount?: number;
 
   // Type of donation
-  type?: string;
+  type: string = "unrestricted";
 
   constructor(
     private viewsService: ViewsService,
     private donationsService: DonationsService,
     private usersService: UsersService,
-    private eventsService: EventsService
+    private eventsService: EventsService,
+    private programsService: ProgramsService
   ) { }
 
   ngOnInit(): void {
     this.user = this.usersService.getUser();
     this.event = this.eventsService.getSelectedEvent();
+    this.program = this.eventsService.getSelectedEvent();
+    this.type = this.donationsService.getType();
   }
 
-  donate() {
+  async donate(): Promise<void> {
 
     if (!this.user) {
       alert("Internal error");
@@ -53,18 +57,17 @@ export class MakeDonationComponent implements OnInit {
     }
 
     // Look into callback return types - TODO
-    this.donationsService.makeDonation(this.amount, this.user, (donation: Donation | null) => {
-      // Signal to users and events service that the user and event has been updated
-      //this.usersService.userUpdatedEmitter.emit();
-      // I wish this elegant way would work
-      // However the components that rely on these emissions
-      // Require both updated user and updated event at the same time
-      //this.eventsService.selectedEventUpdatedEmitter.emit();
+    const donation: Donation = await this.donationsService.makeDonation(this.amount, this.user, this.type, this.event, this.program);
+    // Signal to users and events service that the user and event has been updated
+    //this.usersService.userUpdatedEmitter.emit();
+    // I wish this elegant way would work
+    // However the components that rely on these emissions
+    // Require both updated user and updated event at the same time
+    //this.eventsService.selectedEventUpdatedEmitter.emit();
 
-      this.usersService.userAndEventUpdatedEmitter.emit();
+    this.usersService.userAndEventUpdatedEmitter.emit();
 
-      this.viewsService.showDonationComponent.emit(false);
-    }, this.event, this.program)
+    this.viewsService.showDonationComponent.emit(false);
   }
 
   cancel() {

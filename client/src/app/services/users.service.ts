@@ -12,10 +12,10 @@ export class UsersService {
 
   // When a component invokes a command that will change the user's contents server side
   // The component should signal this to let the service know it needs to get the updated user
-  @Output() userUpdatedEmitter: EventEmitter<any> = new EventEmitter();
-  @Output() userAndEventUpdatedEmitter: EventEmitter<any> = new EventEmitter();
+  userUpdatedEmitter: EventEmitter<any> = new EventEmitter();
+  userAndEventUpdatedEmitter: EventEmitter<any> = new EventEmitter();
 
-  @Output() getCurrentUserEmitter: EventEmitter<any> = new EventEmitter();
+  getCurrentUserEmitter: EventEmitter<any> = new EventEmitter();
   currentUser: User = {};
 
   constructor(

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Event } from 'src/app/models/Event';
 import { User } from 'src/app/models/User';
 import { EventsService } from 'src/app/services/events.service';
@@ -12,13 +13,15 @@ import { ViewsService } from 'src/app/services/views/views.service';
 })
 export class EventComponent implements OnInit {
 
-  @Input() event: Event = {};
-  @Input() user: User = {};
+  @Input() event?: Event;
+  @Input() user?: User;
   date: string = "";
   startTime: string = "";
   endTime: string = "";
+  name: string = "";
   volunteersNeeded: number = 0;
   isRegistered: boolean = false;
+  isIndependent: boolean = true;
 
   constructor(
     private usersService: UsersService,
@@ -27,23 +30,19 @@ export class EventComponent implements OnInit {
   ) {
     this.usersService.getCurrentUserEmitter.subscribe(() => {
       this.user = this.usersService.getUser();
-      this.eventsService.getEventsEmitter.subscribe(() => {
-        let e = this.eventsService.getEvents().find(element => element.eventId == this.event.eventId);
-        if (e) {
-          this.event = e;
-        }
-
-        this.setIsRegistered();
-      });
-
+      this.setIsRegistered();
     });
 
+    this.eventsService.getEventsEmitter.subscribe(() => {
+      this.event = this.eventsService.getSelectedEvent();
+      this.setIsRegistered();
+    });
   }
 
   ngOnInit(): void {
     this.user = this.usersService.getUser();
 
-    if (this.event) {
+    if (this.user && this.event) {
       if (this.event.date) {
         this.date = new Date(this.event.date).toLocaleDateString();
       }
@@ -56,6 +55,11 @@ export class EventComponent implements OnInit {
       if (this.event.volunteerCountRequirement && this.event.registrationIds) {
         this.volunteersNeeded = this.event.volunteerCountRequirement - this.event.registrationIds.length;
       }
+      if (this.event.name) {
+        this.name = this.event.name;
+      }
+        
+      this.isIndependent = this.event.isIndependent!;
 
       this.setIsRegistered();
 
@@ -63,8 +67,10 @@ export class EventComponent implements OnInit {
   }
 
   viewEventDetails() {
-    this.eventsService.setSelectedEvent(this.event);
-    this.viewsService.showEventViewerComponent.emit(true);
+    if (this.event) {
+      this.eventsService.setSelectedEvent(this.event);
+      this.viewsService.showEventViewerComponent.emit(true);
+    }
   }
 
   setIsRegistered() {
