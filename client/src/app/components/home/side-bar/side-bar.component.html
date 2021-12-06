@@ -1,0 +1,27 @@
+<div class="container">
+  <div *ngIf="isUser; then userBlock; else guestBlock"></div> <!-- User is not logged in or registered -->
+  <ng-template #userBlock>
+    <!-- Other buttons specific to user -->
+    <button (click)="viewEvents()" class="btn-normal">View Events</button>
+    <!-- Volunteers -->
+    <div *ngIf="user.type == 'volunteer' || user.type == 'both'">
+      <button (click)="viewMyEvents()" class="btn-normal">My Events</button>
+    </div>
+    <!-- Donors -->
+    <div *ngIf="user.type == 'donor' || user.type == 'both'">
+      <button (click)="viewMyDonations()" class="btn-normal">My Donations</button>
+      <button (click)="makeDonation()" class="btn-normal">Make Donation</button>
+    </div>
+    <!-- Admin -->
+    <div *ngIf="user.type == 'admin'">
+      <button (click)="viewUsers()" class="btn-normal">View Users</button>
+      <button (click)="addEvent()" class="btn-normal">Add Event</button>
+    </div>
+    <button (click)="logout()" class="btn-logout">Logout</button> <!-- Logout button -->
+  </ng-template>
+  <ng-template #guestBlock>
+    <button (click)="viewEvents()" class="btn-normal">View Events</button>
+    <button (click)="gotoLogin()" class="bg-blue txt-white btn-login">Login</button>
+    <button (click)="gotoRegister()" class="bg-green txt-white btn-register">Register</button>
+  </ng-template>
+</div>

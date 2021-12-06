@@ -61,4 +61,8 @@ export class ProgramComponent implements OnInit {
     this.selectEventEmitter.emit(event);
   }
 
+  viewProgramDetails() {
+    
+  }
+
 }

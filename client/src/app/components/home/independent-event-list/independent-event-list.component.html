@@ -5,11 +5,5 @@
       <app-event [event]="event" [user]="currentUser"></app-event>
     </div>
   </nav>
-  <div *ngIf="currentUser && currentUser.type == 'admin'; then thenBlock; else elseBlock"></div>
-  <ng-template #thenBlock>
-    <button (click)="addEvent()" id="btn-add-event">Add Event</button>
-  </ng-template>  
-  <ng-template #elseBlock>
-    <div style="height: 20px;"></div>
-  </ng-template>
+  <div style="height: 20px;"></div>
 </div>

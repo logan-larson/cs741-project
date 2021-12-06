@@ -63,6 +63,7 @@ export class RegisterComponent implements OnInit {
   }
 
   gotoHome() {
+    this.usersService.setAndEmitCurrentUser({});
     this.router.navigateByUrl('home');
   }
 }

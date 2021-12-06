@@ -39,6 +39,11 @@ export class UsersService {
 
   }
 
+  setAndEmitCurrentUser(user: User) {
+    this.currentUser = user;
+    this.getCurrentUserEmitter.emit();
+  }
+
   create(user: User, cb: any): void {
     this.http.post<User>('/api/users', user)
       .subscribe(user => {
@@ -51,6 +56,7 @@ export class UsersService {
   validate(username: string, password: string, cb: any): void {
     this.http.post<User>('/api/users/user', { username: username, password: password })
       .subscribe(user => {
+        this.setAndEmitCurrentUser(user);
         cb(user);
       }, err => {
         console.log("Error in UsersService -> validate");

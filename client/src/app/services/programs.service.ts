@@ -9,6 +9,8 @@ export class ProgramsService {
 
   programs: Program[] = [];
 
+  selectedProgram: Program = {};
+
   @Output() getProgramsEmitter: EventEmitter<any> = new EventEmitter();
 
   constructor(private http: HttpClient) { }

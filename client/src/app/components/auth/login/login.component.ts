@@ -37,6 +37,7 @@ export class LoginComponent implements OnInit {
   }
 
   gotoHome() {
+    this.usersService.setAndEmitCurrentUser({});
     this.router.navigateByUrl('home');
   }
 

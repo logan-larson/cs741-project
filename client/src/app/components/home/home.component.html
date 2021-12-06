@@ -1,24 +1,26 @@
 <div class="container">
   <app-header [currentUser]="currentUser"></app-header>
-  <div id="list-container">
-    <app-program-list
-      id="program-list"
-      (selectProgramEmitter)="selectProgram($event)"
-      (selectEventEmitter)="selectEvent($event)"
-      (showAddProgramEmitter)="showAddProgramComponent = true"
-      (showAddEventToProgramEmitter)="showAddEvent($event)">
-    </app-program-list>
-    <app-independent-event-list
-      id="event-list"
-      (selectEventEmitter)="selectEvent($event)"
-      (showAddEventEmitter)="showAddEvent('')">
-    </app-independent-event-list>
+  <div class="main-container">
+    <app-side-bar></app-side-bar>
+    <!-- All the possible main views -->
+    <div *ngIf="mainList == 'events'">
+      <app-independent-event-list
+        id="event-list"
+        (selectEventEmitter)="selectEvent($event)">
+      </app-independent-event-list>
+    </div>
+    <div *ngIf="mainList == 'users'">
+      <h1>Users List</h1>
+    </div>
+    <div *ngIf="mainList == 'myDonations'">
+      <h1>My Donations</h1>
+    </div>
+    <div *ngIf="mainList == 'myEvents'">
+      <h1>My Events</h1>
+    </div>
   </div>
   <div *ngIf="showAddEventComponent">
-    <app-add-event (close)="showAddEventComponent = false" [programId]="programId"></app-add-event>
-  </div>
-  <div *ngIf="showAddProgramComponent">
-    <app-add-program (close)="showAddProgramComponent = false"></app-add-program>
+    <app-add-event></app-add-event>
   </div>
   <div *ngIf="showEventViewerComponent">
     <app-event-viewer [user]="currentUser" [event]="selectedEvent" (closeEmitter)="showEventViewerComponent = false"></app-event-viewer>

@@ -22,8 +22,7 @@ export class HomeComponent implements OnInit {
   showEventViewerComponent: boolean = false;
   showProgramViewerComponent: boolean = false;
   showMakeDonationComponent: boolean = false;
-
-  programId: any = "";
+  mainList: string = "events";
 
   constructor(
     private usersService: UsersService,
@@ -44,6 +43,14 @@ export class HomeComponent implements OnInit {
     this.viewsService.showEventViewerComponent.subscribe((show: boolean) => {
       this.showEventViewerComponent = show;
     });
+
+    this.viewsService.showAddEventComponent.subscribe((show: boolean) => {
+      this.showAddEventComponent = show;
+    })
+
+    this.viewsService.mainList.subscribe((list: string) => {
+      this.mainList = list;
+    })
   }
 
   ngOnInit(): void {
@@ -60,10 +67,5 @@ export class HomeComponent implements OnInit {
   selectProgram(program: Program): void {
     this.selectedProgram = program;
     this.showProgramViewerComponent = true;
-  }
-
-  showAddEvent(programId: any) {
-    this.programId = programId;
-    this.showAddEventComponent = true;
   }
 }

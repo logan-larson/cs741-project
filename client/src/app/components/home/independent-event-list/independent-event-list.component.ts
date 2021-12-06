@@ -33,11 +33,4 @@ export class IndependentEventListComponent implements OnInit {
       this.currentUser = user;
     })
   }
-
-  addEvent(): void {
-    // This might need two versions, one for events under programs
-    // and one for standalone events
-    this.showAddEventEmitter.emit("show add event component");
-  }
-
 }
