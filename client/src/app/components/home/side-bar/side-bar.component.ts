@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/User';
 import { AuthService } from 'src/app/services/auth.service';
+import { DonationsService } from 'src/app/services/donations.service';
 import { UsersService } from 'src/app/services/users.service';
 import { ViewsService } from 'src/app/services/views/views.service';
 
@@ -19,7 +20,8 @@ export class SideBarComponent implements OnInit {
     private usersService: UsersService,
     private authService: AuthService,
     private router: Router,
-    private viewsService: ViewsService
+    private viewsService: ViewsService,
+    private donationsService: DonationsService
   ) {
     this.usersService.getCurrentUserEmitter.subscribe(() => {
       this.user = this.usersService.getUser();
@@ -70,6 +72,7 @@ export class SideBarComponent implements OnInit {
 
   makeDonation() {
     this.viewsService.showDonationComponent.emit(true);
+    this.donationsService.setIsUnrestricted(true);
   }
 
   // Volunteer operations

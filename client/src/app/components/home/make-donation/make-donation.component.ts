@@ -23,8 +23,7 @@ export class MakeDonationComponent implements OnInit {
   // Input from user
   @Input() amount?: number;
 
-  // Type of donation
-  type: string = "unrestricted";
+  isUnrestricted: boolean = false;
 
   constructor(
     private viewsService: ViewsService,
@@ -36,7 +35,7 @@ export class MakeDonationComponent implements OnInit {
   ngOnInit(): void {
     this.user = this.usersService.getUser();
     this.event = this.eventsService.getSelectedEvent();
-    this.type = this.donationsService.getType();
+    this.isUnrestricted = this.donationsService.getIsUnrestricted();
   }
 
   async donate(): Promise<void> {
@@ -53,14 +52,12 @@ export class MakeDonationComponent implements OnInit {
       return;
     }
 
-    // Look into callback return types - TODO
-    const donation: Donation = await this.donationsService.makeDonation(this.amount, this.user, this.type, this.event);
-    // Signal to users and events service that the user and event has been updated
-    //this.usersService.userUpdatedEmitter.emit();
-    // I wish this elegant way would work
-    // However the components that rely on these emissions
-    // Require both updated user and updated event at the same time
-    //this.eventsService.selectedEventUpdatedEmitter.emit();
+    // TODO
+    if (this.isUnrestricted) {
+      await this.donationsService.makeDonation(this.amount, this.user, this.isUnrestricted);
+    } else {
+      await this.donationsService.makeDonation(this.amount, this.user, this.isUnrestricted, this.event);
+    }
 
     this.usersService.userAndEventUpdatedEmitter.emit();
 

@@ -46,6 +46,12 @@ export class RegistrationsService {
     return false;
   }
 
+  async checkAvailability(clientEvent: Event): Promise<boolean> {
+    let event: Event = await this.eventsService.getEventById(clientEvent.eventId);
+
+    return event.registrationIds.length < event.volunteerCountRequirement;
+  }
+
   async createRegistration(user: User, event: Event): Promise<Registration> {
     let registration: Registration = await this.registrationsRepository.create({
       registrationId: uuidv4(),

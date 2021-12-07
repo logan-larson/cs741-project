@@ -58,6 +58,13 @@ export class RegistrationsController {
       throw new HttpException("Overlap", 400);
     }
 
+    let isAvailable = await this.registrationsService.checkAvailability(
+      changeActivationRegistrationDto.event
+    );
+    if (!isAvailable) {
+      throw new HttpException("Not available", 400);
+    }
+
     return this.registrationsService.activateRegistration(
       registrationId,
       changeActivationRegistrationDto.user,
@@ -72,6 +79,13 @@ export class RegistrationsController {
     let isOverlapping = await this.registrationsService.checkOverlap(createRegistrationDto.user, createRegistrationDto.event);
     if (isOverlapping) {
       throw new HttpException("Overlap", 400);
+    }
+
+    let isAvailable = await this.registrationsService.checkAvailability(
+      createRegistrationDto.event
+    );
+    if (!isAvailable) {
+      throw new HttpException("Not available", 400);
     }
 
     return await this.registrationsService.createRegistration(

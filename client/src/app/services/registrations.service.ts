@@ -39,7 +39,7 @@ export class RegistrationsService {
       }, (err: HttpErrorResponse) => {
         console.log("Error in RegistrationsService -> registerForEvent");
         if (err.status == 400) {
-          alert("You cannot register to volunteer for events with overlapping times");
+          alert("You cannot register to volunteer for this event");
         }
         cb(null);
       });

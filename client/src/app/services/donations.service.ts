@@ -10,20 +10,32 @@ import { User } from '../models/User';
 })
 export class DonationsService {
   
-  private type: string = "unrestricted";
+  private isUnrestricted: boolean = false;
 
   constructor(private http: HttpClient) { }
 
   // Refer to comment in make donation - TODO
-  async makeDonation(amount: number, user: User, type: string, event?: Event): Promise<Donation> {
-    const donation: Donation = await this.http.post<Donation>(
-      '/api/donations',
-      {
-        amount: amount,
-        user: user,
-        event: event,
-      }
-    ).toPromise();
+  async makeDonation(amount: number, user: User, isUnrestricted: boolean, event?: Event): Promise<Donation> {
+    let donation: Donation;
+
+    if (isUnrestricted) {
+      donation = await this.http.post<Donation>(
+        '/api/donations/unrestricted',
+        {
+          amount: amount,
+          user: user,
+        }
+      ).toPromise();
+    } else {
+      donation = await this.http.post<Donation>(
+        '/api/donations',
+        {
+          amount: amount,
+          user: user,
+          event: event,
+        }
+      ).toPromise();
+    }
 
     return donation;
   }
@@ -32,11 +44,12 @@ export class DonationsService {
     return this.http.get<Donation[]>(`/api/donations/user/${user.userId}/event/${event.eventId}`).toPromise();
   }
 
-  getType(): string {
-    return this.type;
+  getIsUnrestricted(): boolean {
+    return this.isUnrestricted;
   }
 
-  setType(type: string): void {
-    this.type = type;
+  setIsUnrestricted(val: boolean): void {
+    this.isUnrestricted = val;
   }
+
 }

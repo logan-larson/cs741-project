@@ -20,19 +20,20 @@ export class DonationsController {
   async makeDonation(
     @Body() makeDonationDto: MakeDonationDto
   ): Promise<Donation> {
-    if (Object.keys(makeDonationDto.event).length == 0) {
-      // Handle as unrestricted donation
-      return await this.donationsService.makeUnrestrictedDonation(
-        makeDonationDto.amount,
-        makeDonationDto.user,
-      );
-    } else {
-      // Handle as restricted donation to event
-      return await this.donationsService.makeDonationToEvent(
-        makeDonationDto.amount,
-        makeDonationDto.user,
-        makeDonationDto.event
-      );
-    }
+    return await this.donationsService.makeDonationToEvent(
+      makeDonationDto.amount,
+      makeDonationDto.user,
+      makeDonationDto.event
+    );
+  }
+
+  @Post("unrestricted")
+  async makeUnrestrictedDonation(
+    @Body() makeDonationDto: MakeDonationDto
+  ): Promise<Donation> {
+    return await this.donationsService.makeUnrestrictedDonation(
+      makeDonationDto.amount,
+      makeDonationDto.user,
+    );
   }
 }
