@@ -24,6 +24,8 @@ import { MakeDonationComponent } from './components/home/make-donation/make-dona
 import { SideBarComponent } from './components/home/side-bar/side-bar.component';
 import { RegistrationsListComponent } from './components/home/registrations-list/registrations-list.component';
 import { RegistrationComponent } from './components/home/registrations-list/registration/registration.component';
+import { DonationsListComponent } from './components/home/donations-list/donations-list.component';
+import { DonationComponent } from './components/home/donations-list/donation/donation.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,9 @@ import { RegistrationComponent } from './components/home/registrations-list/regi
     MakeDonationComponent,
     SideBarComponent,
     RegistrationsListComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    DonationsListComponent,
+    DonationComponent
   ],
   imports: [
     BrowserModule,

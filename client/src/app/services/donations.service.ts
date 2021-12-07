@@ -44,6 +44,10 @@ export class DonationsService {
     return this.http.get<Donation[]>(`/api/donations/user/${user.userId}/event/${event.eventId}`).toPromise();
   }
 
+  async getUsersDonations(user: User): Promise<Donation[]> {
+    return this.http.get<Donation[]>(`/api/donations/user/${user.userId}`).toPromise();
+  }
+
   getIsUnrestricted(): boolean {
     return this.isUnrestricted;
   }

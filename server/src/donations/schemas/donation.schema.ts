@@ -13,6 +13,10 @@ export class Donation {
 
   @Prop()
   isRestricted: boolean;
+
+  @Prop()
+  eventId: string;
+
 }
 
 export const DonationSchema = SchemaFactory.createForClass(Donation);

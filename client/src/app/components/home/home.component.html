@@ -13,7 +13,7 @@
       <h1>Users List</h1>
     </div>
     <div *ngIf="mainList == 'myDonations'">
-      <h1>My Donations</h1>
+      <app-donations-list></app-donations-list>
     </div>
     <div *ngIf="mainList == 'myRegistrations'">
       <app-registrations-list></app-registrations-list>

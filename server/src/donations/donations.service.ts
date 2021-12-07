@@ -34,11 +34,18 @@ export class DonationsService {
     return this.donationsRepository.findWithIdList(donationIds);
   }
 
+  async getUsersDonations(userId: string): Promise<Donation[]> {
+    const user: User = await this.usersService.getUserById(userId);
+
+    return this.donationsRepository.findWithIdList(user.donationIds);
+  }
+
   async makeDonationToEvent(amount: number, user: User, event: Event): Promise<Donation> {
     let donation: Donation = await this.donationsRepository.create({
       donationId: uuidv4(),
       amount: amount,
       isRestricted: true,
+      eventId: event.eventId,
     });
 
     let userDonIds: string[] = user.donationIds;
@@ -63,6 +70,7 @@ export class DonationsService {
       donationId: uuidv4(),
       amount: amount,
       isRestricted: false,
+      eventId: "",
     });
 
     let userDonIds: string[] = user.donationIds;

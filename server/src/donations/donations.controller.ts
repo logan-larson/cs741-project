@@ -16,6 +16,13 @@ export class DonationsController {
     return this.donationsService.getUsersDonationsForEvent(userId, eventId);
   }
 
+  @Get('user/:userId')
+  async getUsersDonations(
+    @Param('userId') userId: string,
+  ): Promise<Donation[]> {
+    return this.donationsService.getUsersDonations(userId);
+  }
+
   @Post()
   async makeDonation(
     @Body() makeDonationDto: MakeDonationDto
