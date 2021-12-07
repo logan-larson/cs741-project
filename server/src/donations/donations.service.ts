@@ -57,4 +57,21 @@ export class DonationsService {
 
     return donation;
   }
+
+  async makeUnrestrictedDonation(amount: number, user: User): Promise<Donation> {
+    let donation: Donation = await this.donationsRepository.create({
+      donationId: uuidv4(),
+      amount: amount,
+      isRestricted: false,
+    });
+
+    let userDonIds: string[] = user.donationIds;
+    userDonIds.push(donation.donationId);
+    if (!await this.usersService.updateDonationIds(user.userId, userDonIds)) {
+      console.log("ERROR: DonationsService->makeDonationToEvent->updateUserDonIds");
+      return null;
+    }
+
+    return donation;
+  }
 }

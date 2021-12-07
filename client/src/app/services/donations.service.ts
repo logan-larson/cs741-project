@@ -15,29 +15,17 @@ export class DonationsService {
   constructor(private http: HttpClient) { }
 
   // Refer to comment in make donation - TODO
-  async makeDonation(amount: number, user: User, type: string, event?: Event, program?: Program): Promise<Donation> {
+  async makeDonation(amount: number, user: User, type: string, event?: Event): Promise<Donation> {
     const donation: Donation = await this.http.post<Donation>(
       '/api/donations',
       {
-        type: type,
-        donation: {
-          amount: amount,
-          user: user,
-          event: event,
-          program: program
-        }
+        amount: amount,
+        user: user,
+        event: event,
       }
     ).toPromise();
 
     return donation;
-    
-    /*
-    .subscribe((donation: Donation) => {
-      cb(donation)
-    }, (err: HttpErrorResponse) => {
-      console.log(err);
-    });
-    */
   }
 
   async getUsersDonationsForEvent(user: User, event: Event): Promise<Donation[]> {

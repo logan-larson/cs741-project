@@ -20,22 +20,19 @@ export class DonationsController {
   async makeDonation(
     @Body() makeDonationDto: MakeDonationDto
   ): Promise<Donation> {
-    if (!makeDonationDto.event || !makeDonationDto.program) {
-      console.log("Handle unrestricted donation");
+    if (Object.keys(makeDonationDto.event).length == 0) {
       // Handle as unrestricted donation
-    } else if (makeDonationDto.event) {
-      console.log("Handle event donation");
+      return await this.donationsService.makeUnrestrictedDonation(
+        makeDonationDto.amount,
+        makeDonationDto.user,
+      );
+    } else {
       // Handle as restricted donation to event
       return await this.donationsService.makeDonationToEvent(
         makeDonationDto.amount,
         makeDonationDto.user,
         makeDonationDto.event
       );
-    } else if (makeDonationDto.program) {
-      console.log("Handle program donation");
-      // Handle as restricted donation to program
     }
-
-    throw new HttpException("Somehow got here", 400);
   }
 }

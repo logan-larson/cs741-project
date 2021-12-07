@@ -6,5 +6,4 @@ export class MakeDonationDto {
   amount: number;
   user: User;
   event?: Event;
-  program?: Program;
 }

@@ -19,7 +19,6 @@ export class MakeDonationComponent implements OnInit {
   // OnInit get these from their respective services
   user?: User;
   event?: Event;
-  program?: Program;
 
   // Input from user
   @Input() amount?: number;
@@ -32,13 +31,11 @@ export class MakeDonationComponent implements OnInit {
     private donationsService: DonationsService,
     private usersService: UsersService,
     private eventsService: EventsService,
-    private programsService: ProgramsService
   ) { }
 
   ngOnInit(): void {
     this.user = this.usersService.getUser();
     this.event = this.eventsService.getSelectedEvent();
-    this.program = this.eventsService.getSelectedEvent();
     this.type = this.donationsService.getType();
   }
 
@@ -57,7 +54,7 @@ export class MakeDonationComponent implements OnInit {
     }
 
     // Look into callback return types - TODO
-    const donation: Donation = await this.donationsService.makeDonation(this.amount, this.user, this.type, this.event, this.program);
+    const donation: Donation = await this.donationsService.makeDonation(this.amount, this.user, this.type, this.event);
     // Signal to users and events service that the user and event has been updated
     //this.usersService.userUpdatedEmitter.emit();
     // I wish this elegant way would work
