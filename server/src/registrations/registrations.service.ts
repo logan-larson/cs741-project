@@ -15,9 +15,10 @@ export class RegistrationsService {
     private readonly usersService: UsersService,
     private readonly eventsService: EventsService) {}
 
-  async checkOverlap(user: User, clientEvent: Event): Promise<boolean> {
+  async checkOverlap(u: User, clientEvent: Event): Promise<boolean> {
 
     let event: Event = await this.eventsService.getEventById(clientEvent.eventId);
+    let user: User = await this.usersService.getUserById(u.userId);
     
     if (user.activeRegistrationIds.length == 0) {
       return false;
@@ -128,4 +129,21 @@ export class RegistrationsService {
     return await this.registrationsRepository.findMany({eventId});
   }
 
+  async getUserActiveRegistrations(userId: string): Promise<Registration[]> {
+    let user: User = await this.usersService.getUserById(userId);
+    let ret: Registration[] = [];
+    for (const regId of user.activeRegistrationIds) {
+      ret.push(await this.registrationsRepository.findOne({ registrationId: regId }));
+    }
+    return ret;
+  }
+
+  async getUserInactiveRegistrations(userId: string): Promise<Registration[]> {
+    let user: User = await this.usersService.getUserById(userId);
+    let ret: Registration[] = [];
+    for (const regId of user.inactiveRegistrationIds) {
+      ret.push(await this.registrationsRepository.findOne({ registrationId: regId }));
+    }
+    return ret;
+  }
 }

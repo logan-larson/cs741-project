@@ -3,13 +3,17 @@ import { Injectable } from '@angular/core';
 import { Registration } from '../models/Registration';
 import { User } from '../models/User';
 import { Event } from '../models/Event';
+import { UsersService } from './users.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RegistrationsService {
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private usersService: UsersService,
+  ) { }
 
   unregisterFromEvent(registrationId: string, user: User, event: Event, cb: any): void {
     this.http.post<Registration>(`/api/registrations/${registrationId}`, { user: user, event: event })
@@ -45,4 +49,34 @@ export class RegistrationsService {
     return await this.http.get<Registration[]>(`/api/registrations/${eventId}`).toPromise();
   }
 
+  async getUserActiveRegistrations(userId: string): Promise<Registration[]> {
+    return await this.http.get<Registration[]>(`/api/registrations/user/${userId}/active`).toPromise();
+  }
+
+  async getUserInactiveRegistrations(userId: string): Promise<Registration[]> {
+    return await this.http.get<Registration[]>(`/api/registrations/user/${userId}/inactive`).toPromise();
+  }
+
+  async activateRegistration(reg: Registration, event: Event): Promise<Registration> {
+    let user: User = this.usersService.getUser();
+    return await this.http.post<Registration>(
+      `/api/registrations/${reg.registrationId!}/activate`, 
+      {
+        user,
+        event
+      }
+    ).toPromise();
+  }
+
+  async deactivateRegistration(reg: Registration, event: Event): Promise<Registration> {
+    console.log(reg.registrationId!);
+    let user: User = this.usersService.getUser();
+    return await this.http.post<Registration>(
+      `/api/registrations/${reg.registrationId!}/deactivate`, 
+      {
+        user,
+        event
+      }
+    ).toPromise();
+  }
 }

@@ -1,0 +1,25 @@
+h2 {
+  text-align: center;
+}
+
+.container {
+  margin-top: 20px;
+  width: 90%;
+}
+
+.active-container {
+  background-color: var(--primary);
+  padding: 15px;
+  border-radius: 15px;
+  margin-bottom: 20px;
+}
+
+.inactive-container {
+  background-color: var(--primary);
+  padding: 15px;
+  border-radius: 15px;
+}
+
+.reg {
+  margin-bottom: 10px;
+}

@@ -73,8 +73,8 @@ export class SideBarComponent implements OnInit {
   }
 
   // Volunteer operations
-  viewMyEvents() {
-    this.viewsService.mainList.emit("myEvents");
+  viewMyRegistrations() {
+    this.viewsService.mainList.emit("myRegistrations");
   }
 
   // Admin operations

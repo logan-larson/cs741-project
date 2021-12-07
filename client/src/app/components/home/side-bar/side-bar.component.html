@@ -5,7 +5,7 @@
     <button (click)="viewEvents()" class="btn-normal">View Events</button>
     <!-- Volunteers -->
     <div *ngIf="user.type == 'volunteer' || user.type == 'both'">
-      <button (click)="viewMyEvents()" class="btn-normal">My Events</button>
+      <button (click)="viewMyRegistrations()" class="btn-normal">My Registrations</button>
     </div>
     <!-- Donors -->
     <div *ngIf="user.type == 'donor' || user.type == 'both'">

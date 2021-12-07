@@ -17,11 +17,27 @@ export class RegistrationsController {
     return await this.registrationsService.getEventRegistrations(eventId);
   }
 
+  @Get('user/:userId/active')
+  async getUserActiveRegistrations(
+    @Param('userId') userId: string
+  ): Promise<Registration[]> {
+    return await this.registrationsService.getUserActiveRegistrations(userId);
+  }
+
+  @Get('user/:userId/inactive')
+  async getUserInctiveRegistrations(
+    @Param('userId') userId: string
+  ): Promise<Registration[]> {
+    return await this.registrationsService.getUserInactiveRegistrations(userId);
+  }
+
   @Post(':registrationId/deactivate')
   async deactivateRegistration(
     @Param('registrationId') registrationId: string,
     @Body() changeActivationRegistrationDto: ChangeActivationRegistrationDto
   ): Promise<Registration> {
+    console.log("Received request");
+
     return this.registrationsService.deactivateRegistration(
       registrationId,
       changeActivationRegistrationDto.user,
@@ -34,7 +50,10 @@ export class RegistrationsController {
     @Body() changeActivationRegistrationDto: ChangeActivationRegistrationDto
   ): Promise<Registration> {
 
-    let isOverlapping = await this.registrationsService.checkOverlap(changeActivationRegistrationDto.user, changeActivationRegistrationDto.event);
+    let isOverlapping = await this.registrationsService.checkOverlap(
+      changeActivationRegistrationDto.user,
+      changeActivationRegistrationDto.event
+    );
     if (isOverlapping) {
       throw new HttpException("Overlap", 400);
     }

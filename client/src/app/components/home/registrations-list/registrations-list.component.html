@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="active-container">
+    <h2>Active Registrations</h2>
+    <div *ngFor="let reg of activeRegs" class="reg">
+      <app-registration [registration]="reg" [isActive]="true" (updated)="switchList(reg, true)"></app-registration>
+    </div>
+  </div>
+  <div class="inactive-container">
+    <h2>Inactive Registrations</h2>
+    <div *ngFor="let reg of inactiveRegs" class="reg">
+      <app-registration [registration]="reg" [isActive]="false" (updated)="switchList(reg, false)"></app-registration>
+    </div>
+  </div>
+</div>

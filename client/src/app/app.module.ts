@@ -22,6 +22,8 @@ import { ProgramListComponent } from './components/home/program-list/program-lis
 import { DonorSectionComponent } from './components/home/event-viewer/donor-section/donor-section.component';
 import { MakeDonationComponent } from './components/home/make-donation/make-donation.component';
 import { SideBarComponent } from './components/home/side-bar/side-bar.component';
+import { RegistrationsListComponent } from './components/home/registrations-list/registrations-list.component';
+import { RegistrationComponent } from './components/home/registrations-list/registration/registration.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,9 @@ import { SideBarComponent } from './components/home/side-bar/side-bar.component'
     ProgramListComponent,
     DonorSectionComponent,
     MakeDonationComponent,
-    SideBarComponent
+    SideBarComponent,
+    RegistrationsListComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,
