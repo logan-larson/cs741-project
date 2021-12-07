@@ -18,7 +18,10 @@ export class User {
   type: string;
 
   @Prop([String])
-  registrationIds: string[];
+  activeRegistrationIds: string[];
+
+  @Prop([String])
+  inactiveRegistrationIds: string[];
 
   @Prop([String])
   donationIds: string[];

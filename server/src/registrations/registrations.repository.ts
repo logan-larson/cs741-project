@@ -13,6 +13,10 @@ export class RegistrationsRepository {
     return this.registrationModel.findOne(registrationFilterQuery);
   }
 
+  async findMany(registrationFilterQuery: FilterQuery<RegistrationDocument>): Promise<Registration[]> {
+    return this.registrationModel.find(registrationFilterQuery);
+  }
+
   async create(registration: Registration): Promise<Registration> {
     const newRegistration = new this.registrationModel(registration);
     return newRegistration.save();

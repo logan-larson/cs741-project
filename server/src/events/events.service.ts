@@ -76,7 +76,7 @@ export class EventsService {
 
     // for each registration id in event, if has registration id associated then is registered
     for (const eventRegId in event.registrationIds) {
-      if (user.registrationIds.find((userRegId) => userRegId == eventRegId)) {
+      if (user.activeRegistrationIds.find((userRegId) => userRegId == eventRegId)) {
         return true
       }
     }

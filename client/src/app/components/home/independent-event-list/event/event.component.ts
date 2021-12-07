@@ -78,8 +78,8 @@ export class EventComponent implements OnInit {
       
       this.isRegistered = false;
       this.event.registrationIds.forEach(eventRegId => {
-        if (this.user && this.user.registrationIds) {
-          this.user.registrationIds.forEach(userRegId => {
+        if (this.user && this.user.activeRegistrationIds) {
+          this.user.activeRegistrationIds.forEach(userRegId => {
             if (eventRegId == userRegId) {
               this.isRegistered = true;
             }

@@ -18,7 +18,8 @@ export class UsersService {
       username: username,
       password: password,
       type: type,
-      registrationIds: [],
+      activeRegistrationIds: [],
+      inactiveRegistrationIds: [],
       donationIds: [],
     });
   }
@@ -35,8 +36,13 @@ export class UsersService {
     return user;
   }
 
-  async updateRegistrationIds(userId: string, registrationIds: string[]): Promise<boolean> {
-    let user: User = await this.usersRepository.findOneAndUpdate({ userId }, { registrationIds });
+  async updateRegistrationIds(userId: string, activeRegistrationIds: string[], inactiveRegistrationIds: string[]): Promise<boolean> {
+    let user: User;
+    if (!inactiveRegistrationIds) {
+      user = await this.usersRepository.findOneAndUpdate({ userId }, { activeRegistrationIds });
+    } else {
+      user = await this.usersRepository.findOneAndUpdate({ userId }, { activeRegistrationIds, inactiveRegistrationIds });
+    }
     
     return user != undefined;
   }

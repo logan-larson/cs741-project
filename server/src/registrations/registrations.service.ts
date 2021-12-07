@@ -19,14 +19,14 @@ export class RegistrationsService {
 
     let event: Event = await this.eventsService.getEventById(clientEvent.eventId);
     
-    if (user.registrationIds.length == 0) {
+    if (user.activeRegistrationIds.length == 0) {
       return false;
     }
 
     // For each registration id in user's reg ids
-    for (const index in user.registrationIds) {
+    for (const index in user.activeRegistrationIds) {
       // Get registration object
-      let registration: Registration = await this.registrationsRepository.findOne({ registrationId: user.registrationIds[index] })
+      let registration: Registration = await this.registrationsRepository.findOne({ registrationId: user.activeRegistrationIds[index] })
 
       // Check if times overlap with event times
       let regTimeStart: number = registration.timeStart.valueOf();
@@ -49,13 +49,14 @@ export class RegistrationsService {
     let registration: Registration = await this.registrationsRepository.create({
       registrationId: uuidv4(),
       timeStart: event.timeStart,
-      timeEnd: event.timeEnd
+      timeEnd: event.timeEnd,
+      eventId: event.eventId
     });
     
     // Update user registrationIds
-    let registrationIds: string[] = user.registrationIds;
+    let registrationIds: string[] = user.activeRegistrationIds;
     registrationIds.push(registration.registrationId);
-    this.usersService.updateRegistrationIds(user.userId, registrationIds);
+    this.usersService.updateRegistrationIds(user.userId, registrationIds, null);
   
     // Update event registrationIds
     registrationIds = event.registrationIds;
@@ -67,12 +68,49 @@ export class RegistrationsService {
     return registration;
   }
 
-  async removeRegistration(registrationId: string, user: User, event: Event): Promise<Registration> {
-    // Remove registration from user and events registrationIds
-    
-    let userRegIds: string[] = user.registrationIds.filter(regId => regId != registrationId);
+  async activateRegistration(registrationId: string, u: User, event: Event): Promise<Registration> {
 
-    let updatedUserRegs: boolean = await this.usersService.updateRegistrationIds(user.userId, userRegIds);
+    let user: User = await this.usersService.getUserById(u.userId);
+
+    let userActiveRegIds: string[] = user.activeRegistrationIds;
+    userActiveRegIds.push(registrationId);
+    let userInactiveRegIds: string[] = user.inactiveRegistrationIds.filter(regId => regId != registrationId);
+
+    let updatedUserRegs: boolean = await this.usersService.updateRegistrationIds(
+      user.userId, 
+      userActiveRegIds,
+      userInactiveRegIds
+    );
+
+    if (!updatedUserRegs) {
+      return null;
+    }
+
+    let eventRegIds: string[] = event.registrationIds;
+    eventRegIds.push(registrationId);
+    let updatedEventRegs: boolean = await this.eventsService.updateRegistrationIds(event.eventId, eventRegIds);
+    if (!updatedEventRegs) {
+      return null;
+    }
+
+    return await this.registrationsRepository.findOne({ registrationId });
+  }
+
+  async deactivateRegistration(registrationId: string, u: User, event: Event): Promise<Registration> {
+
+    let user: User = await this.usersService.getUserById(u.userId);
+
+    // Remove registration from user and events registrationIds
+    let userActiveRegIds: string[] = user.activeRegistrationIds.filter(regId => regId != registrationId);
+    let userInactiveRegIds: string[] = user.inactiveRegistrationIds;
+    userInactiveRegIds.push(registrationId);
+
+    let updatedUserRegs: boolean = await this.usersService.updateRegistrationIds(
+      user.userId, 
+      userActiveRegIds,
+      userInactiveRegIds
+    );
+
     if (!updatedUserRegs) {
       return null;
     }
@@ -83,9 +121,11 @@ export class RegistrationsService {
       return null;
     }
 
-    // Remove registration from repository
-    return await this.registrationsRepository.findOneAndDelete({ registrationId });
+    return await this.registrationsRepository.findOne({ registrationId });
+  }
 
+  async getEventRegistrations(eventId: string): Promise<Registration[]> {
+    return await this.registrationsRepository.findMany({eventId});
   }
 
 }

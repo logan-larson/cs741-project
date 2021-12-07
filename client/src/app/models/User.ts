@@ -3,6 +3,7 @@ export interface User {
   username?: string,
   password?: string,
   type?: string,
-  registrationIds?: string[],
+  activeRegistrationIds?: string[],
+  inactiveRegistrationIds?: string[],
   donationIds?: string[]
 }

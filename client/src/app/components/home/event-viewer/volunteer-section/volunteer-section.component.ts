@@ -19,6 +19,7 @@ export class VolunteerSectionComponent implements OnInit {
   user?: User;
   event?: Event;
 
+  showButton: boolean = false;
   buttonText: string = "";
   registrationStatus: string = "";
   registrationId: string = "";
@@ -31,71 +32,33 @@ export class VolunteerSectionComponent implements OnInit {
     private usersService: UsersService
   ) { }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     // Calculate registration status
     this.user = this.usersService.getUser();
     
     this.event = this.eventsService.getSelectedEvent();
-    
 
-    // Check if event registration ids contains a registration id in current user's registration ids
-    // if so the user is registered to volunteer for event
-    if (this.event && this.event.registrationIds) {
-      this.event.registrationIds.forEach(eventRegId => {
-        if (this.user && this.user.registrationIds) {
-          this.user.registrationIds.forEach(userRegId => {
-            if (eventRegId == userRegId) {
-              this.isRegistered = true;
-              this.registrationId = eventRegId;
-            }
-          });
-        }
-      });
+    let eventRegs: Registration[] = [];
+    if (this.event.eventId) {
+      eventRegs = await this.registrationsService.getEventRegistrations(this.event.eventId);
     }
 
-    this.registrationStatus = this.isRegistered ? "Registered" : "Not registered";
-    this.buttonText = this.isRegistered ? "Unregister" : "Register";
-  }
-
-  async setRegistrationStatus() {
-    // Use registration service to update registration status
-
-    if (this.isRegistered) {
-      this.unregister();
-    } else {
-      this.register();
+    this.showButton = true;
+    this.isRegistered = false;
+    this.registrationStatus = "Unregistered";
+    for (const reg of eventRegs) {
+      if (this.user.activeRegistrationIds?.includes(reg.registrationId!) || this.user.inactiveRegistrationIds?.includes(reg.registrationId!)) {
+        this.showButton = false;
+        this.isRegistered = true;
+        this.registrationStatus = "Registered";
+      }
     }
-  }
 
-  unregister() {
-    if (this.user && this.event) {
-      this.registrationsService.unregisterFromEvent(
-        this.registrationId, 
-        this.user, 
-        this.event, 
-        (registration: Registration) => {
-          if (registration) {
-            // On successful unregistration, update view
-            this.isRegistered = false;
-            this.registrationStatus = "Not registered";
-            this.buttonText = "Register";
-            this.eventChangeEmitter.emit(true);
-            
-            this.eventsService.getAllIndependentEvents(() => {
-              this.usersService.userUpdatedEmitter.emit(true);
-              this.eventsService.selectedEventUpdatedEmitter.emit(true);
-
-              this.eventsService.getEventsEmitter.emit(true);
-              this.usersService.getCurrentUserEmitter.emit(true);
-            })
-          }
-        });
-    }
   }
 
   register() {
     if (this.user && this.event) {
-      this.registrationsService.registerForEvent(
+      this.registrationsService.createRegistration(
         this.user,
         this.event,
         (registration: Registration) => {
@@ -103,7 +66,7 @@ export class VolunteerSectionComponent implements OnInit {
             // On successful registration, update view
             this.isRegistered = true;
             this.registrationStatus = "Registered";
-            this.buttonText = "Unregister";
+            this.showButton = false;
             if (registration.registrationId) {
               this.registrationId = registration.registrationId;
             }

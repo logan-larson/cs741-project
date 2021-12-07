@@ -61,8 +61,8 @@ export class EventViewerComponent implements OnInit {
     // if so the user is registered to volunteer for event
     if (this.event && this.event.registrationIds) {
       this.event.registrationIds.forEach(eventRegId => {
-        if (this.user.registrationIds) {
-          this.user.registrationIds.forEach(userRegId => {
+        if (this.user.activeRegistrationIds) {
+          this.user.activeRegistrationIds.forEach(userRegId => {
             if (eventRegId == userRegId) {
               this.isRegistered = true;
               this.previousIsRegistered = true;

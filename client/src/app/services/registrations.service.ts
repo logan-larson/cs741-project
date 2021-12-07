@@ -21,7 +21,7 @@ export class RegistrationsService {
       })
   }
 
-  registerForEvent(user: User, event: Event, cb: any): void {
+  createRegistration(user: User, event: Event, cb: any): void {
     const body = {
       user: user,
       event: event
@@ -40,4 +40,9 @@ export class RegistrationsService {
         cb(null);
       });
   }
+
+  async getEventRegistrations(eventId: string): Promise<Registration[]> {
+    return await this.http.get<Registration[]>(`/api/registrations/${eventId}`).toPromise();
+  }
+
 }

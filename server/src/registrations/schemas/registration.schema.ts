@@ -15,6 +15,9 @@ export class Registration {
   @Prop({ type: Date })
   timeEnd: Date;
 
+  @Prop()
+  eventId: string;
+
 }
 
 export const RegistrationSchema = SchemaFactory.createForClass(Registration);
