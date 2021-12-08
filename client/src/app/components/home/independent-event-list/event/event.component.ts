@@ -44,7 +44,7 @@ export class EventComponent implements OnInit {
   ngOnInit(): void {
     this.user = this.usersService.getUser();
 
-    if (this.user && this.event) {
+    if (this.event) {
       if (this.event.date) {
         this.date = new Date(this.event.date).toLocaleDateString();
       }
