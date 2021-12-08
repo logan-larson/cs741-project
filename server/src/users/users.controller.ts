@@ -1,4 +1,4 @@
-import { Body, ConsoleLogger, Controller, Get, Param, Post, Session } from '@nestjs/common';
+import { Body, ConsoleLogger, Controller, Get, Param, Post, Put, Session } from '@nestjs/common';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { ValidateUserDto } from './dtos/validate-user.dto';
 import { User } from './schemas/user.schema';
@@ -61,4 +61,12 @@ export class UsersController {
     session.userId = null;
     return true;
   }
+
+  @Put('user/:userId')
+  async updateActive(
+    @Param('userId') userId: string
+  ): Promise<User> {
+    return await this.usersService.updateActive(userId);
+  }
+
 }

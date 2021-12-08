@@ -11,9 +11,14 @@ export class UsersListComponent implements OnInit {
 
   users: User[] = [];
 
-  constructor(private usersService: UsersService) { }
+  constructor(private usersService: UsersService) {}
 
   async ngOnInit() {
+    // Get all users
+    this.users = await this.usersService.getAllUsers();
+  }
+
+  async userUpdated() {
     // Get all users
     this.users = await this.usersService.getAllUsers();
   }

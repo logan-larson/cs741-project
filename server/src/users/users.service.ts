@@ -72,4 +72,11 @@ export class UsersService {
     return await this.usersRepository.findAll();
   }
 
+  async updateActive(userId: string): Promise<User> {
+    const user: User = await this.usersRepository.findOne({ userId });
+    const active: boolean = user.isActive;
+
+    return await this.usersRepository.findOneAndUpdate({userId}, {isActive: !active });
+  }
+
 }

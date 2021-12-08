@@ -89,4 +89,8 @@ export class UsersService {
     return await this.http.get<User[]>(`/api/users`).toPromise();
   }
 
+  async updateActive(userId: string) {
+    await this.http.put(`/api/users/user/${userId}`, {}).toPromise();
+  }
+
 }
