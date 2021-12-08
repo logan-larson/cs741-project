@@ -51,6 +51,10 @@ export class SideBarComponent implements OnInit {
   }
 
   // All users
+  showHelp() {
+    this.viewsService.showHelpComponent.emit(true);
+  }
+
   viewEvents() {
     this.viewsService.mainList.emit("events");
   }

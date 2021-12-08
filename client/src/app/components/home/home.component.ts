@@ -23,6 +23,7 @@ export class HomeComponent implements OnInit {
   showProgramViewerComponent: boolean = false;
   showMakeDonationComponent: boolean = false;
   showReportComponent: boolean = false;
+  showHelpComponent: boolean = false;
   mainList: string = "events";
 
   constructor(
@@ -55,6 +56,10 @@ export class HomeComponent implements OnInit {
 
     this.viewsService.showReportComponent.subscribe((show: boolean) => {
       this.showReportComponent = show;
+    })
+
+    this.viewsService.showHelpComponent.subscribe((show: boolean) => {
+      this.showHelpComponent = show;
     })
   }
 

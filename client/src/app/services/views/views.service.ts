@@ -9,6 +9,7 @@ export class ViewsService {
   showEventViewerComponent: EventEmitter<boolean> = new EventEmitter();
   showAddEventComponent: EventEmitter<boolean> = new EventEmitter();
   showReportComponent: EventEmitter<boolean> = new EventEmitter();
+  showHelpComponent: EventEmitter<boolean> = new EventEmitter();
   mainList: EventEmitter<string> = new EventEmitter();
 
   constructor() { }

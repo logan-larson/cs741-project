@@ -1,7 +1,8 @@
 <div class="container">
   <div *ngIf="user; then userBlock; else guestBlock"></div> <!-- User is not logged in or registered -->
   <ng-template #userBlock>
-    <!-- Other buttons specific to user -->
+    <!-- Buttons not specific to user -->
+    <button (click)="showHelp()" class="btn-normal">Help</button>
     <button (click)="viewEvents()" class="btn-normal">View Events</button>
     <!-- Volunteers -->
     <div *ngIf="user.type == 'volunteer' || user.type == 'both'">
@@ -20,6 +21,7 @@
     <button (click)="logout()" class="btn-logout">Logout</button> <!-- Logout button -->
   </ng-template>
   <ng-template #guestBlock>
+    <button (click)="showHelp()" class="btn-normal">Help</button>
     <button (click)="viewEvents()" class="btn-normal">View Events</button>
     <button (click)="gotoLogin()" class="bg-blue txt-white btn-login">Login</button>
     <button (click)="gotoRegister()" class="bg-green txt-white btn-register">Register</button>
