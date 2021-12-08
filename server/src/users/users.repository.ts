@@ -13,6 +13,10 @@ export class UsersRepository {
     return this.userModel.findOne(userFilterQuery);
   }
 
+  async findAll(): Promise<User[]> {
+    return this.userModel.find();
+  }
+
   async create(user: User): Promise<User> {
     const newUser = new this.userModel(user);
     return newUser.save();

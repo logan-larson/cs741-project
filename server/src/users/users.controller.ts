@@ -10,6 +10,11 @@ export class UsersController {
 
   constructor(private readonly usersService: UsersService) {}
 
+  @Get()
+  async getAllUsers(): Promise<User[]> {
+    return await this.usersService.getAllUsers();
+  }
+
   @Get('user')
   async getCurrentUser(@Session() session: Record<string, any>): Promise<User> {
     if (!session.userId) {

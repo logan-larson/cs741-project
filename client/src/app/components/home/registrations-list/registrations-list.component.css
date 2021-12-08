@@ -3,20 +3,20 @@ h2 {
 }
 
 .container {
-  margin-top: 20px;
-  width: 90%;
+  margin-top: 25px;
+  width: 95%;
 }
 
 .active-container {
   background-color: var(--primary);
-  padding: 15px;
+  padding: 10px;
   border-radius: 15px;
   margin-bottom: 20px;
 }
 
 .inactive-container {
   background-color: var(--primary);
-  padding: 15px;
+  padding: 10px;
   border-radius: 15px;
 }
 

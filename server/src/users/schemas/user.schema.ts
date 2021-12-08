@@ -25,6 +25,10 @@ export class User {
 
   @Prop([String])
   donationIds: string[];
+
+  @Prop()
+  isActive: boolean;
+
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

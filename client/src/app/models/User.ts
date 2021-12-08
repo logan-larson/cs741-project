@@ -5,5 +5,6 @@ export interface User {
   type?: string,
   activeRegistrationIds?: string[],
   inactiveRegistrationIds?: string[],
-  donationIds?: string[]
+  donationIds?: string[],
+  isActive?: boolean,
 }

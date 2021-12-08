@@ -26,6 +26,8 @@ import { RegistrationsListComponent } from './components/home/registrations-list
 import { RegistrationComponent } from './components/home/registrations-list/registration/registration.component';
 import { DonationsListComponent } from './components/home/donations-list/donations-list.component';
 import { DonationComponent } from './components/home/donations-list/donation/donation.component';
+import { UsersListComponent } from './components/home/users-list/users-list.component';
+import { UserComponent } from './components/home/users-list/user/user.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,9 @@ import { DonationComponent } from './components/home/donations-list/donation/don
     RegistrationsListComponent,
     RegistrationComponent,
     DonationsListComponent,
-    DonationComponent
+    DonationComponent,
+    UsersListComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,

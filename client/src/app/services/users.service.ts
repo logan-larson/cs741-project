@@ -84,4 +84,9 @@ export class UsersService {
   getUser(): User {
     return this.currentUser;
   }
+
+  async getAllUsers(): Promise<User[]> {
+    return await this.http.get<User[]>(`/api/users`).toPromise();
+  }
+
 }

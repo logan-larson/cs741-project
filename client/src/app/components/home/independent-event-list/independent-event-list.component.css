@@ -1,15 +1,11 @@
 .container {
   width: 95%;
   height: 100%;
-  margin-left: 10px;
   margin-top: 25px;
   border-radius: 15px;
   background-color: var(--primary);
   box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
-}
-
-#list-title {
-  text-align: center;
+  padding: 10px;
 }
 
 nav {
@@ -38,8 +34,7 @@ nav::-webkit-scrollbar-thumb:hover {
 }
 
 h2 {
-  margin: 0px;
-  padding: 10px;
+  text-align: center;
 }
 
 #btn-add-event {

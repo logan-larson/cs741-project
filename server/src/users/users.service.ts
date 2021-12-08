@@ -29,6 +29,7 @@ export class UsersService {
       activeRegistrationIds: [],
       inactiveRegistrationIds: [],
       donationIds: [],
+      isActive: true
     });
   }
 
@@ -42,6 +43,10 @@ export class UsersService {
     }
 
     const result: boolean = await bcrypt.compare(password, user.password)
+
+    if (!user.isActive) {
+      return null;
+    }
 
     return result ? user : null;
   }
@@ -62,4 +67,9 @@ export class UsersService {
     
     return user != undefined;
   }
+
+  async getAllUsers(): Promise<User[]> {
+    return await this.usersRepository.findAll();
+  }
+
 }
