@@ -1,5 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { v4 as uuidv4 } from 'uuid';
+const bcrypt = require('bcrypt');
+//import { bcrypt } from 'bcrypt';
 
 import { User } from "./schemas/user.schema";
 import { UsersRepository } from "./users.repository";
@@ -13,10 +15,16 @@ export class UsersService {
   }
 
   async createUser(username: string, password: string, type: string): Promise<User> {
+
+    const saltRounds = 10;
+
+    // Hash the password before storing
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+
     return this.usersRepository.create({
       userId: uuidv4(),
       username: username,
-      password: password,
+      password: hashedPassword,
       type: type,
       activeRegistrationIds: [],
       inactiveRegistrationIds: [],
@@ -29,11 +37,13 @@ export class UsersService {
     const user: User = await this.usersRepository.findOne({ username });
 
     // Validate user exists and password is the same as one provided
-    if (!user || user.password != password) {
+    if (!user) {
       return null;
     }
 
-    return user;
+    const result: boolean = await bcrypt.compare(password, user.password)
+
+    return result ? user : null;
   }
 
   async updateRegistrationIds(userId: string, activeRegistrationIds: string[], inactiveRegistrationIds: string[]): Promise<boolean> {
