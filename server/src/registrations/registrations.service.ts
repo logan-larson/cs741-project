@@ -152,4 +152,16 @@ export class RegistrationsService {
     }
     return ret;
   }
+
+  async getVolunteerTime(userId: string): Promise<number> {
+    const user: User = await this.usersService.getUserById(userId);
+    let volunteerMinutes: number = 0;
+    for (const regId of user.activeRegistrationIds) {
+      const reg: Registration = await this.registrationsRepository.findOne({ registrationId: regId });
+      volunteerMinutes += (reg.timeEnd.getTime() - reg.timeStart.getTime()) / (1000 * 60);
+    }
+
+    return volunteerMinutes;
+  }
+
 }

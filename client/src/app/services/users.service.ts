@@ -17,6 +17,7 @@ export class UsersService {
 
   getCurrentUserEmitter: EventEmitter<any> = new EventEmitter();
   currentUser: User = {};
+  private reportUser: User = {};
 
   constructor(
     private http: HttpClient,
@@ -91,6 +92,14 @@ export class UsersService {
 
   async updateActive(userId: string) {
     await this.http.put(`/api/users/user/${userId}`, {}).toPromise();
+  }
+
+  getReportUser() {
+    return this.reportUser;
+  }
+
+  setReportUser(user: User) {
+    this.reportUser = user;
   }
 
 }

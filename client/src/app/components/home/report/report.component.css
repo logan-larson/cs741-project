@@ -1,0 +1,32 @@
+.container {
+  background-color: var(--primary);
+}
+
+.size {
+  width: 700px;
+}
+
+h2 {
+  text-align: center;
+  margin-top: 15px;
+}
+
+h4 {
+  text-align: center;
+}
+
+button {
+  border: none;
+  width: 200px;
+  color: white;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.5s;
+  background-color: var(--red);
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: var(--dark-red);
+}

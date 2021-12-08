@@ -1,0 +1,11 @@
+<div class="pop-up-container container" [class.size]="donations.length != 0">
+  <h2>User Report</h2>
+  <h4 *ngIf="user.type == 'volunteer' || user.type == 'both'">Volunteer time: {{ volunteerHours }} hours {{ volunteerMinutes }} minutes</h4>
+  <div *ngIf="user.type == 'donor' || user.type == 'both'">
+    <h4>Donations</h4>
+    <div *ngFor="let don of donations" class="don">
+      <app-donation [donation]="don"></app-donation>
+    </div>
+  </div>
+  <button id="close" (click)="close()">Close</button>
+</div>

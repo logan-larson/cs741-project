@@ -31,6 +31,13 @@ export class RegistrationsController {
     return await this.registrationsService.getUserInactiveRegistrations(userId);
   }
 
+  @Get('user/:userId')
+  async getVolunteerTime(
+    @Param('userId') userId: string
+  ): Promise<number> {
+    return await this.registrationsService.getVolunteerTime(userId);
+  }
+
   @Post(':registrationId/deactivate')
   async deactivateRegistration(
     @Param('registrationId') registrationId: string,

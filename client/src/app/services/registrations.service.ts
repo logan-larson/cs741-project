@@ -79,4 +79,8 @@ export class RegistrationsService {
       }
     ).toPromise();
   }
+
+  async getVolunteerTime(userId: string): Promise<number> {
+    return await this.http.get<number>(`/api/registrations/user/${userId}`).toPromise();
+  }
 }

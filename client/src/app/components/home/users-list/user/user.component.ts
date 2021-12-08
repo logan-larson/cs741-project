@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { User } from 'src/app/models/User';
 import { UsersService } from 'src/app/services/users.service';
+import { ViewsService } from 'src/app/services/views/views.service';
 
 @Component({
   selector: 'app-user',
@@ -14,7 +15,10 @@ export class UserComponent implements OnInit {
   type: string = "";
   changeActiveText: string = "Disable";
 
-  constructor(private usersService: UsersService) {}
+  constructor(
+    private usersService: UsersService,
+    private viewsService: ViewsService
+  ) {}
 
   ngOnInit(): void {
     switch (this.user.type) {
@@ -36,7 +40,8 @@ export class UserComponent implements OnInit {
   }
 
   viewReport() {
-    console.log("View report");
+    this.usersService.setReportUser(this.user);
+    this.viewsService.showReportComponent.emit(true);
   }
 
   async changeActive() {

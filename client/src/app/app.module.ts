@@ -28,6 +28,7 @@ import { DonationsListComponent } from './components/home/donations-list/donatio
 import { DonationComponent } from './components/home/donations-list/donation/donation.component';
 import { UsersListComponent } from './components/home/users-list/users-list.component';
 import { UserComponent } from './components/home/users-list/user/user.component';
+import { ReportComponent } from './components/home/report/report.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { UserComponent } from './components/home/users-list/user/user.component'
     DonationsListComponent,
     DonationComponent,
     UsersListComponent,
-    UserComponent
+    UserComponent,
+    ReportComponent
   ],
   imports: [
     BrowserModule,

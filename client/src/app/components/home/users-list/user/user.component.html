@@ -1,6 +1,6 @@
 <div class="container">
   <h4>{{ user.username }}</h4>
   <h4>{{ type }}</h4>
-  <button (click)="viewReport()">View Report</button>
-  <button (click)="changeActive()">{{ changeActiveText }}</button>
+  <button *ngIf="user.type != 'admin'" (click)="viewReport()">View Report</button>
+  <button *ngIf="user.type != 'admin'" (click)="changeActive()">{{ changeActiveText }}</button>
 </div>
