@@ -25,21 +25,11 @@ export class SideBarComponent implements OnInit {
   ) {
     this.usersService.getCurrentUserEmitter.subscribe(() => {
       this.user = this.usersService.getUser();
-      if (Object.keys(this.user).length === 0) {
-        this.isUser = false;
-      } else {
-        this.isUser = true;
-      }
     })
   }
 
   ngOnInit(): void {
     this.user = this.usersService.getUser();
-    if (Object.keys(this.user).length === 0) {
-      this.isUser = false;
-    } else {
-      this.isUser = true;
-    }
   }
 
   gotoLogin() {

@@ -69,7 +69,6 @@ export class RegistrationsService {
   }
 
   async deactivateRegistration(reg: Registration, event: Event): Promise<Registration> {
-    console.log(reg.registrationId!);
     let user: User = this.usersService.getUser();
     return await this.http.post<Registration>(
       `/api/registrations/${reg.registrationId!}/deactivate`, 

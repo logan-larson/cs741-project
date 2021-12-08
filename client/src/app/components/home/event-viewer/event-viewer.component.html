@@ -2,16 +2,18 @@
   <h2 id="title">Event Viewer</h2>
   <nav>
     <app-event-details class="subcontainer" [event]="event"></app-event-details>
-    <div class="subcontainer" *ngIf="isRegistered != undefined && (user.type == 'volunteer' || user.type == 'both')">
-      <app-volunteer-section [isRegistered]="isRegistered" (eventChangeEmitter)="refreshEvent()"></app-volunteer-section>
-    </div>
-    <div class="subcontainer" *ngIf="user.type == 'donor' || user.type == 'both'">
-      <app-donor-section></app-donor-section>
+    <div *ngIf="user">
+      <div class="subcontainer" *ngIf="isRegistered != undefined && (user.type == 'volunteer' || user.type == 'both')">
+        <app-volunteer-section [isRegistered]="isRegistered" (eventChangeEmitter)="refreshEvent()"></app-volunteer-section>
+      </div>
+      <div class="subcontainer" *ngIf="user.type == 'donor' || user.type == 'both'">
+        <app-donor-section></app-donor-section>
+      </div>
     </div>
   </nav>
   <div class="button-container">
     <button id="close" (click)="close()">Close</button>
-    <div *ngIf="user != {} && user.type == 'admin'">
+    <div *ngIf="user && user.type == 'admin'">
       <button id="cancel" (click)="cancelEvent()">Cancel Event</button>
     </div>
   </div>

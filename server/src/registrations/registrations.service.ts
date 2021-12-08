@@ -137,6 +137,11 @@ export class RegistrationsService {
 
   async getUserActiveRegistrations(userId: string): Promise<Registration[]> {
     let user: User = await this.usersService.getUserById(userId);
+
+    if (user.activeRegistrationIds == null) {
+      return [];
+    }
+
     let ret: Registration[] = [];
     for (const regId of user.activeRegistrationIds) {
       ret.push(await this.registrationsRepository.findOne({ registrationId: regId }));

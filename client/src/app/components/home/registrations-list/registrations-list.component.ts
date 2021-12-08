@@ -21,7 +21,9 @@ export class RegistrationsListComponent implements OnInit {
   ) {
     this.usersService.getCurrentUserEmitter.subscribe((user: User) => {
       this.user = user;
-      this.getRegs();
+      if (this.user) {
+        this.getRegs();
+      }
     })
   }
 

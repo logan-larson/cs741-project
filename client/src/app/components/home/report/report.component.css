@@ -30,3 +30,7 @@ button:hover {
   cursor: pointer;
   background-color: var(--dark-red);
 }
+
+.don {
+  margin-bottom: 10px;
+}

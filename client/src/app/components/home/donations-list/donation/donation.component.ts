@@ -19,7 +19,6 @@ export class DonationComponent implements OnInit {
   ngOnInit(): void {
     if (this.donation.isRestricted!) {
       this.restricted = "Restricted";
-      console.log(this.donation);
       
       this.eventsService.getEventById(this.donation.eventId!,
         (event: Event) => {

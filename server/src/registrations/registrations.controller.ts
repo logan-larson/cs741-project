@@ -43,8 +43,6 @@ export class RegistrationsController {
     @Param('registrationId') registrationId: string,
     @Body() changeActivationRegistrationDto: ChangeActivationRegistrationDto
   ): Promise<Registration> {
-    console.log("Received request");
-
     return this.registrationsService.deactivateRegistration(
       registrationId,
       changeActivationRegistrationDto.user,

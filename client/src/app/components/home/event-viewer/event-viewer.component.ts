@@ -83,10 +83,10 @@ export class EventViewerComponent implements OnInit {
 
     if (!result) {
       return;
-    } else {
-      this.eventsService.cancelEvent(this.event);
-      this.close();
     }
+
+    this.eventsService.cancelEvent(this.event);
+    this.close();
   }
 
   setIsRegistered(isRegistered: boolean) {

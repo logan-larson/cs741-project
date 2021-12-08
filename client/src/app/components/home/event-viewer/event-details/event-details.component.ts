@@ -37,9 +37,6 @@ export class EventDetailsComponent implements OnInit {
       this.date = new Date(this.event.date).toLocaleDateString();
       this.startTime = new Date(this.event.timeStart).toLocaleTimeString();
       this.endTime = new Date(this.event.timeEnd).toLocaleTimeString();
-      
-      console.log(`Date: ${this.date}, Start: ${this.startTime}, End: ${this.endTime}`);
-      
     }
 
 

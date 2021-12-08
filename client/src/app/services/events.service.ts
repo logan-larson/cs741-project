@@ -48,6 +48,10 @@ export class EventsService {
     return this.selectedEvent;
   }
 
+  getMyEvent(eventId: string): Event | undefined {
+    return this.events.find((event) => { event.eventId == eventId });
+  }
+
   getEventById(eventId: string, cb: any): void {
     this.http.get<Event>(`/api/events/${eventId}`)
       .subscribe((event: Event) => {

@@ -5,3 +5,33 @@
   border-radius: 15px;
   padding: 10px;
 }
+
+button {
+  width: 200px;
+  height: 50px;
+  color: white;
+  transition: background-color 0.5s;
+  border: none;
+  box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.2);
+  align-self: center;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+.cancel {
+  background-color: red;
+}
+
+.cancel:hover {
+  background-color: rgb(177, 0, 0);
+}
+
+.re-register {
+  background-color: green;
+}
+
+.re-register:hover {
+  background-color: rgb(0, 80, 0);
+}

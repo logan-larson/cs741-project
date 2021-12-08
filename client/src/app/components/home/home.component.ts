@@ -60,7 +60,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.usersService.getCurrentUser((user: User) => {
-      this.usersService.getCurrentUserEmitter.emit();
+      this.usersService.getCurrentUserEmitter.emit("get user");
       this.currentUser = user;
     });
   }

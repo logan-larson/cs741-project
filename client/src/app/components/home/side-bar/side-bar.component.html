@@ -1,5 +1,5 @@
 <div class="container">
-  <div *ngIf="isUser; then userBlock; else guestBlock"></div> <!-- User is not logged in or registered -->
+  <div *ngIf="user; then userBlock; else guestBlock"></div> <!-- User is not logged in or registered -->
   <ng-template #userBlock>
     <!-- Other buttons specific to user -->
     <button (click)="viewEvents()" class="btn-normal">View Events</button>

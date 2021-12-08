@@ -16,6 +16,8 @@ export class RegistrationComponent implements OnInit {
   @Output() updated: EventEmitter<any> = new EventEmitter();
   event: Event = {};
   changeActivationString: string = "Cancel";
+  timeStart: string = "";
+  timeEnd: string = "";
   
   constructor(
     private eventsService: EventsService,
@@ -26,6 +28,9 @@ export class RegistrationComponent implements OnInit {
     // Get the event
     this.eventsService.getEventById(this.registration.eventId!, (event: Event) => {
       this.event = event;
+
+      this.timeStart = new Date(this.event.timeStart!).toLocaleTimeString();
+      this.timeEnd = new Date(this.event.timeEnd!).toLocaleTimeString();
     });
 
     if (this.isActive) {

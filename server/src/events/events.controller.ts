@@ -45,9 +45,6 @@ export class EventsController {
     @Session() session: Record<string, any>,
     @Body() createEventDto: CreateEventDto
   ): Promise<Event> {
-
-    console.log("hit");
-
     let event: Event = await this.eventsService.createEvent(
       session.userId,
       createEventDto.name,

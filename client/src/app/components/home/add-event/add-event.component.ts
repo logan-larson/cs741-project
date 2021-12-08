@@ -87,6 +87,7 @@ export class AddEventComponent implements OnInit {
 
     this.eventsService.createEvent(event, (event: Event) => {
       if (event) {
+        this.eventsService.getAllIndependentEvents(() => {});
         this.viewsService.showAddEventComponent.emit(false);
       }
     });

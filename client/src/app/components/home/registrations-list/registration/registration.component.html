@@ -1,6 +1,6 @@
 <div class="container">
   <h4>{{ event.name }}</h4>
-  <h4>{{ registration.timeStart }}</h4>
-  <h4>{{ registration.timeEnd }}</h4>
-  <button (click)="changeActivation()">{{ changeActivationString }}</button>
+  <h4>{{ timeStart }}</h4>
+  <h4>{{ timeEnd }}</h4>
+  <button (click)="changeActivation()" [class.cancel]="isActive" [class.re-register]="!isActive">{{ changeActivationString }}</button>
 </div>
