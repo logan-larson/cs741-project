@@ -47,7 +47,7 @@ export class VolunteerSectionComponent implements OnInit {
     this.isRegistered = false;
     this.registrationStatus = "Unregistered";
     for (const reg of eventRegs) {
-      if (this.user.activeRegistrationIds?.includes(reg.registrationId!) || this.user.inactiveRegistrationIds?.includes(reg.registrationId!)) {
+      if (this.user.activeRegistrationIds?.includes(reg.registrationId!)) {
         this.showButton = false;
         this.isRegistered = true;
         this.registrationStatus = "Registered";

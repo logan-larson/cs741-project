@@ -85,9 +85,7 @@ export class AddEventComponent implements OnInit {
       isIndependent: isIndependent
     }
 
-    let id: string = 'undefined';
-
-    this.eventsService.createEvent(id, event, (event: Event) => {
+    this.eventsService.createEvent(event, (event: Event) => {
       if (event) {
         this.viewsService.showAddEventComponent.emit(false);
       }

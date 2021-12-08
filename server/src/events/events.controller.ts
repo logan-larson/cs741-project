@@ -40,12 +40,14 @@ export class EventsController {
     return this.eventsService.getVolunteerRegistrationStatus(eventId, userId);
   }
 
-  @Post(':programId')
+  @Post()
   async createEvent(
     @Session() session: Record<string, any>,
-    @Param('programId') programId: string,
     @Body() createEventDto: CreateEventDto
   ): Promise<Event> {
+
+    console.log("hit");
+
     let event: Event = await this.eventsService.createEvent(
       session.userId,
       createEventDto.name,
@@ -57,22 +59,14 @@ export class EventsController {
       createEventDto.isIndependent
     );
 
-    if (programId != 'undefined') {
-      this.programsService.updateEventIds(programId, event.eventId);
-    }
-    
     return event;
   }
 
-  /*
-  -- Deprecated -- Old volunteering system
-  @Put(':eventId/volunteers')
-  async addVolunteerToEvent(
-    @Param('eventId') eventId: string,
-    @Body() userIdDto: UserIdDto
+  @Post(':eventId')
+  async cancelEvent(
+    @Param('eventId') eventId: string
   ): Promise<Event> {
-    return this.eventsService.changeEventVolunteerStatus(eventId, userIdDto.userId);
+    return await this.eventsService.cancelEvent(eventId);
   }
-  */
 
 }

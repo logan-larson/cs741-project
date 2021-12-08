@@ -35,6 +35,7 @@ export class EventsService {
     this.http.get<Event[]>('/api/events/independent')
       .subscribe(events => {
         this.events = events;
+        this.getEventsEmitter.emit();
         cb(events);
       })
   }
@@ -54,13 +55,13 @@ export class EventsService {
       })
   }
 
-  createEvent(programId: string, event: Event, cb: any): void {
-    this.http.post<Event>(`/api/events/${programId}`, event)
+  createEvent(event: Event, cb: any): void {
+    this.http.post<Event>(`/api/events`, event)
       .subscribe(event => {
         if (event.isIndependent) {
           this.events.push(event);
         }
-        this.getEventsEmitter.emit(programId);
+        this.getEventsEmitter.emit();
         cb(event);
       }, err => {
         console.log("Error in EventsService -> createEvent");
@@ -69,5 +70,10 @@ export class EventsService {
 
   setSelectedEvent(event: Event) {
     this.selectedEvent = event;
+  }
+
+  async cancelEvent(event: Event) {
+    await this.http.post<Event>(`/api/events/${event.eventId}`, {}).toPromise();
+    this.getAllIndependentEvents(() => {});
   }
 }

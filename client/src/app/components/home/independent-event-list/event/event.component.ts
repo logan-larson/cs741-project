@@ -22,6 +22,7 @@ export class EventComponent implements OnInit {
   volunteersNeeded: number = 0;
   isRegistered: boolean = false;
   isIndependent: boolean = true;
+  isActive: boolean = false;
 
   constructor(
     private usersService: UsersService,
@@ -35,6 +36,7 @@ export class EventComponent implements OnInit {
 
     this.eventsService.getEventsEmitter.subscribe(() => {
       this.event = this.eventsService.getSelectedEvent();
+      this.isActive = this.event.isActive!;
       this.setIsRegistered();
     });
   }
@@ -61,8 +63,9 @@ export class EventComponent implements OnInit {
         
       this.isIndependent = this.event.isIndependent!;
 
-      this.setIsRegistered();
+      this.isActive = this.event.isActive!;
 
+      this.setIsRegistered();
     }
   }
 

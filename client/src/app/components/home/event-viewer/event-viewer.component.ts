@@ -78,8 +78,15 @@ export class EventViewerComponent implements OnInit {
     this.closeEmitter.emit("close me");
   }
 
-  async save() {
-    this.close();
+  cancelEvent() {
+    const result: boolean = confirm("Are you sure you want to cancel this event?");
+
+    if (!result) {
+      return;
+    } else {
+      this.eventsService.cancelEvent(this.event);
+      this.close();
+    }
   }
 
   setIsRegistered(isRegistered: boolean) {

@@ -46,6 +46,7 @@ nav::-webkit-scrollbar-thumb:hover {
 
 button {
   border: none;
+  width: 200px;
   color: white;
   box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
   transition: background-color 0.5s;
@@ -55,12 +56,12 @@ button:hover {
   cursor: pointer;
 }
 
-#save {
-  background-color: var(--green);
+#cancel {
+  background-color: var(--blue);
 }
 
-#save:hover {
-  background-color: var(--dark-green);
+#cancel:hover {
+  background-color: var(--dark-blue);
 }
 
 #close {

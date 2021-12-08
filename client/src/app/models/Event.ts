@@ -10,4 +10,5 @@ export interface Event {
   registrationIds?: string[],
   donationIds?: string[],
   isIndependent?: boolean,
+  isActive?: boolean,
 }

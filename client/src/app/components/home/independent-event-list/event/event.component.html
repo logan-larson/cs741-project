@@ -1,4 +1,4 @@
-<div class="container" [class.independent]="isIndependent" [class.registered]="isRegistered">
+<div class="container" [class.independent]="isIndependent" [class.registered]="isRegistered" [class.inactive]="!isActive">
   <div class="details-container">
     <h2>{{ name }}</h2>
     <div class="date-time-container">
@@ -8,5 +8,5 @@
   </div>
   <h4 id="vol-need">Volunteers Needed: {{ volunteersNeeded }}</h4>
   <p *ngIf="event && event.description">{{ event.description }}</p>
-  <button (click)="viewEventDetails()">View Event Details</button>
+  <button *ngIf="isActive" (click)="viewEventDetails()">View Event Details</button>
 </div>

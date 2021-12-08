@@ -34,6 +34,10 @@ export class Event {
 
   @Prop()
   isIndependent: boolean;
+
+  @Prop()
+  isActive: boolean;
+
 }
 
 export const EventSchema = SchemaFactory.createForClass(Event);

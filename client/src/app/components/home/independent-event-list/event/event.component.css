@@ -45,6 +45,10 @@ h2 {
   background-color: var(--green);
 }
 
+.inactive {
+  background-color: var(--red);
+}
+
 #vol-need {
   margin: 10px;
 }

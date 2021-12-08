@@ -65,7 +65,8 @@ export class EventsService {
       volunteerCountRequirement: volunteerCountRequirement,
       registrationIds: [],
       donationIds: [],
-      isIndependent: isIndependent
+      isIndependent: isIndependent,
+      isActive: true,
     });
   }
 
@@ -96,26 +97,8 @@ export class EventsService {
     return event != undefined;
   }
 
-  /*
-  -- Deprecated -- Old volunteering system
-  async changeEventVolunteerStatus(eventId: string, userId: string): Promise<Event> {
-    const isRegistered: boolean = await this.getVolunteerRegistrationStatus(eventId, userId);
-    const event: Event = await this.eventsRepository.findOne({ eventId });
-    let eventVolunteerUserIds: string[] = event.volunteerUserIds;
-    let eventVolunteersNeeded: number = event.volunteersNeeded;
-
-    if (isRegistered) {
-      // If user was registered, remove them from the list of volunteers
-      eventVolunteerUserIds = eventVolunteerUserIds.filter(uid => uid != userId);
-      eventVolunteersNeeded += 1;
-    } else {
-      // If user wasn't registered, add them to the list of volunteers
-      eventVolunteerUserIds.push(userId);
-      eventVolunteersNeeded -= 1;
-    }
-  
-    return this.eventsRepository.findOneAndUpdate({ eventId }, { volunteersNeeded: eventVolunteersNeeded, volunteerUserIds: eventVolunteerUserIds });
+  async cancelEvent(eventId: string): Promise<Event> {
+    return await this.eventsRepository.findOneAndUpdate({ eventId }, { isActive: false });
   }
-  */
 
 }
