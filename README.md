@@ -49,3 +49,7 @@ Each endpoint folder contains a controller, a service, a repository, one or more
 - Schemas: represent objects able to be stored in the database
 - DTOs: Data transfer objects, used to represent objects that are sent in requests
 - Module: ties all the above files together for an easy export
+
+## Executing
+
+If you would like to run it, navigate to the `client` directory in the terminal and run `ng serve`. Then open another terminal and navigate to the `server` directory and run `npm run start:dev`.
