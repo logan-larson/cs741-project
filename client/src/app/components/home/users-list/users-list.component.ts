@@ -1,3 +1,7 @@
+/**
+ * List all users in the system
+ */
+
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/User';
 import { UsersService } from 'src/app/services/users.service';
@@ -18,6 +22,10 @@ export class UsersListComponent implements OnInit {
     this.users = await this.usersService.getAllUsers();
   }
 
+  /**
+   * User(s) was updated
+   * Get all the new updated users
+   */
   async userUpdated() {
     // Get all users
     this.users = await this.usersService.getAllUsers();

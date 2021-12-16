@@ -1,3 +1,7 @@
+/**
+ * Volunteer section of event viewer
+ */
+
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Event } from 'src/app/models/Event';
 import { Registration } from 'src/app/models/Registration';
@@ -56,6 +60,9 @@ export class VolunteerSectionComponent implements OnInit {
 
   }
 
+  /**
+   * Called when user registers to volunteer for event
+   */
   register() {
     if (this.user && this.event) {
       this.registrationsService.createRegistration(

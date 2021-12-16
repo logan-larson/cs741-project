@@ -1,3 +1,7 @@
+/**
+ * Login component
+ */
+
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/User';
@@ -21,6 +25,10 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /**
+   * User selects login
+   * Validate credentials with server
+   */
   login() {
     this.usersService.validate(this.username, this.password, (user: User) => {
       if (!user) {
@@ -31,11 +39,17 @@ export class LoginComponent implements OnInit {
     })
   }
 
+  /**
+   * Go to register component
+   */
   gotoRegister() {
     this.authService.setPage('register');
     this.gotoRegisterEmitter.emit("goto register");
   }
 
+  /**
+   * Go to event list w/o logging in
+   */
   gotoHome() {
     this.usersService.setAndEmitCurrentUser({});
     this.router.navigateByUrl('home');

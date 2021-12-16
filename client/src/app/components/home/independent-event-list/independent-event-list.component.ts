@@ -1,10 +1,11 @@
+/**
+ * List all events related to the organization
+ */
+
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { EventsService } from 'src/app/services/events.service';
 
 import { Event } from 'src/app/models/Event';
-import { User } from 'src/app/models/User';
-import { UsersService } from 'src/app/services/users.service';
-import { Program } from 'src/app/models/Program';
 
 @Component({
   selector: 'app-independent-event-list',
@@ -24,6 +25,9 @@ export class IndependentEventListComponent implements OnInit {
     })
   }
 
+  /**
+   * Get all the events related to the organization
+   */
   ngOnInit(): void {
     this.eventsService.getAllIndependentEvents((events: Event[]) => {
       this.events = events;

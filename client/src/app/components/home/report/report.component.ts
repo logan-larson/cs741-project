@@ -1,3 +1,7 @@
+/**
+ * Show a user report based on donation and volunteer history
+ */
+
 import { Component, OnInit } from '@angular/core';
 import { Donation } from 'src/app/models/Donation';
 import { User } from 'src/app/models/User';
@@ -38,6 +42,9 @@ export class ReportComponent implements OnInit {
 
   }
 
+  /**
+   * Close popup
+   */
   close() {
     this.viewsService.showReportComponent.emit(false);
   }

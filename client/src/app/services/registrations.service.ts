@@ -1,3 +1,7 @@
+/**
+ * Controls all requests related to registrations
+ */
+
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Registration } from '../models/Registration';
@@ -15,23 +19,14 @@ export class RegistrationsService {
     private usersService: UsersService,
   ) { }
 
-  unregisterFromEvent(registrationId: string, user: User, event: Event, cb: any): void {
-    this.http.post<Registration>(`/api/registrations/${registrationId}`, { user: user, event: event })
-      .subscribe((registration: Registration) => {
-        cb(registration);
-      }, (err: any) => {
-        console.log("Error in RegistrationsService -> unregisterFromEvent");
-        cb(null);
-      })
-  }
-
+  /**
+   * Request user's event registration is created on the first time a user registers for an event
+   */
   createRegistration(user: User, event: Event, cb: any): void {
     const body = {
       user: user,
       event: event
     };
-
-    console.log(body);
     
     this.http.post<Registration>(`/api/registrations`, { user: user, event: event })
       .subscribe((registration: Registration) => {
@@ -45,18 +40,30 @@ export class RegistrationsService {
       });
   }
 
+  /**
+   * Request list of registrations related to an event
+   */
   async getEventRegistrations(eventId: string): Promise<Registration[]> {
     return await this.http.get<Registration[]>(`/api/registrations/${eventId}`).toPromise();
   }
 
+  /**
+   * Request a user's active registrations
+   */
   async getUserActiveRegistrations(userId: string): Promise<Registration[]> {
     return await this.http.get<Registration[]>(`/api/registrations/user/${userId}/active`).toPromise();
   }
 
+  /**
+   * Request a user's inactive registrations
+   */
   async getUserInactiveRegistrations(userId: string): Promise<Registration[]> {
     return await this.http.get<Registration[]>(`/api/registrations/user/${userId}/inactive`).toPromise();
   }
 
+  /**
+   * Request user's event registration is reactivated
+   */
   async activateRegistration(reg: Registration, event: Event): Promise<Registration> {
     let user: User = this.usersService.getUser();
     return await this.http.post<Registration>(
@@ -68,6 +75,9 @@ export class RegistrationsService {
     ).toPromise();
   }
 
+  /**
+   * Request user's event registration is deactivated
+   */
   async deactivateRegistration(reg: Registration, event: Event): Promise<Registration> {
     let user: User = this.usersService.getUser();
     return await this.http.post<Registration>(
@@ -79,6 +89,9 @@ export class RegistrationsService {
     ).toPromise();
   }
 
+  /**
+   * Request a user's volunteer time
+   */
   async getVolunteerTime(userId: string): Promise<number> {
     return await this.http.get<number>(`/api/registrations/user/${userId}`).toPromise();
   }

@@ -1,3 +1,7 @@
+/**
+ * Register component
+ */
+
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/User';
@@ -24,6 +28,9 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /**
+   * Validate registering for a new account
+   */
   register() {
     if (this.password != this.confirmPassword) {
       alert("Passwords do not match");
@@ -57,11 +64,17 @@ export class RegisterComponent implements OnInit {
     })
   }
 
+  /**
+   * Go to login component
+   */
   gotoLogin() {
     this.authService.setPage('login');
     this.gotoLoginEmitter.emit("goto login");
   }
 
+  /**
+   * Continue to event list without registering
+   */
   gotoHome() {
     this.usersService.setAndEmitCurrentUser({});
     this.router.navigateByUrl('home');

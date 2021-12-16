@@ -1,8 +1,11 @@
+/**
+ * Show details related to an event
+ */
+
 import { Component, Input, OnInit } from '@angular/core';
 import { Event } from 'src/app/models/Event';
 import { User } from 'src/app/models/User';
 import { EventsService } from 'src/app/services/events.service';
-import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-event-details',
@@ -31,8 +34,8 @@ export class EventDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // TODO format date and time properly
 
+    // Format the dates and times
     if (this.event && this.event.date && this.event.timeStart && this.event.timeEnd) {
       this.date = new Date(this.event.date).toLocaleDateString();
       this.startTime = new Date(this.event.timeStart).toLocaleTimeString();
@@ -44,6 +47,9 @@ export class EventDetailsComponent implements OnInit {
 
   }
 
+  /**
+   * Calculate the volunteers needed based on current volunteer count and volunteer requirement count
+   */
   setVolunteersNeeded() {
     if (this.event && this.event.volunteerCountRequirement && this.event.registrationIds) {
       this.volunteersNeeded = this.event.volunteerCountRequirement - this.event.registrationIds?.length;

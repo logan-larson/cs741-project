@@ -1,3 +1,10 @@
+/**
+ * Houses components that are related to an event
+ *  - Event Details
+ *  - Donor Section
+ *  - Volunteer Section
+ */
+
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Event } from 'src/app/models/Event';
 import { User } from 'src/app/models/User';
@@ -43,6 +50,9 @@ export class EventViewerComponent implements OnInit {
   }
   
 
+  /**
+   * Set current user and event
+   */
   ngOnInit(): void {
     this.user = this.usersService.getUser();
     this.event = this.eventsService.getSelectedEvent();
@@ -52,6 +62,9 @@ export class EventViewerComponent implements OnInit {
     }
   }
 
+  /**
+   * Determine if user is registered for volunteer section component
+   */
   getIsRegistered() {
 
     this.isRegistered = false;
@@ -74,10 +87,16 @@ export class EventViewerComponent implements OnInit {
     }
   }
 
+  /**
+   * Close the popup
+   */
   close() {
     this.closeEmitter.emit("close me");
   }
 
+  /**
+   * Admin decides to cancel the event
+   */
   cancelEvent() {
     const result: boolean = confirm("Are you sure you want to cancel this event?");
 
@@ -89,10 +108,9 @@ export class EventViewerComponent implements OnInit {
     this.close();
   }
 
-  setIsRegistered(isRegistered: boolean) {
-    this.isRegistered = isRegistered;
-  }
-
+  /**
+   * Event was updated, so need to get updated event from server
+   */
   refreshEvent() {
     if (this.event.eventId) {
       this.eventsService.getEventById(this.event.eventId, (event: Event) => {

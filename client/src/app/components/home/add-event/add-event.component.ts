@@ -1,3 +1,9 @@
+/**
+ * Add event popup dialog
+ * 
+ * Only available to admin
+ */
+
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Event } from 'src/app/models/Event';
 import { EventsService } from 'src/app/services/events.service';
@@ -27,10 +33,19 @@ export class AddEventComponent implements OnInit {
 
   constructor(private eventsService: EventsService, private viewsService: ViewsService) { }
 
+  /**
+   * Parse the initialized date
+   */
   ngOnInit(): void {
     this.date = this.parseDate(this.currentDate);
   }
   
+  /**
+   * Date parser helper
+   * 
+   * @param date date to parse
+   * @returns formatted date
+   */
   parseDate(date: Date): string {
     let day: number = date.getDate();
     let month: number = date.getMonth()+1;
@@ -39,6 +54,12 @@ export class AddEventComponent implements OnInit {
     return `${this.addZeroes(year.toString())}-${this.addZeroes(month.toString())}-${this.addZeroes(day.toString())}`;
   }
 
+  /**
+   * Add 0 to single digits
+   * 
+   * @param str 
+   * @returns 
+   */
   addZeroes(str: string): string {
     let ret: string = str;
     if (ret.length == 1) {
@@ -47,6 +68,12 @@ export class AddEventComponent implements OnInit {
     return ret;
   }
 
+  /**
+   * Validate user inputs
+   * Signal to server that event should be added
+   * 
+   * @returns 
+   */
   addEvent() {
     let currentTime: Date = new Date();
 
@@ -94,6 +121,9 @@ export class AddEventComponent implements OnInit {
 
   }
 
+  /**
+   * User cancels adding event
+   */
   cancel() {
     this.viewsService.showAddEventComponent.emit(false);
   }

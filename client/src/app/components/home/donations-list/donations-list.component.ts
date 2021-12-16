@@ -1,3 +1,7 @@
+/**
+ * Lists all donations related to a user
+ */
+
 import { Component, OnInit } from '@angular/core';
 import { Donation } from 'src/app/models/Donation';
 import { User } from 'src/app/models/User';
@@ -28,6 +32,10 @@ export class DonationsListComponent implements OnInit {
     this.usersService.userUpdatedEmitter.emit();
   }
 
+  /**
+   * Called when a user gets updated
+   * Get the updated user's donations
+   */
   async getDonations() {
     this.donations = await this.donationsService.getUsersDonations(this.user);
   }

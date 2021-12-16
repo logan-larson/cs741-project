@@ -1,3 +1,7 @@
+/**
+ * Registration component that shows user's registration data
+ */
+
 import { Component, Input, OnInit, EventEmitter, Output } from '@angular/core';
 import { Event } from 'src/app/models/Event';
 import { Registration } from 'src/app/models/Registration';
@@ -40,6 +44,9 @@ export class RegistrationComponent implements OnInit {
     }
   }
 
+  /**
+   * Change registration from active to cancelled or vice versa
+   */
   async changeActivation() {
     if (this.isActive) {
       let newReg: Registration = await this.registrationsService.deactivateRegistration(this.registration, this.event)

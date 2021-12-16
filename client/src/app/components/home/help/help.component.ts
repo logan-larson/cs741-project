@@ -1,6 +1,10 @@
+/**
+ * Help popup
+ * Change text based on current user
+ */
+
 import { Component, Input, OnInit } from '@angular/core';
 import { User } from 'src/app/models/User';
-import { UsersService } from 'src/app/services/users.service';
 import { ViewsService } from 'src/app/services/views/views.service';
 
 @Component({
@@ -17,6 +21,9 @@ export class HelpComponent implements OnInit {
     private viewsService: ViewsService,
   ) { }
 
+  /**
+   * Set message based on current user
+   */
   ngOnInit(): void {
 
     if (!this.user) {
@@ -68,6 +75,9 @@ export class HelpComponent implements OnInit {
     In the 'Users List', select 'View Report' to view a user's activity or select 'Disable' to inhibit a user.`;
   }
 
+  /**
+   * Close popup
+   */
   close() {
     this.viewsService.showHelpComponent.emit(false);
   }

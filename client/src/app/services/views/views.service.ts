@@ -1,3 +1,7 @@
+/**
+ * Controls all popup components
+ */
+
 import { EventEmitter, Injectable } from '@angular/core';
 
 @Injectable({

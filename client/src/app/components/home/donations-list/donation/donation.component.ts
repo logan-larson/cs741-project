@@ -1,3 +1,7 @@
+/**
+ * Donation component that shows user's donation data
+ */
+
 import { Component, Input, OnInit } from '@angular/core';
 import { Donation } from 'src/app/models/Donation';
 import { Event } from 'src/app/models/Event';
@@ -16,6 +20,9 @@ export class DonationComponent implements OnInit {
 
   constructor(private eventsService: EventsService) { }
 
+  /**
+   * Get whether this donation is restricted or not
+   */
   ngOnInit(): void {
     if (this.donation.isRestricted!) {
       this.restricted = "Restricted";

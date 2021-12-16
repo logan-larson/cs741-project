@@ -1,3 +1,7 @@
+/**
+ * Donor section of event viewer
+ */
+
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Donation } from 'src/app/models/Donation';
 import { Event } from 'src/app/models/Event';
@@ -35,21 +39,18 @@ export class DonorSectionComponent implements OnInit {
         
         this.setAmountDonated();
       });
-
-
-    // Listen for change from make donation?
   }
 
   ngOnInit(): void {
     this.user = this.usersService.getUser();
     this.event = this.eventsService.getSelectedEvent();
     this.setAmountDonated();
-
-    // TODO - expand donor section to accomodate programs
   }
 
+  /**
+   * Get user's donation amount and reflect it in view
+   */
   async setAmountDonated() {
-    // TODO - For events
     // Given the user donationIds and event donationIds
     // Find the donations the user has made to the event
     // Add the amounts of those donations to this.amount
@@ -75,6 +76,9 @@ export class DonorSectionComponent implements OnInit {
 
   }
 
+  /**
+   * Show the make donation popup
+   */
   donate() {
     this.viewsService.showDonationComponent.emit(true);
     this.donationsService.setIsUnrestricted(false);

@@ -1,7 +1,9 @@
+/**
+ * Show either login or register component
+ */
+
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-auth',
@@ -14,6 +16,9 @@ export class AuthComponent implements OnInit {
 
   constructor(private authService: AuthService) { }
 
+  /**
+   * Set the active component to the one selected
+   */
   ngOnInit(): void {
     this.page = this.authService.getPage();
   }

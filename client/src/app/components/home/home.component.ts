@@ -1,3 +1,11 @@
+/**
+ * Controls the main view
+ *  - Header
+ *  - Side bar
+ *  - Main list
+ * Also houses all popup boxes
+ */
+
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Event } from 'src/app/models/Event';
@@ -38,6 +46,8 @@ export class HomeComponent implements OnInit {
       })
     });
 
+    /* Show different components based on the views service */
+
     this.viewsService.showDonationComponent.subscribe((show: boolean) => {
       this.showMakeDonationComponent = show;
     });
@@ -63,6 +73,9 @@ export class HomeComponent implements OnInit {
     })
   }
 
+  /**
+   * Get the current user
+   */
   ngOnInit(): void {
     this.usersService.getCurrentUser((user: User) => {
       this.usersService.getCurrentUserEmitter.emit("get user");
@@ -70,13 +83,13 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  /**
+   * Triggers showing the event viewer component
+   * 
+   * @param event 
+   */
   selectEvent(event: Event): void {
     this.selectedEvent = event;
     this.showEventViewerComponent = true;
-  }
-
-  selectProgram(program: Program): void {
-    this.selectedProgram = program;
-    this.showProgramViewerComponent = true;
   }
 }

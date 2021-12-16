@@ -1,3 +1,7 @@
+/**
+ * User component that shows related user data
+ */
+
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { User } from 'src/app/models/User';
 import { UsersService } from 'src/app/services/users.service';
@@ -20,6 +24,9 @@ export class UserComponent implements OnInit {
     private viewsService: ViewsService
   ) {}
 
+  /**
+   * Set user type based on current user
+   */
   ngOnInit(): void {
     switch (this.user.type) {
       case "donor":
@@ -39,11 +46,17 @@ export class UserComponent implements OnInit {
     this.changeActiveText = this.user.isActive ? "Disable" : "Enable";
   }
 
+  /**
+   * Show user report popup component
+   */
   viewReport() {
     this.usersService.setReportUser(this.user);
     this.viewsService.showReportComponent.emit(true);
   }
 
+  /**
+   * Switch user from active to deactivated or vice versa
+   */
   async changeActive() {
     await this.usersService.updateActive(this.user.userId!);
     this.updated.emit();

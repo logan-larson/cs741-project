@@ -1,3 +1,7 @@
+/**
+ * Controls all sidebar functionality
+ */
+
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/User';
@@ -32,16 +36,25 @@ export class SideBarComponent implements OnInit {
     this.user = this.usersService.getUser();
   }
 
+  /**
+   * Go to login component
+   */
   gotoLogin() {
     this.authService.setPage('login');
     this.router.navigateByUrl('auth');
   }
 
+  /**
+   * Go to register component
+   */
   gotoRegister() {
     this.authService.setPage('register');
     this.router.navigateByUrl('auth');
   }
 
+  /**
+   * Logout current user
+   */
   logout() {
     this.usersService.logout(this.user, (success: boolean) => {
       if (success) {

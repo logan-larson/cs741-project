@@ -1,3 +1,7 @@
+/**
+ * Controls login and register page components
+ */
+
 import { Injectable } from '@angular/core';
 
 @Injectable({

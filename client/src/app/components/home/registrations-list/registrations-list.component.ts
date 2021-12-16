@@ -1,3 +1,7 @@
+/**
+ * List all registrations related to a user
+ */
+
 import { Component, OnInit } from '@angular/core';
 import { Registration } from 'src/app/models/Registration';
 import { User } from 'src/app/models/User';
@@ -33,11 +37,18 @@ export class RegistrationsListComponent implements OnInit {
     this.inactiveRegs = await this.registrationsService.getUserInactiveRegistrations(this.user.userId!);
   }
 
+  /**
+   * Called when a user get updated
+   * Get the updated user's registrations
+   */
   async getRegs() {
     this.activeRegs = await this.registrationsService.getUserActiveRegistrations(this.user.userId!);
     this.inactiveRegs = await this.registrationsService.getUserInactiveRegistrations(this.user.userId!);
   }
 
+  /**
+   * Switch a registration from active to cancelled or vice versa
+   */
   switchList(registration: Registration, isActive: boolean) {
     if (isActive) {
       this.activeRegs = this.activeRegs.filter(reg => reg != registration);

@@ -1,5 +1,8 @@
+/**
+ * Event component that shows details related to an event
+ */
+
 import { Component, Input, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
 import { Event } from 'src/app/models/Event';
 import { User } from 'src/app/models/User';
 import { EventsService } from 'src/app/services/events.service';
@@ -45,6 +48,9 @@ export class EventComponent implements OnInit {
     });
   }
 
+  /**
+   * Set formatted event details
+   */
   ngOnInit(): void {
     this.user = this.usersService.getUser();
 
@@ -73,6 +79,9 @@ export class EventComponent implements OnInit {
     }
   }
 
+  /**
+   * Show event details popup component
+   */
   viewEventDetails() {
     if (this.event) {
       this.eventsService.setSelectedEvent(this.event);
@@ -80,6 +89,9 @@ export class EventComponent implements OnInit {
     }
   }
 
+  /**
+   * Set color of component based on user registration
+   */
   setIsRegistered() {
     if (this.event && this.event.registrationIds) {
       

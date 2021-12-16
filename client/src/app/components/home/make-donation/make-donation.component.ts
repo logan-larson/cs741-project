@@ -1,13 +1,14 @@
+/**
+ * Popup to submit a donation
+ */
+
 import { Component, Input, OnInit } from '@angular/core';
 import { User } from 'src/app/models/User';
 import { Event } from 'src/app/models/Event';
 import { DonationsService } from 'src/app/services/donations.service';
 import { ViewsService } from 'src/app/services/views/views.service';
-import { Program } from 'src/app/models/Program';
-import { Donation } from 'src/app/models/Donation';
 import { UsersService } from 'src/app/services/users.service';
 import { EventsService } from 'src/app/services/events.service';
-import { ProgramsService } from 'src/app/services/programs.service';
 
 @Component({
   selector: 'app-make-donation',
@@ -38,6 +39,10 @@ export class MakeDonationComponent implements OnInit {
     this.isUnrestricted = this.donationsService.getIsUnrestricted();
   }
 
+  /**
+   * Validate user inputs
+   * Call server to make donation
+   */
   async donate(): Promise<void> {
 
     if (!this.user) {
@@ -52,7 +57,6 @@ export class MakeDonationComponent implements OnInit {
       return;
     }
 
-    // TODO
     if (this.isUnrestricted) {
       await this.donationsService.makeDonation(this.amount, this.user, this.isUnrestricted);
     } else {
@@ -64,6 +68,9 @@ export class MakeDonationComponent implements OnInit {
     this.viewsService.showDonationComponent.emit(false);
   }
 
+  /**
+   * Close popup
+   */
   cancel() {
     this.viewsService.showDonationComponent.emit(false);
   }

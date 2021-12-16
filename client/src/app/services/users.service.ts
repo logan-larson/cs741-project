@@ -1,8 +1,11 @@
+/**
+ * Controls all requests related to users
+ * Also controls current user, client-side state management
+ */
+
 import { HttpClient } from '@angular/common/http';
-import { EventEmitter, Injectable, Output } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { User } from '../models/User';
-import { Event } from '../models/Event';
-import { Observable, Subscription } from 'rxjs';
 import { EventsService } from './events.service';
 
 @Injectable({
@@ -46,6 +49,9 @@ export class UsersService {
     this.getCurrentUserEmitter.emit();
   }
 
+  /**
+   * User registers for an account
+   */
   create(user: User, cb: any): void {
     this.http.post<User>('/api/users', user)
       .subscribe(user => {
@@ -55,6 +61,9 @@ export class UsersService {
       });
   }
 
+  /**
+   * Validate user log in
+   */
   validate(username: string, password: string, cb: any): void {
     this.http.post<User>('/api/users/user', { username: username, password: password })
       .subscribe(user => {
@@ -65,6 +74,9 @@ export class UsersService {
       });
   }
 
+  /**
+   * Logout user 
+   */
   logout(user: User, cb: any): void {
     this.http.post<boolean>(`/api/users/user/${user.userId}`, {})
       .subscribe(success => {
@@ -74,6 +86,9 @@ export class UsersService {
       })
   }
 
+  /**
+   * Gets the currently active user from the server
+   */
   getCurrentUser(cb: any): void {
     this.http.get<User>(`/api/users/user`)
       .subscribe((user: User) => {
@@ -82,18 +97,30 @@ export class UsersService {
       })
   }
 
+  /**
+   * Components call this to get the current user
+   */
   getUser(): User {
     return this.currentUser;
   }
 
+  /**
+   * Get all users in the system
+   */
   async getAllUsers(): Promise<User[]> {
     return await this.http.get<User[]>(`/api/users`).toPromise();
   }
 
+  /**
+   * Activate/deactivate user account
+   */
   async updateActive(userId: string) {
     await this.http.put(`/api/users/user/${userId}`, {}).toPromise();
   }
 
+  /**
+   * State management for user reports
+   */
   getReportUser() {
     return this.reportUser;
   }
