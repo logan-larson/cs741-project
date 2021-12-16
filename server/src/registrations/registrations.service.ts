@@ -46,6 +46,9 @@ export class RegistrationsService {
     return false;
   }
 
+  /**
+   * Checks if event could use more volunteers
+   */
   async checkAvailability(clientEvent: Event): Promise<boolean> {
     let event: Event = await this.eventsService.getEventById(clientEvent.eventId);
 

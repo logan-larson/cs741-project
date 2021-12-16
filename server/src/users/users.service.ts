@@ -1,7 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { v4 as uuidv4 } from 'uuid';
 const bcrypt = require('bcrypt');
-//import { bcrypt } from 'bcrypt';
 
 import { User } from "./schemas/user.schema";
 import { UsersRepository } from "./users.repository";

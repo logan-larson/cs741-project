@@ -43,8 +43,8 @@ The server directory is a NestJS project consisting of multiple endpoint folders
 
 Each endpoint folder contains a controller, a service, a repository, one or more schemas, one or more dtos and a module. Located in `server/src`
 
-- Controller: handle hits to certain endpoints
-- Services: supports controllers functionality needs
+- Controller: handle hits to endpoints related to the controller
+- Services: supports controllers functionality needs, such as getting data from the database and computations on data
 - Repositories: interact with the database
 - Schemas: represent objects able to be stored in the database
 - DTOs: Data transfer objects, used to represent objects that are sent in requests
