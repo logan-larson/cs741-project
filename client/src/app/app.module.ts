@@ -16,9 +16,6 @@ import { AddEventComponent } from './components/home/add-event/add-event.compone
 import { EventViewerComponent } from './components/home/event-viewer/event-viewer.component';
 import { VolunteerSectionComponent } from './components/home/event-viewer/volunteer-section/volunteer-section.component';
 import { EventDetailsComponent } from './components/home/event-viewer/event-details/event-details.component';
-import { ProgramComponent } from './components/home/program-list/program/program.component';
-import { AddProgramComponent } from './components/home/add-program/add-program.component';
-import { ProgramListComponent } from './components/home/program-list/program-list.component';
 import { DonorSectionComponent } from './components/home/event-viewer/donor-section/donor-section.component';
 import { MakeDonationComponent } from './components/home/make-donation/make-donation.component';
 import { SideBarComponent } from './components/home/side-bar/side-bar.component';
@@ -45,9 +42,6 @@ import { HelpComponent } from './components/home/help/help.component';
     EventViewerComponent,
     VolunteerSectionComponent,
     EventDetailsComponent,
-    ProgramComponent,
-    AddProgramComponent,
-    ProgramListComponent,
     DonorSectionComponent,
     MakeDonationComponent,
     SideBarComponent,

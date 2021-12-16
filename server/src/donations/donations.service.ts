@@ -6,7 +6,6 @@ import { v4 as uuidv4 } from "uuid";
 import { DonationsRepository } from "./donations.repository";
 import { UsersService } from "src/users/users.service";
 import { EventsService } from "src/events/events.service";
-import { ProgramsService } from "src/programs/programs.service";
 
 @Injectable()
 export class DonationsService {
@@ -15,7 +14,6 @@ export class DonationsService {
     private readonly donationsRepository: DonationsRepository,
     private readonly usersService: UsersService,
     private readonly eventsService: EventsService,
-    private readonly programsService: ProgramsService
   ) {}
 
   async getUsersDonationsForEvent(userId: string, eventId: string): Promise<Donation[]> {

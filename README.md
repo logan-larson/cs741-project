@@ -31,7 +31,7 @@ Root directory contains two directories, client and server. Each house their res
 
 ### Client
 
-The client directory is an Angular project consisting of components, services and models.
+The client directory is an Angular project consisting of components, services and models. Located in `client/src/app`
 
 - Components: views and interactive pieces of the application
 - Services: provide state management and handle requests to the server
@@ -41,7 +41,7 @@ The client directory is an Angular project consisting of components, services an
 
 The server directory is a NestJS project consisting of multiple endpoint folders.
 
-Each endpoint folder contains a controller, a service, a repository, one or more schemas, one or more dtos and a module.
+Each endpoint folder contains a controller, a service, a repository, one or more schemas, one or more dtos and a module. Located in `server/src`
 
 - Controller: handle hits to certain endpoints
 - Services: supports controllers functionality needs

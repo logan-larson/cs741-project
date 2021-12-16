@@ -1,7 +1,6 @@
 import { Module } from "@nestjs/common";
 import { MongooseModule } from "@nestjs/mongoose";
 import { EventsModule } from "src/events/events.module";
-import { ProgramsModule } from "src/programs/programs.module";
 import { UsersModule } from "src/users/users.module";
 import { DonationsController } from "./donations.controller";
 import { DonationsRepository } from "./donations.repository";
@@ -12,7 +11,6 @@ import { Donation, DonationSchema } from "./schemas/donation.schema";
   imports: [
     UsersModule,
     EventsModule,
-    ProgramsModule,
     MongooseModule.forFeature([{ name: Donation.name, schema: DonationSchema}])
   ],
   controllers: [DonationsController],

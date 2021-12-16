@@ -1,6 +1,4 @@
 import { Body, Controller, Get, Param, Post, Put, Session } from '@nestjs/common';
-import { ProgramsService } from 'src/programs/programs.service';
-import { UserIdDto } from 'src/users/dtos/user-id.dto';
 import { CreateEventDto } from './dtos/create-event.dto';
 import { EventsService } from './events.service';
 import { Event } from './schemas/event.schema';
@@ -10,7 +8,6 @@ export class EventsController {
 
   constructor(
     private readonly eventsService: EventsService,
-    private readonly programsService: ProgramsService
   ) {}
 
   @Get()
